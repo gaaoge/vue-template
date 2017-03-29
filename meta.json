@@ -1,0 +1,27 @@
+{
+  "prompts": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "label": "name"
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "label": "description"
+    },
+    "author": {
+      "type": "string",
+      "required": true,
+      "label": "author",
+      "default": "gaoge"
+    },
+    "email": {
+      "type": "string",
+      "required": true,
+      "label": "email",
+      "default": "gaoge@corp.netease.com"
+    }
+  },
+  "skipInterpolation": "src/**/*"
+}
