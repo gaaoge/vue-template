@@ -42,10 +42,12 @@ window.NewsAppShare = {
 document.addEventListener('WeixinJSBridgeReady', function () {
     WeixinJSBridge.on('menu:share:timeline', function () {
         WeixinJSBridge.invoke('shareTimeline', NewsAppShare.shareData, function () {
+            window.__newsapp_share_done();
         });
     });
     WeixinJSBridge.on('menu:share:appmessage', function () {
         WeixinJSBridge.invoke('sendAppMessage', NewsAppShare.shareData, function () {
+            window.__newsapp_share_done();
         });
     });
 }, false);

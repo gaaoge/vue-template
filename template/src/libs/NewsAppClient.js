@@ -234,7 +234,7 @@ function NewsApp(protocolHandler) {
      * @param {Function} callback 成功回调
      */
     function share(callback, type) {
-        Callbacks.afterShare.push(callback);
+        Callbacks.afterShare = [callback];
         protocol(Protocols.share.replace('{TYPE}', type || ''), callback);
     }
 
