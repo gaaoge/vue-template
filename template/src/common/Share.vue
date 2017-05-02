@@ -16,14 +16,14 @@
         },
         methods: {
             show(callback) {
-                if (NewsAppClient.isNewsApp()) {
-                    NewsAppClient.share(callback);
+                if (NewsappClient.isNewsapp) {
+                    NewsappClient.share(callback);
                 } else {
                     this.isShow = true;
                     setTimeout(() => {
                         this.isShow = false;
                     }, 2000);
-                    NewsAppClient.Callbacks.afterShare = [callback];
+                    NewsappClient.Callbacks.afterShare = [callback];
                 }
             },
             hide() {

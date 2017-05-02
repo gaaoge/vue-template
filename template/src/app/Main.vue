@@ -12,11 +12,11 @@
     export default {
         name: 'main',
         created() {
-            NewsAppShare.update({
+            NewsappShare.update({
                 title: '',
                 desc: '',
-                img_url: NewsAppShare.getAbsPath('resource/assets/share-icon.png'),
-                link: NewsAppShare.getAbsPath()
+                img_url: NewsappShare.getAbsPath('resource/assets/share-icon.png'),
+                link: NewsappShare.getAbsPath()
             });
         }
     }

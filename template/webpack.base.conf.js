@@ -51,9 +51,9 @@ module.exports = {
     entry: {
         main: './src/main.js',
         libs: [
-            'RemAdapter',
-            'NewsAppClient',
-            'NewsAppShare',
+            'rem-adapter',
+            'newsapp-client',
+            'newsapp-share',
             'normalize.css',
             'v-tap',
             'vue',
