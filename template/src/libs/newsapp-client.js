@@ -433,7 +433,7 @@
             path = path || '/startup';
             channel = channel || 'sps';
 
-            if (isNewsApp()) {
+            if (isNewsApp) {
                 protocol('newsapp:/' + path);
             } else {
                 window.location.href = 'http://m.163.com/newsapp/applinks.html?path=' + encodeURIComponent(path) + '&s=' + channel;
