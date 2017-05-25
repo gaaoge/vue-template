@@ -11,10 +11,11 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.prod.conf.js"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "normalize.css": "^5.0.0",
     "v-tap": "^3.0.1",
     "vue": "^2.1.0",
-    "vue-resource": "^1.2.0",
+    "vue-axios": "^2.0.2",
     "vue-router": "^2.0.1",
     "vuex": "^2.0.0"
   },

@@ -54,10 +54,11 @@ module.exports = {
             'rem-adapter',
             'newsapp-client',
             'newsapp-share',
+            'axios',
             'normalize.css',
             'v-tap',
             'vue',
-            'vue-resource',
+            'vue-axios',
             'vue-router'
         ]
     },
