@@ -20,6 +20,7 @@ module.exports = merge.smart(base, {
     ],
     devServer: {
         host: '0.0.0.0',
+        disableHostCheck: true,
         clientLogLevel: 'none',
         noInfo: true,
         compress: true,
