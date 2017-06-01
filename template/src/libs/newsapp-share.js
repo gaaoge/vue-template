@@ -7,7 +7,7 @@
             img_url: '',
             link: ''
         },
-        update: function (data) {
+        update: function (data, onlyImg) {
             for (var i in data) {
                 if (this.shareData.hasOwnProperty(i)) {
                     this.shareData[i] = data[i];
@@ -19,13 +19,10 @@
             html += '<div id="__newsapp_sharewxtitle">' + this.shareData.title + '</div>';
             html += '<div id="__newsapp_sharewxtext">' + this.shareData.desc + '</div>';
             html += '<div id="__newsapp_sharewxthumburl">' + this.shareData.img_url + '</div>';
-            html += '<div id="__newsapp_sharewxurl">' + this.shareData.link + '</div>';
+            if(!onlyImg) {
+                html += '<div id="__newsapp_sharewxurl">' + this.shareData.link + '</div>';
+            }
 
-            document.getElementById('__newsapp_shareconfig').innerHTML = html;
-        },
-        updateImg: function (imgUrl) {
-            var html = '<div id="__newsapp_sharetext">图片分享</div>';
-            html += '<div id="__newsapp_sharephotourl">' + imgUrl + '</div>';
             document.getElementById('__newsapp_shareconfig').innerHTML = html;
         },
         getAbsPath: function (url) {
