@@ -36,7 +36,7 @@
         }
     };
 
-//微信分享设置
+    //微信分享设置
     document.addEventListener('WeixinJSBridgeReady', function () {
         WeixinJSBridge.on('menu:share:timeline', function () {
             WeixinJSBridge.invoke('shareTimeline', window.NewsappShare.shareData, function () {
