@@ -8,7 +8,16 @@
     import Share from '../common/Share.vue';
 
     export default {
-        name: 'main'
+        name: 'main',
+        created() {
+            //分享配置
+            NewsappShare.update({
+                title: '',
+                desc: '',
+                img_url: NewsappShare.getAbsPath('resource/assets/share-icon.png'),
+                link: NewsappShare.getAbsPath()
+            });
+        }
     }
 </script>
 
