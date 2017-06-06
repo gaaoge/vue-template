@@ -54,6 +54,7 @@ module.exports = {
             'rem-adapter',
             'newsapp-client',
             'newsapp-share',
+            'newsapp-stats',
             'axios',
             'normalize.css',
             'v-tap',
