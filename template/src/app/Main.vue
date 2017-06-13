@@ -5,11 +5,15 @@
 </template>
 
 <script>
-    import Share from '../common/Share.vue';
+    import Vue from 'vue';
+    import CommonShare from '../common/Share.vue';
 
     export default {
         name: 'main',
         created() {
+            //注册全局通用组件
+            Vue.component('common-share', CommonShare);
+
             //分享配置
             NewsappShare.update({
                 title: '',
