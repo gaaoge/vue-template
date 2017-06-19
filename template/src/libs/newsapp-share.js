@@ -14,7 +14,7 @@
                 }
             }
             var html = '';
-            html += '<div id="__newsapp_sharetext">' + (this.shareData.weibo || this.shareData.title) + ' ' + this.shareData.link + '</div>';
+            html += '<div id="__newsapp_sharetext">' + (this.shareData.weibo || (this.shareData.title + ' ' + this.shareData.link)) + '</div>';
             html += '<div id="__newsapp_sharephotourl">' + this.shareData.img_url + '</div>';
             html += '<div id="__newsapp_sharewxtitle">' + this.shareData.title + '</div>';
             html += '<div id="__newsapp_sharewxtext">' + this.shareData.desc + '</div>';

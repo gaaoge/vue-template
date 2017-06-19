@@ -10,7 +10,7 @@
                 });
             }
             if (window['_hmt']) {
-                window['_hmt'].push(['_trackPageview', '/nc/qa/activity/' + window['_ntes_sps_modelid'] + '/' + view]);
+                window['_hmt'].push(['_trackPageview', location.pathname.replace('index.html', view + '.html')]);
             }
         },
         trackEvent: function (event, view) {

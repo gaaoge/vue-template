@@ -16,8 +16,8 @@
 
             //分享配置
             NewsappShare.update({
-                title: '',
-                desc: '',
+                title: '分享标题',
+                desc: '分享描述',
                 img_url: NewsappShare.getAbsPath('resource/assets/share-icon.png'),
                 link: NewsappShare.getAbsPath()
             });
@@ -29,6 +29,7 @@
     html, body {
         height: 100%;
         overflow: hidden;
+        background: #fff;
     }
 
     body {
