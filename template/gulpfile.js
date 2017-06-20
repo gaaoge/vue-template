@@ -51,7 +51,7 @@ gulp.task('publish', ['tinypng_copy'], function () {
         parallel: 5
     });
 
-    const target = filter('index.html', {restore: true});
+    const target = filter(path.build + 'index.html', {restore: true});
     const statistics = '<script src="//analytics.163.com/ntes.js"></script>' +
         '<script>_ntes_nacc = "mapp";neteaseTracker();</script>' +
         '<script src="//img1.cache.netease.com/utf8/3g/util/analysis.min.js"></script>' +
