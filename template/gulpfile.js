@@ -55,7 +55,7 @@ gulp.task('publish', ['tinypng_copy'], function () {
     const statistics = '<script src="//analytics.163.com/ntes.js"></script>' +
         '<script>_ntes_nacc = "mapp";neteaseTracker();</script>' +
         '<script src="//img1.cache.netease.com/utf8/3g/util/analysis.min.js"></script>' +
-        '<script>_ntes_sps_modelid="' + pkg.name + '";neteaseAnalysis({type:"special",spst:5,modelid:_ntes_sps_modelid});</script>' +
+        '<script>_ntes_sps_modelid="' + pkg.name + '";neteaseAnalysis({type:"special",modelid:_ntes_sps_modelid,spst:5});</script>' +
         '<script>var _hmt=_hmt||[];(function(){var b=document.createElement("script");b.src="//hm.baidu.com/hm.js?7fa45cfaddbf8ba5591da1950285d665";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a)})();</script>';
 
     return gulp.src(path.build + '**/*')

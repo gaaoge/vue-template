@@ -4,9 +4,9 @@
             if (window['neteaseAnalysis']) {
                 window['neteaseAnalysis']({
                     type: 'special',
-                    spst: 5,
                     modelid: window['_ntes_sps_modelid'],
-                    view: view
+                    view: view,
+                    spst: 5
                 });
             }
             if (window['_hmt']) {
@@ -19,10 +19,10 @@
             if (window['neteaseAnalysis']) {
                 window['neteaseAnalysis']({
                     type: 'func',
-                    spst: 5,
                     modelid: window['_ntes_sps_modelid'],
                     view: view,
-                    event: event
+                    event: event,
+                    spst: 5
                 });
             }
             if (window['_hmt']) {
