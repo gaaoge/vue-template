@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div class="app-main">
 
     </div>
 </template>
@@ -9,7 +9,6 @@
     import CommonShare from '../common/Share.vue';
 
     export default {
-        name: 'main',
         created() {
             //注册全局通用组件
             Vue.component('common-share', CommonShare);
@@ -40,7 +39,7 @@
         -webkit-user-select: none;
     }
 
-    .main {
+    .app-main {
         position: relative;
         width: 750px;
         height: 100%;

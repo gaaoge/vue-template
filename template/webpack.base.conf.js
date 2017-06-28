@@ -2,6 +2,7 @@
  * Created by GG on 16/12/01.
  */
 
+const pkg = require('./package.json');
 const path = require('path');
 const postcss = require('postcss');
 const cssnext = require('postcss-cssnext');
@@ -54,14 +55,8 @@ module.exports = {
             'rem-adapter',
             'newsapp-client',
             'newsapp-share',
-            'newsapp-stats',
-            'axios',
-            'normalize.css',
-            'v-tap',
-            'vue',
-            'vue-axios',
-            'vue-router'
-        ]
+            'newsapp-stats'
+        ].concat(Object.keys(pkg.dependencies))
     },
     output: {
         path: path.resolve(__dirname, 'build/')
