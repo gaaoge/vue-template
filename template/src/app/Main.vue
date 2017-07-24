@@ -1,6 +1,6 @@
 <template>
-    <div class="app-main">
-
+    <div class="app">
+        <router-view></router-view>
     </div>
 </template>
 
@@ -39,11 +39,18 @@
         -webkit-user-select: none;
     }
 
-    .app-main {
+    .app {
         position: relative;
         width: 750px;
         height: 100%;
         margin: 0 auto;
         overflow: hidden;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
     }
 </style>
