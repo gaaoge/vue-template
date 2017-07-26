@@ -45,7 +45,7 @@ const spritesOptions = {
     }
 };
 const px2remOptions = {
-    propBlackList: ['border', 'border-width']
+    propBlackList: ['border-width']
 };
 
 module.exports = {
