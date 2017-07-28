@@ -40,7 +40,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background: color(black alpha(-20%));
+        background: color(black alpha(-25%));
         z-index: 10000;
 
         & .notice {
