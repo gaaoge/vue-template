@@ -7,11 +7,13 @@
 <script>
     import Vue from 'vue';
     import CommonShare from '../common/Share.vue';
+    import CommonToast from '../common/Toast.vue';
 
     export default {
         created() {
             //注册全局通用组件
             Vue.component('common-share', CommonShare);
+            Vue.component('common-toast', CommonToast);
 
             //分享配置
             NewsappShare.update({
@@ -33,7 +35,6 @@
 
     body {
         font: 28px/1.2 sans-serif;
-        transform: translate3d(0, 0, 0);
         -webkit-tap-highlight-color: transparent;
         -webkit-overflow-scrolling: touch;
         -webkit-user-select: none;

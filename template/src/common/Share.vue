@@ -40,7 +40,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background: color(black alpha(-30%));
+        background: color(black alpha(-20%));
         z-index: 10000;
 
         & .notice {
@@ -58,6 +58,6 @@
     }
 
     .common-share-enter, .common-share-leave-active {
-        opacity: 0
+        opacity: 0;
     }
 </style>
