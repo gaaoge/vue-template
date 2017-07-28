@@ -7,7 +7,7 @@ import VueTap from 'v-tap';
 
 import router from './router';
 import store from './store';
-import Main from './app/Main.vue';
+import Main from './Main.vue';
 
 //Vue插件
 Vue.use(VueTap);

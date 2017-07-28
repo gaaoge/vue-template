@@ -1,13 +1,13 @@
 <template>
-    <div class="app">
+    <div class="main">
         <router-view></router-view>
     </div>
 </template>
 
 <script>
     import Vue from 'vue';
-    import CommonShare from '../common/Share.vue';
-    import CommonToast from '../common/Toast.vue';
+    import CommonShare from './common/Share.vue';
+    import CommonToast from './common/Toast.vue';
 
     export default {
         created() {
@@ -40,7 +40,7 @@
         -webkit-user-select: none;
     }
 
-    .app {
+    .main {
         position: relative;
         width: 750px;
         height: 100%;
