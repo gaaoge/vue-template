@@ -9,21 +9,43 @@
                     spst: 5
                 });
             }
+            if (window['NTESAntAnalysis']) {
+                window['NTESAntAnalysis'].sendData({
+                    projectid: window['_ntes_ant_projectid'],
+                    val_nm: "pageview",
+                    val_act: view,
+                    info: {
+                        modelid: window['_ntes_sps_modelid'],
+                        title: document.title
+                    }
+                })
+            }
             if (window['_hmt']) {
                 window['_hmt'].push(['_trackPageview', location.pathname.replace('index.html', view + '.html')]);
             }
         },
-        trackEvent: function (event, view) {
-            view = view || 'main';
+        trackEvent: function (event, action) {
+            action = action || 'click';
 
             if (window['neteaseAnalysis']) {
                 window['neteaseAnalysis']({
                     type: 'func',
                     modelid: window['_ntes_sps_modelid'],
-                    view: view,
+                    action: action,
                     event: event,
                     spst: 5
                 });
+            }
+            if (window['NTESAntAnalysis']) {
+                window['NTESAntAnalysis'].sendData({
+                    projectid: window['_ntes_ant_projectid'],
+                    val_nm: action,
+                    val_act: event,
+                    info: {
+                        modelid: window['_ntes_sps_modelid'],
+                        title: document.title
+                    }
+                })
             }
             if (window['_hmt']) {
                 window['_hmt'].push(['_trackEvent', view, event]);
