@@ -82,10 +82,10 @@
     })();
 
     window.NewsappClient = (function (protocolHandler) {
-        var isNewsapp = (/newsapp/ig).test(navigator.userAgent),
-            androidReg = /Android/gi,
-            debug = false,
-            isAndroid = androidReg.test(navigator.platform) || androidReg.test(navigator.userAgent),
+        var debug = false,
+            isNewsapp = (/newsapp/ig).test(navigator.userAgent),
+            isAndroid = !!navigator.userAgent.match(/(Android|Adr)/ig),
+            isIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
             Callbacks, Protocols;
 
         Callbacks = {
@@ -442,6 +442,8 @@
 
         return {
             isNewsapp: isNewsapp,
+            isAndroid: isAndroid,
+            isIos: isIos,
             login: login,
             userInfo: userInfo,
             device: device,
