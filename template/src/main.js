@@ -9,6 +9,8 @@ import router from './router';
 import store from './store';
 import Main from './Main.vue';
 
+import * as OfflinePlugin from 'offline-plugin/runtime';
+
 //Vue插件
 Vue.use(VueTap);
 
@@ -19,3 +21,6 @@ new Vue({
     store,
     render: h => h(Main)
 });
+
+//离线缓存Service Worker
+OfflinePlugin.install();

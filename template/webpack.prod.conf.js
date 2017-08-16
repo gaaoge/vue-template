@@ -5,11 +5,13 @@
 const base = require('./webpack.base.conf');
 const merge = require('webpack-merge');
 
+const pkg = require('./package.json');
 const webpack = require('webpack');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 module.exports = merge.smart(base, {
     output: {
@@ -18,9 +20,8 @@ module.exports = merge.smart(base, {
     plugins: [
         new CleanWebpackPlugin(['build']),
         new CopyWebpackPlugin([{
-            from: 'resource',
-            to: 'resource',
-            ignore: 'assets/**/*'
+            from: 'resource/statics',
+            to: 'resource/statics'
         }]),
         new webpack.DefinePlugin({
             'process.env': {
@@ -53,6 +54,12 @@ module.exports = merge.smart(base, {
             filename: 'bundle.[contenthash].css',
             allChunks: true
         }),
-        new WebpackMd5Hash()
+        new WebpackMd5Hash(),
+        new OfflinePlugin({
+            ServiceWorker: {
+                cacheName: pkg.name
+            },
+            AppCache: false
+        })
     ],
 });

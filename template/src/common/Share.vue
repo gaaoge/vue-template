@@ -2,7 +2,6 @@
     <transition name="common-share">
         <div class="common-share" v-show="isShow" v-tap="{methods:hide}">
             <div class="notice"></div>
-            <img src="../../resource/assets/share-icon.png" style="display: none">
         </div>
     </transition>
 </template>
