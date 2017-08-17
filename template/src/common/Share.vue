@@ -1,6 +1,6 @@
 <template>
     <transition name="common-share">
-        <div class="common-share" v-show="isShow" v-tap="{methods:hide}">
+        <div class="common-share" v-show="isShow" @click="hide">
             <div class="notice"></div>
         </div>
     </transition>

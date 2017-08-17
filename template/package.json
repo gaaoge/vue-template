@@ -13,7 +13,6 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "normalize.css": "^7.0.0",
-    "v-tap": "^3.0.2",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
     "vuex": "^2.3.1",
