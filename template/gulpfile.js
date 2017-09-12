@@ -46,8 +46,8 @@ gulp.task('publish', ['tinypng_copy'], function () {
     const conn = ftp.create({
         host: '220.181.29.249',
         port: '16321',
-        user: 'wangjun2012',
-        password: 'wangjun2012',
+        user: 'newsclient',
+        password: 'newsclient@2017',
         parallel: 5
     });
 
