@@ -65,5 +65,5 @@ gulp.task('publish', ['tinypng_copy'], function () {
         .pipe(replace('<!--statistics-->', statistics))
         .pipe(replace(/\n.*<\!--.*-->/g, ''))
         .pipe(target.restore)
-        .pipe(conn.dest('activity/' + pkg.name));
+        .pipe(conn.dest('qa/activity/' + pkg.name));
 });
