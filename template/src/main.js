@@ -8,8 +8,6 @@ import router from './router';
 import store from './store';
 import Main from './Main.vue';
 
-import * as OfflinePlugin from 'offline-plugin/runtime';
-
 //Vue实例
 new Vue({
     el: '#app',
@@ -19,4 +17,7 @@ new Vue({
 });
 
 //离线缓存Service Worker
-OfflinePlugin.install();
+if(process.env.NODE_ENV === 'production') {
+    let OfflinePlugin = require('offline-plugin/runtime');
+    OfflinePlugin.install();
+}
