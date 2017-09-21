@@ -18,6 +18,5 @@ new Vue({
 
 //离线缓存Service Worker
 if(process.env.NODE_ENV === 'production') {
-    let OfflinePlugin = require('offline-plugin/runtime');
-    OfflinePlugin.install();
+    require('offline-plugin/runtime').install();
 }
