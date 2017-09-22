@@ -1,6 +1,6 @@
 <template>
     <transition name="common-toast">
-        <div class="common-toast" v-show="isShow">
+        <div class="common-toast" v-if="isShow">
             <span>{{content}}</span>
         </div>
     </transition>
@@ -11,16 +11,25 @@
         data() {
             return {
                 content: '',
-                isShow: false
+                isShow: false,
+                timer: null
             };
         },
         methods: {
             show(content) {
-                this.content = content;
-                this.isShow = true;
-                setTimeout(() => {
-                    this.isShow = false;
-                }, 2000);
+                this.reset();
+                this.$nextTick(() => {
+                    this.content = content;
+                    this.isShow = true;
+                    this.timer = setTimeout(() => {
+                        this.isShow = false;
+                    }, 2000);
+                })
+            },
+            reset() {
+                this.content = '';
+                this.isShow = false;
+                clearTimeout(this.timer);
             }
         }
     }
