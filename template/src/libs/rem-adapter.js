@@ -19,6 +19,8 @@
         var clientWidth;
         if (window.innerWidth < window.innerHeight) {
             clientWidth = window.innerWidth;
+        } else if (window.orientation === 0 || window.orientation === 180) {
+            clientWidth = window.innerWidth;
         } else {
             clientWidth = designWidth / designHeight * window.innerHeight;
         }
