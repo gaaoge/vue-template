@@ -52,13 +52,14 @@ gulp.task('publish', ['tinypng_copy'], function () {
     });
 
     const target = filter(path.build + 'index.html', {restore: true});
-    const statistics = '<script src="//analytics.163.com/ntes.js"></script>' +
-        '<script>_ntes_nacc = "mapp";neteaseTracker();</script>' +
-        '<script src="//static.ws.126.net/utf8/3g/util/analysis.min.js"></script>' +
-        '<script>_ntes_sps_modelid="' + pkg.name + '";neteaseAnalysis({type:"special",modelid:_ntes_sps_modelid,spst:5});</script>' +
-        '<script src="//static.ws.126.net/utf8/3g/util/antanalysis.min.js"></script>' +
-        '<script>_ntes_ant_projectid="NTM-BXR8M5Z5-1";NTESAntAnalysis.sendData({projectid:_ntes_ant_projectid,val_nm:"pageview",val_act:"pageview",info:{modelid:_ntes_sps_modelid,title:document.title}});</script>' +
-        '<script>var _hmt=_hmt||[];(function(){var b=document.createElement("script");b.src="//hm.baidu.com/hm.js?7fa45cfaddbf8ba5591da1950285d665";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a)})();</script>';
+    const statistics = [
+        '<script src="//analytics.163.com/ntes.js"></script>',
+        '<script>var _ntes_nacc="mapp";neteaseTracker();</script>',
+        '<script src="//static.ws.126.net/utf8/3g/util/analysis.min.js"></script>',
+        '<script>var _ntes_sps_modelid="'+pkg.name+'";neteaseAnalysis({type:"special",modelid:_ntes_sps_modelid,spst:5});</script>',
+        '<script>var _ntes_ant_projectid="NTM-BXR8M5Z5-1";(function(w,d,s,n) {var f=d.getElementsByTagName(s)[0],k=d.createElement(s);k.async=true;k.src="//static.ws.126.net/utf8/3g/analytics/data1/"+n+".js";f.parentNode.insertBefore(k,f);})(window,document,"script",_ntes_ant_projectid);</script>',
+        '<script>var _hmt=_hmt||[];(function(){var b=document.createElement("script");b.src="//hm.baidu.com/hm.js?7fa45cfaddbf8ba5591da1950285d665";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a)})();</script>',
+    ].join('');
 
     return gulp.src(path.build + '**/*')
         .pipe(target)

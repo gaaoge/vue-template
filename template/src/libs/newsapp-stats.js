@@ -13,11 +13,7 @@
                 window['NTESAntAnalysis'].sendData({
                     projectid: window['_ntes_ant_projectid'],
                     val_nm: "pageview",
-                    val_act: view,
-                    info: {
-                        modelid: window['_ntes_sps_modelid'],
-                        title: document.title
-                    }
+                    val_act: view
                 })
             }
             if (window['_hmt']) {
@@ -40,11 +36,7 @@
                 window['NTESAntAnalysis'].sendData({
                     projectid: window['_ntes_ant_projectid'],
                     val_nm: action,
-                    val_act: event,
-                    info: {
-                        modelid: window['_ntes_sps_modelid'],
-                        title: document.title
-                    }
+                    val_act: event
                 })
             }
             if (window['_hmt']) {
