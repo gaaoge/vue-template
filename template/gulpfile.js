@@ -42,6 +42,18 @@ gulp.task('test', ['tinypng_copy'], function () {
     });
 });
 
+gulp.task('pre', ['tinypng_copy'], function () {
+    const username = pkg.author.name;
+    const host = 'ftp-pre';
+
+    exec(`cp -rf ${path.build} ${pkg.name}`, function () {
+        exec(`scp -r ${pkg.name} ${username}@${host}:/home/appops/htmlfile/activity`, function (e) {
+            e && console.log(e);
+            exec(`rm -rf ${pkg.name}`);
+        });
+    });
+});
+
 gulp.task('publish', ['tinypng_copy'], function () {
     const conn = ftp.create({
         host: '220.181.29.249',
