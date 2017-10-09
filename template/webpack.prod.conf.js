@@ -56,6 +56,7 @@ module.exports = merge.smart(base, {
         }),
         new WebpackMd5Hash(),
         new OfflinePlugin({
+            rewrites: {'/': 'index.html'},
             ServiceWorker: {
                 cacheName: pkg.name
             },
