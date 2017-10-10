@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div class="app">
         <router-view></router-view>
     </div>
 </template>
@@ -10,6 +10,7 @@
     import CommonToast from './common/Toast.vue';
 
     export default {
+        name: 'app',
         created() {
             //注册全局通用组件
             Vue.component('common-share', CommonShare);
@@ -40,7 +41,7 @@
         -webkit-user-select: none;
     }
 
-    .main {
+    .app {
         position: relative;
         width: 750px;
         height: 100%;

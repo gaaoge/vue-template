@@ -5,13 +5,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Home from '../app/Home.vue';
+import AppHome from '../app/Home.vue';
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
-        {path: '/', component: Home}
+        {path: '/', component: AppHome}
     ]
 });
 

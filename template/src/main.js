@@ -6,14 +6,14 @@ import Vue from 'vue';
 
 import router from './router';
 import store from './store';
-import Main from './Main.vue';
+import App from './App.vue';
 
 //Vue实例
 new Vue({
     el: '#app',
     router,
     store,
-    render: h => h(Main)
+    render: h => h(App)
 });
 
 //离线缓存Service Worker
