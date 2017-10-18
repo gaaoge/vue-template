@@ -9,18 +9,18 @@ const webpack = require('webpack');
 
 module.exports = merge.smart(base, {
     output: {
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'libs',
-            filename: `libs/bundle.js`,
-            minChunks: Infinity
+            name: 'vendor',
+            minChunks: function (module) {
+                return module.context && module.context.indexOf("node_modules") !== -1;
+            }
         })
     ],
     devServer: {
         host: '0.0.0.0',
-        disableHostCheck: true,
         clientLogLevel: 'none',
         noInfo: true,
         compress: true,

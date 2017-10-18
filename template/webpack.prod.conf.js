@@ -15,7 +15,39 @@ const OfflinePlugin = require('offline-plugin');
 
 module.exports = merge.smart(base, {
     output: {
-        filename: 'bundle.[chunkhash].js'
+        filename: '[name]/[chunkhash].js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    postcss: base.module.rules[0].options.postcss,
+                    loaders: {
+                        css: ExtractTextPlugin.extract({
+                            use: {
+                                loader: 'css-loader',
+                                options: {
+                                    minimize: true
+                                }
+                            }
+                        })
+                    }
+                }
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    use: {
+                        loader: 'css-loader',
+                        options: {
+                            minimize: true
+                        }
+                    }
+                })
+            }
+        ]
     },
     plugins: [
         new CleanWebpackPlugin(['build']),
@@ -29,38 +61,29 @@ module.exports = merge.smart(base, {
             }
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'libs',
-            filename: 'libs/bundle.[chunkhash].js',
-            minChunks: Infinity
+            name: 'vendor',
+            minChunks: function (module) {
+                return module.context && module.context.indexOf("node_modules") !== -1;
+            }
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
             }
         }),
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                vue: {
-                    loaders: {
-                        css: ExtractTextPlugin.extract({
-                            use: 'css-loader',
-                            fallback: 'vue-style-loader'
-                        })
-                    }
-                }
-            }
-        }),
         new ExtractTextPlugin({
-            filename: 'bundle.[contenthash].css',
+            filename:  (getPath) => {
+                return getPath('[name]/[contenthash].css');
+            },
             allChunks: true
         }),
         new WebpackMd5Hash(),
         new OfflinePlugin({
-            rewrites: {'/': 'index.html'},
+            rewrites: { '/': 'index.html' },
             ServiceWorker: {
                 cacheName: pkg.name
             },
             AppCache: false
         })
-    ],
+    ]
 });

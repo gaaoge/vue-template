@@ -2,6 +2,7 @@
  * Created by GG on 2016/11/30.
  */
 
+import 'babel-polyfill';
 import Vue from 'vue';
 
 import router from './router';

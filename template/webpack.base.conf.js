@@ -14,8 +14,8 @@ const spritesOptions = {
     spritePath: './build/resource/assets/',
     spritesmith: {padding: 20},
     groupBy: function (image) {
-        let groupName = /.*\/(.*)\.vue/g.exec(image.styleFilePath)[1].toLowerCase();
-        return Promise.resolve(groupName);
+        let groupname = path.basename(image.styleFilePath, '.vue').toLowerCase();
+        return Promise.resolve(groupname);
     },
     hooks: {
         onUpdateRule: function (rule, token, image) {
@@ -50,13 +50,15 @@ const px2remOptions = {
 
 module.exports = {
     entry: {
-        main: './src/main.js',
-        libs: [
+        app: './src/main.js',
+        vendor: [
             'rem-adapter',
             'newsapp-client',
             'newsapp-share',
-            'newsapp-stats'
-        ].concat(Object.keys(pkg.dependencies))
+            'newsapp-stats',
+            'normalize.css',
+            'whatwg-fetch'
+        ]
     },
     output: {
         path: path.resolve(__dirname, 'build/')
@@ -93,7 +95,7 @@ module.exports = {
         ]
     },
     resolve: {
-        modules: ['node_modules', 'src/libs']
+        modules: ['node_modules', 'src/utils']
     },
     plugins: [
         new HtmlWebpackPlugin({
