@@ -10,8 +10,7 @@ import store from './store'
 import App from './App.vue'
 
 // Vue实例
-/* eslint-disable no-new */
-new Vue({
+window.vm = new Vue({
   el: '#app',
   router,
   store,
