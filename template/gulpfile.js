@@ -16,18 +16,18 @@ const path = {
 
 gulp.task('tinypng', function () {
   return gulp.src(path.build + 'resource/assets/**/*.{png,jpg,jpeg}')
-        .pipe(tinypng({
-          key: '6-qmxQevyQCCYb-gqGTMnF6LTE8Dzo3j',
-          sigFile: 'assets_tinypng/.sigfile',
-          log: true,
-          summarise: true
-        }))
-        .pipe(gulp.dest('assets_tinypng'))
+    .pipe(tinypng({
+      key: '6-qmxQevyQCCYb-gqGTMnF6LTE8Dzo3j',
+      sigFile: 'assets_tinypng/.sigfile',
+      log: true,
+      summarise: true
+    }))
+    .pipe(gulp.dest('assets_tinypng'))
 })
 
 gulp.task('tinypng_copy', function () {
   return gulp.src('assets_tinypng/**/*')
-        .pipe(gulp.dest(path.build + 'resource/assets'))
+    .pipe(gulp.dest(path.build + 'resource/assets'))
 })
 
 gulp.task('test', ['tinypng_copy'], function () {
@@ -74,8 +74,8 @@ gulp.task('publish', ['tinypng_copy'], function () {
   ].join('')
 
   return gulp.src(path.build + '**/*')
-        .pipe(target)
-        .pipe(replace('<!--statistics-->', statistics))
-        .pipe(target.restore)
-        .pipe(conn.dest('qa/activity/' + pkg.name))
+    .pipe(target)
+    .pipe(replace('<!--statistics-->', statistics))
+    .pipe(target.restore)
+    .pipe(conn.dest('qa/activity/' + pkg.name))
 })
