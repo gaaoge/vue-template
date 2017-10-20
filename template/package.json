@@ -1,10 +1,10 @@
 {
-  "name": "vue-template",
-  "version": "1.0.0",
-  "description": "vue开发模板",
+  "name": "{{name}}",
+  "version": "2.0.0",
+  "description": "{{description}}",
   "author": {
-    "name": "gaoge",
-    "email": "gaoge@corp.netease.com"
+    "name": "{{author}}",
+    "email": "{{email}}"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config webpack.dev.conf.js",
