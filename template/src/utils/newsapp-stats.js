@@ -45,3 +45,5 @@
     }
   }
 })(window)
+
+export default window.NewsappStats

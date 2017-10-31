@@ -50,3 +50,5 @@
     })
   }, false)
 })(window)
+
+export default window.NewsappShare

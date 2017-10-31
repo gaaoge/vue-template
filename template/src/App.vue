@@ -6,17 +6,18 @@
 
 <script>
   import Vue from 'vue'
+  import NewsappShare from 'newsapp-share'
   import CommonShare from './common/Share.vue'
   import CommonToast from './common/Toast.vue'
 
   export default {
     name: 'app',
     created () {
-      //注册全局通用组件
+      // 注册全局通用组件
       Vue.component('common-share', CommonShare)
       Vue.component('common-toast', CommonToast)
 
-      //分享配置
+    // 分享配置
       NewsappShare.update({
         title: '分享标题',
         desc: '分享描述',

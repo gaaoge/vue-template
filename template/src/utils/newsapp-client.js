@@ -476,3 +476,5 @@
     }
   })(Navigator.protocol)
 }(window))
+
+export default window.NewsappClient

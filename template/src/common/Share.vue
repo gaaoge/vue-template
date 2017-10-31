@@ -7,6 +7,8 @@
 </template>
 
 <script>
+  import NewsappClient from 'newsapp-client'
+
   export default {
     data () {
       return {
