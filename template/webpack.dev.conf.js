@@ -5,20 +5,22 @@
 const base = require('./webpack.base.conf')
 const merge = require('webpack-merge')
 
-const webpack = require('webpack')
-
 module.exports = merge.smart(base, {
   output: {
     filename: '[name].js'
   },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-        return module.context && module.context.indexOf('node_modules') !== -1
+  module:{
+    rules: [
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          publicPath: 'resource/assets/'
+        }
       }
-    })
-  ],
+    ]
+  },
   devServer: {
     host: '0.0.0.0',
     clientLogLevel: 'none',

@@ -8,6 +8,7 @@ const cssnext = require('postcss-cssnext')
 const sprites = require('postcss-sprites')
 const px2rem = require('postcss-plugin-px2rem')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 const spritesOptions = {
   spritePath: './build/resource/assets/',
@@ -80,13 +81,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'resource/assets/[name].[ext]?[hash]'
-        }
-      },
+
       {
         test: /\.json$/,
         loader: 'json-loader'
@@ -99,6 +94,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function (module) {
+        return module.context && module.context.indexOf('node_modules') !== -1
+      }
     })
   ]
 }

@@ -46,6 +46,14 @@ module.exports = merge.smart(base, {
             }
           }
         })
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]',
+          publicPath: '../resource/assets/'
+        }
       }
     ]
   },
@@ -58,12 +66,6 @@ module.exports = merge.smart(base, {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-        return module.context && module.context.indexOf('node_modules') !== -1
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
