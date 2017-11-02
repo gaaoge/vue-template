@@ -15,8 +15,7 @@ module.exports = merge.smart(base, {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
-          publicPath: 'resource/assets/'
+          name: '[name].[ext]'
         }
       }
     ]
