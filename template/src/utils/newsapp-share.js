@@ -33,6 +33,13 @@
       } else {
         return window.location.href.replace(/(\?|#).*/, '')
       }
+    },
+    getshareLink (url) {
+      if (window.NTESAntAnalysis) {
+        return window.NTESAntAnalysis.getShareLink(window.NewsappShare.getAbsPath(url))
+      } else {
+        return window.NewsappShare.getAbsPath(url)
+      }
     }
   }
 
