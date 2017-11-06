@@ -17,7 +17,7 @@
       Vue.component('common-share', CommonShare)
       Vue.component('common-toast', CommonToast)
 
-    // 分享配置
+      // 分享配置
       NewsappShare.update({
         title: '分享标题',
         desc: '分享描述',
