@@ -9,7 +9,7 @@ module.exports = merge.smart(base, {
   output: {
     filename: '[name].js'
   },
-  module:{
+  module: {
     rules: [
       {
         test: /\.(png|jpg|gif|svg)$/,
