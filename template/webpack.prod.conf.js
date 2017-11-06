@@ -52,7 +52,8 @@ module.exports = merge.smart(base, {
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]',
-          publicPath: '../resource/assets/'
+          outputPath: 'resource/assets/',
+          publicPath: '../'
         }
       }
     ]
