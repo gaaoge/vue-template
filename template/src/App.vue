@@ -21,9 +21,9 @@
       NewsappShare.update({
         title: '分享标题',
         desc: '分享描述',
-        img_url: NewsappShare.getAbsPath('resource/statics/share-icon.png'),
-        link: NewsappShare.getshareLink()
+        img_url: NewsappShare.getAbsPath('resource/statics/share-icon.png')
       })
+      NewsappShare.updateShareLink()
     }
   }
 </script>
