@@ -40,6 +40,9 @@
           link: window.NTESAntAnalysis.getShareLink(window.NewsappShare.getAbsPath())
         })
       } else {
+        window.NewsappShare.update({
+          link: window.NewsappShare.getAbsPath()
+        })
         window.addEventListener('NTMReady', () => {
           NewsappShare.update({
             link: window.NTESAntAnalysis.getShareLink(window.NewsappShare.getAbsPath())
