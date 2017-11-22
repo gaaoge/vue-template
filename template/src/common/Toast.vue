@@ -48,7 +48,7 @@
     & span {
       display: inline-block;
       max-width: 600px;
-      padding: 10px 20px;
+      padding: 15px 20px;
       border-radius: 8px;
       color: #fff;
       background: color(black alpha(-20%));
