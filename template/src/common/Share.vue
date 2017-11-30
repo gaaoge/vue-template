@@ -1,5 +1,5 @@
 <template>
-  <transition name="common-fade">
+  <transition name="common-share">
     <div class="common-share" v-show="isShow" @click="hide">
       <div class="notice"></div>
     </div>
@@ -54,11 +54,11 @@
     }
   }
 
-  .common-fade-enter-active, .common-fade-leave-active {
+  .common-share-enter-active, .common-share-leave-active {
     transition: opacity .3s;
   }
 
-  .common-fade-enter, .common-fade-leave-active {
+  .common-share-enter, .common-share-leave-active {
     opacity: 0;
   }
 </style>
