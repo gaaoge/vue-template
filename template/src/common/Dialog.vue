@@ -1,6 +1,6 @@
 <template>
   <transition name="common-dialog">
-    <div class="common-dialog" v-if="isOpen" @touchmove="preventDefault">
+    <div class="common-dialog" v-show="isOpen" @touchmove="preventDefault">
       <slot></slot>
     </div>
   </transition>
