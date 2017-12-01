@@ -6,14 +6,16 @@
 
 <script>
   import Vue from 'vue'
-  import NewsappShare from 'newsapp-share'
+  import CommonDialog from './common/Dialog.vue'
   import CommonShare from './common/Share.vue'
   import CommonToast from './common/Toast.vue'
+  import NewsappShare from 'newsapp-share'
 
   export default {
     name: 'app',
     created () {
       // 注册全局通用组件
+      Vue.component('common-dialog', CommonDialog)
       Vue.component('common-share', CommonShare)
       Vue.component('common-toast', CommonToast)
 
