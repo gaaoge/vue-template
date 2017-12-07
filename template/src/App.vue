@@ -1,31 +1,26 @@
 <template>
   <div class="app">
     <router-view></router-view>
+    <common-share ref="share"></common-share>
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
-  import CommonDialog from './common/Dialog.vue'
+  import CommonMask from './common/Mask.vue'
   import CommonShare from './common/Share.vue'
-  import CommonToast from './common/Toast.vue'
-  import NewsappShare from 'newsapp-share'
 
   export default {
     name: 'app',
     created () {
       // 注册全局通用组件
-      Vue.component('common-dialog', CommonDialog)
+      Vue.component('common-mask', CommonMask)
       Vue.component('common-share', CommonShare)
-      Vue.component('common-toast', CommonToast)
-
-      // 分享配置
-      NewsappShare.update({
-        title: '分享标题',
-        desc: '分享描述',
-        img_url: 'resource/statics/share-icon.png'
-      })
-      NewsappShare.updateShareLink()
+    },
+    methods: {
+      share () {
+        this.$refs.share.show()
+      }
     }
   }
 </script>

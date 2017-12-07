@@ -1,34 +1,60 @@
 <template>
-  <transition name="common-share">
-    <div class="common-share" v-show="isShow" @click="hide">
-      <div class="notice"></div>
+  <common-mask ref="main">
+    <div class="common-share">
+      <div class="notice" @click="hide" v-if="isInApp">
+        <span></span>
+      </div>
+      <div class="panel" v-else>
+        <div class="weibo" @click="shareWeibo"></div>
+        <div class="qzone" @click="shareQzone"></div>
+        <div class="yixin" @click="shareYixin"></div>
+        <div class="close" @click="hide"></div>
+      </div>
     </div>
-  </transition>
+  </common-mask>
 </template>
 
 <script>
   import NewsappClient from 'newsapp-client'
+  import NewsappShare from 'newsapp-share'
 
   export default {
     data () {
       return {
-        isShow: false
+        isInApp: /micromessenger|weibo|qq|yixin/ig.test(navigator.userAgent)
       }
     },
+    created () {
+      NewsappShare.update({
+        title: '分享标题',
+        desc: '分享描述',
+        img_url: 'resource/statics/share-icon.png',
+        link: ''
+      })
+    },
     methods: {
-      show (callback) {
+      show () {
         if (NewsappClient.isNewsapp) {
-          NewsappClient.share(callback)
-        } else {
-          this.isShow = true
-          setTimeout(() => {
-            this.isShow = false
-          }, 2000)
-          NewsappClient.Callbacks.afterShare = [callback]
+          NewsappClient.share()
+          return
         }
+
+        this.$refs.main.show()
+        this.isInApp && setTimeout(() => {
+          this.$refs.main.hide()
+        }, 2000)
       },
       hide () {
-        this.isShow = false
+        this.$refs.main.hide()
+      },
+      shareWeibo () {
+        window.location.href = NewsappShare.getShareUrl('weibo')
+      },
+      shareQzone () {
+        window.location.href = NewsappShare.getShareUrl('qzone')
+      },
+      shareYixin () {
+        window.location.href = NewsappShare.getShareUrl('yixin')
       }
     }
   }
@@ -36,29 +62,61 @@
 
 <style type="text/postcss">
   .common-share {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: color(black alpha(-25%));
-    z-index: 10000;
+    position: relative;
+    height: 100%;
 
     & .notice {
-      position: absolute;
-      right: 50px;
-      top: 50px;
-      width: 380px;
-      height: 140px;
-      background: url("/resource/assets/share-notice.png");
+      position: relative;
+      height: 100%;
+
+      & span {
+        position: absolute;
+        right: 50px;
+        top: 50px;
+        width: 380px;
+        height: 140px;
+        background: url("/resource/assets/share-notice.png");
+      }
     }
-  }
 
-  .common-share-enter-active, .common-share-leave-active {
-    transition: opacity .3s;
-  }
+    & .panel {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 400px;
+      padding: 0 100px 150px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
 
-  .common-share-enter, .common-share-leave-active {
-    opacity: 0;
+      & .weibo, & .qzone, & .yixin {
+        width: 100px;
+        height: 100px;
+      }
+
+      & .weibo {
+        background: url("/resource/assets/share-weibo.png");
+      }
+
+      & .qzone {
+        background: url("/resource/assets/share-qzone.png");
+      }
+
+      & .yixin {
+        background: url("/resource/assets/share-yixin.png");
+      }
+
+      & .close {
+        position: absolute;
+        left: 50%;
+        bottom: 80px;
+        width: 72px;
+        height: 72px;
+        margin-left: -36px;
+        background: url("/resource/assets/share-close.png");
+      }
+    }
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <transition name="common-dialog">
-    <div class="common-dialog" v-show="isOpen" @touchmove="preventDefault">
+  <transition name="common-mask">
+    <div class="common-mask" v-show="isShow" @touchmove="preventDefault">
       <slot></slot>
     </div>
   </transition>
@@ -8,10 +8,10 @@
 
 <script>
   export default {
-    name: 'common-dialog',
+    name: 'common-mask',
     data () {
       return {
-        isOpen: false
+        isShow: false
       }
     },
     props: {
@@ -21,11 +21,11 @@
       }
     },
     methods: {
-      open () {
-        this.isOpen = true
+      show () {
+        this.isShow = true
       },
-      close () {
-        this.isOpen = false
+      hide () {
+        this.isShow = false
       },
       preventDefault (e) {
         this.prevent && e.preventDefault()
@@ -35,7 +35,7 @@
 </script>
 
 <style type="text/postcss">
-  .common-dialog {
+  .common-mask {
     position: fixed;
     top: 0;
     right: 0;
@@ -45,11 +45,11 @@
     z-index: 9999;
   }
 
-  .common-dialog-enter-active, .common-dialog-leave-active {
+  .common-mask-enter-active, .common-mask-leave-active {
     transition: opacity .3s;
   }
 
-  .common-dialog-enter, .common-dialog-leave-active {
+  .common-mask-enter, .common-mask-leave-active {
     opacity: 0;
   }
 </style>
