@@ -24,14 +24,6 @@
         isInApp: /micromessenger|weibo|qq|yixin/ig.test(navigator.userAgent)
       }
     },
-    created () {
-      NewsappShare.update({
-        title: '分享标题',
-        desc: '分享描述',
-        img_url: 'resource/statics/share-icon.png',
-        link: ''
-      })
-    },
     methods: {
       show () {
         if (NewsappClient.isNewsapp) {

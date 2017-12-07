@@ -1,12 +1,12 @@
 <template>
   <div class="app">
     <router-view></router-view>
-    <common-share ref="share"></common-share>
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
+  import NewsappShare from 'newsapp-share'
   import CommonMask from './common/Mask.vue'
   import CommonShare from './common/Share.vue'
 
@@ -16,11 +16,14 @@
       // 注册全局通用组件
       Vue.component('common-mask', CommonMask)
       Vue.component('common-share', CommonShare)
-    },
-    methods: {
-      share () {
-        this.$refs.share.show()
-      }
+
+      // 分享配置
+      NewsappShare.update({
+        title: '分享标题',
+        desc: '分享描述',
+        img_url: 'resource/statics/share-icon.png',
+        link: ''
+      })
     }
   }
 </script>
