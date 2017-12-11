@@ -18,10 +18,10 @@
       Vue.component('common-share', CommonShare)
 
       // 分享配置
-      NewsappShare.update({
+      NewsappShare.config({
         title: '分享标题',
         desc: '分享描述',
-        img_url: 'resource/statics/share-icon.png',
+        imgUrl: 'resource/statics/share-icon.png',
         link: ''
       })
     }

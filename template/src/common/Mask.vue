@@ -1,6 +1,6 @@
 <template>
   <transition name="common-mask">
-    <div class="common-mask" v-show="isShow" @touchmove="preventDefault">
+    <div class="common-mask" v-show="isShow" @touchmove="preventDefault" @click="onClick">
       <slot></slot>
     </div>
   </transition>
@@ -18,6 +18,10 @@
       prevent: {
         type: Boolean,
         default: true
+      },
+      clickHide: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -29,6 +33,9 @@
       },
       preventDefault (e) {
         this.prevent && e.preventDefault()
+      },
+      onClick () {
+        this.clickHide && this.hide()
       }
     }
   }

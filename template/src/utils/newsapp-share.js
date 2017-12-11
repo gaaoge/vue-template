@@ -1,14 +1,12 @@
 ;(function (window) {
+  var appName = ''
   var shareConfig = {
-    onlyImage: false,
-    shareDone: function () {}
-  }
-  var shareData = {
-    weibo: '',
     title: '',
     desc: '',
-    img_url: '',
-    link: ''
+    imgUrl: '',
+    link: '',
+    shareDone: function () {},
+    onlyImg: false
   }
 
   window.NewsappShare = {
@@ -18,59 +16,19 @@
         if (shareConfig.hasOwnProperty(key)) {
           shareConfig[key] = value
         }
-        if (key === 'shareDone') {
-          window.__newsapp_share_done = value
-        }
-      }
-    },
-    update: function (data) {
-      for (var key in data) {
-        var value = data[key]
-        if (shareData.hasOwnProperty(key)) {
-          shareData[key] = value
-        }
-        if (key === 'img_url') {
-          shareData.img_url = getAbsPath(value)
+
+        if (key === 'imgUrl') {
+          shareConfig.imgUrl = getAbsPath(value)
         }
         if (key === 'link') {
-          shareData.link = getAbsPath(value)
-          getAntShareLink(value, function (link) {
-            shareData.link = link
-            updateHiddenElement()
-          })
+          shareConfig.link = getAbsPath(value)
+          setTimeout(updateAntShareLink, 500)
         }
       }
-      updateHiddenElement()
+      config()
     },
-    getShareUrl: function (type) {
-      switch (type) {
-        case 'weibo':
-          return replaceUrl('http://service.weibo.com/share/share.php?url={link}&title={title}&pic={img_url}&searchPic=true')
-        case 'qzone':
-          return replaceUrl('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={link}&desc=&summary={desc}&title={title}&otype=share&pics={img_url}')
-        case 'yixin':
-          return replaceUrl('http://open.yixin.im/share?appKey=&type=webpage&title={title}&desc={desc}&userdesc=&pic={img_url}&url={link}')
-      }
-    }
+    show: show
   }
-
-  // 微信分享设置
-  document.addEventListener('WeixinJSBridgeReady', function () {
-    window.WeixinJSBridge.on('menu:share:appmessage', function () {
-      window.WeixinJSBridge.invoke('sendAppMessage', shareData, function (res) {
-        if (res.err_msg === 'send_app_msg:confirm') {
-          shareConfig.shareDone()
-        }
-      })
-    })
-    window.WeixinJSBridge.on('menu:share:timeline', function () {
-      window.WeixinJSBridge.invoke('shareTimeline', shareData, function (res) {
-        if (res.err_msg === 'share_timeline:ok') {
-          shareConfig.shareDone()
-        }
-      })
-    })
-  }, false)
 
   function getAbsPath (url) {
     if (url) {
@@ -82,44 +40,166 @@
     }
   }
 
-  function getAntShareLink (url, callback) {
-    if (window['NTESAntAnalysis']) {
-      var link = window['NTESAntAnalysis'].getShareLink(getAbsPath(url))
-      callback && callback(link)
-    } else {
-      window.addEventListener('NTMReady', () => {
-        var link = window['NTESAntAnalysis'].getShareLink(getAbsPath(url))
-        callback && callback(link)
-      })
+  function loadScript (url, callback) {
+    var script = document.createElement('script')
+    script.src = url
+    script.onload = function () {
+      callback && callback()
+      script.parentNode.removeChild(script)
     }
+    var target = document.getElementsByTagName('script')[0]
+    target.parentNode.insertBefore(script, target)
   }
 
-  function updateHiddenElement () {
-    var el = document.getElementById('__newsapp_share')
-    if (!el) {
-      el = document.createElement('div')
-      el.id = '__newsapp_share'
-      el.style.display = 'none'
-      document.body.insertBefore(el, document.body.childNodes[0])
-    }
-
-    var html = ''
-    html += '<div id="__newsapp_sharetext">' + (shareData.weibo || shareData.title) + ' ' + shareData.link + '</div>'
-    html += '<div id="__newsapp_sharephotourl">' + shareData.img_url + '</div>'
-    html += '<div id="__newsapp_sharewxtitle">' + shareData.title + '</div>'
-    html += '<div id="__newsapp_sharewxtext">' + shareData.desc + '</div>'
-    html += '<div id="__newsapp_sharewxthumburl">' + shareData.img_url + '</div>'
-    if (!shareConfig.onlyImage) {
-      html += '<div id="__newsapp_sharewxurl">' + shareData.link + '</div>'
-    }
-
-    el.innerHTML = html
-  }
-
-  function replaceUrl (url) {
-    return url.replace(/{([^}]*)}/g, function ($0, $1) {
-      return encodeURIComponent(shareData[$1])
+  function init (callback) {
+    window.navigator.userAgent.replace(/(newsapp|micromessenger|qq|qzone)\//ig, function ($0, $1) {
+      appName = $1 && $1.toLowerCase()
     })
+
+    switch (appName) {
+      case 'newsapp':
+        if (!window.NewsappClient) {
+          loadScript('//static.ws.126.net/utf8/3g/activity/libs/newsapp-client.min.js', callback)
+        } else {
+          callback()
+        }
+        break
+      case 'micromessenger':
+        if (!window.wx) {
+          loadScript('//res.wx.qq.com/open/js/jweixin-1.3.0.js', function () {
+            window.wx.config({
+              jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone'
+              ]
+            })
+            window.wx.ready(callback)
+          })
+        } else {
+          callback()
+        }
+        break
+      case 'qq':
+        if (!window.mqq) {
+          loadScript('//open.mobile.qq.com/sdk/qqapi.js', callback)
+        } else {
+          callback()
+        }
+        break
+      case 'qzone':
+        if (!window.mqq) {
+          loadScript('//qzonestyle.gtimg.cn/qzone/hybrid/lib/jsbridge.js', callback)
+        } else {
+          callback()
+        }
+        break
+      default:
+        callback()
+        break
+    }
+  }
+
+  function config () {
+    init(function () {
+      switch (appName) {
+        case 'newsapp':
+          var el = document.getElementById('__newsapp_shareconfig')
+          if (!el) {
+            el = document.createElement('div')
+            el.id = '__newsapp_shareconfig'
+            el.style.display = 'none'
+            document.body.insertBefore(el, document.body.childNodes[0])
+          }
+
+          var html = ''
+          html += '<div id="__newsapp_sharetext">' + shareConfig.title + ' ' + shareConfig.link + '</div>'
+          html += '<div id="__newsapp_sharephotourl">' + shareConfig.imgUrl + '</div>'
+          html += '<div id="__newsapp_sharewxtitle">' + shareConfig.title + '</div>'
+          html += '<div id="__newsapp_sharewxtext">' + shareConfig.desc + '</div>'
+          html += '<div id="__newsapp_sharewxthumburl">' + shareConfig.imgUrl + '</div>'
+          if (!shareConfig.onlyImg) {
+            html += '<div id="__newsapp_sharewxurl">' + shareConfig.link + '</div>'
+          }
+          el.innerHTML = html
+
+          window.__newsapp_share_done = shareConfig.shareDone
+          break
+        case 'micromessenger':
+          var config = {
+            title: shareConfig.title,
+            desc: shareConfig.desc,
+            imgUrl: shareConfig.imgUrl,
+            link: shareConfig.link,
+            success: shareConfig.shareDone
+          }
+
+          window.wx.onMenuShareTimeline(config)
+          window.wx.onMenuShareAppMessage(config)
+          window.wx.onMenuShareQQ(config)
+          window.wx.onMenuShareWeibo(config)
+          window.wx.onMenuShareQZone(config)
+          break
+        case 'qq':
+        case 'qzone':
+          window.mqq.data.setShareInfo({
+            title: shareConfig.title,
+            desc: shareConfig.desc,
+            image_url: shareConfig.imgUrl,
+            share_url: shareConfig.link
+          })
+          break
+        default:
+          var urls = {
+            weibo: 'http://service.weibo.com/share/share.php?title={title}&pic={imgUrl}&url={link}',
+            qq: 'http://connect.qq.com/widget/shareqq/index.html?title={title}&summary={desc}&pics={imgUrl}&url={link}',
+            qzone: 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title={title}&summary={desc}&pics={imgUrl}&url={link}&&otype=share',
+            yixin: 'http://open.yixin.im/share?title={title}&desc={desc}&pic={imgUrl}&url={link}&type=webpage'
+          }
+          for (var key in urls) {
+            urls[key] = urls[key].replace(/{([^}]*)}/g, function ($0, $1) {
+              return encodeURIComponent(shareConfig[$1])
+            })
+          }
+          window.NewsappShare.urls = urls
+          break
+      }
+    })
+  }
+
+  function show (fallback) {
+    init(function () {
+      switch (appName) {
+        case 'newsapp':
+          window.NewsappClient.share()
+          break
+        case 'micromessenger':
+          fallback && fallback(true)
+          break
+        case 'qq':
+        case 'qzone':
+          window.mqq.ui.showShareMenu()
+          break
+        default:
+          fallback && fallback(false)
+          break
+      }
+    })
+  }
+
+  function updateAntShareLink () {
+    if (!window['NTESAntAnalysis']) {
+      window.addEventListener('NTMReady', update)
+    } else {
+      update()
+    }
+
+    function update () {
+      shareConfig.link = window['NTESAntAnalysis'].getShareLink(shareConfig.link)
+      config()
+    }
   }
 }(window))
 
