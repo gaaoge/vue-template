@@ -1,6 +1,7 @@
 <template>
   <div class="app-home">
-    Hello Vue!
+    <h5 @click="$refs.share.show()">Hello Vue!</h5>
+    <common-share ref="share"></common-share>
   </div>
 </template>
 
