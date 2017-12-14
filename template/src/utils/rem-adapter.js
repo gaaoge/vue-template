@@ -1,4 +1,4 @@
-;(function (window) {
+;(function () {
   var designWidth = 750 // 设计稿宽度
   var designHeight = 1206 // 设计稿高度
   var designRem = 100 // 目标rem对应px的比例
@@ -39,4 +39,4 @@
   }, false)
 
   updateRem()
-})(window)
+}())

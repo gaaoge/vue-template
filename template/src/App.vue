@@ -6,7 +6,6 @@
 
 <script>
   import Vue from 'vue'
-  import NewsappShare from 'newsapp-share'
   import CommonMask from './common/Mask.vue'
   import CommonShare from './common/Share.vue'
 
@@ -18,7 +17,7 @@
       Vue.component('common-share', CommonShare)
 
       // 分享配置
-      NewsappShare.config({
+      window.NewsappShare.config({
         title: '分享标题',
         desc: '分享描述',
         imgUrl: 'resource/statics/share-icon.png',

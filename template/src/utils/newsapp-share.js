@@ -1,4 +1,4 @@
-;(function (window) {
+;(function () {
   var appName = ''
   var shareConfig = {
     title: '',
@@ -58,8 +58,8 @@
 
     switch (appName) {
       case 'newsapp':
-        if (!window.NewsappClient) {
-          loadScript('//static.ws.126.net/utf8/3g/activity/libs/newsapp-client.min.js', callback)
+        if (!window.newsappAPI) {
+          loadScript('//static.ws.126.net/utf8/3g/activity/libs/newsapp.min.js', callback)
         } else {
           callback()
         }
@@ -106,26 +106,22 @@
     init(function () {
       switch (appName) {
         case 'newsapp':
-          var el = document.getElementById('__newsapp_shareconfig')
-          if (!el) {
-            el = document.createElement('div')
-            el.id = '__newsapp_shareconfig'
-            el.style.display = 'none'
-            document.body.insertBefore(el, document.body.childNodes[0])
-          }
-
-          var html = ''
-          html += '<div id="__newsapp_sharetext">' + shareConfig.title + ' ' + shareConfig.link + '</div>'
-          html += '<div id="__newsapp_sharephotourl">' + shareConfig.imgUrl + '</div>'
-          html += '<div id="__newsapp_sharewxtitle">' + shareConfig.title + '</div>'
-          html += '<div id="__newsapp_sharewxtext">' + shareConfig.desc + '</div>'
-          html += '<div id="__newsapp_sharewxthumburl">' + shareConfig.imgUrl + '</div>'
           if (!shareConfig.onlyImg) {
-            html += '<div id="__newsapp_sharewxurl">' + shareConfig.link + '</div>'
+            window.newsappAPI.share.setShareData({
+              wxTitle: shareConfig.title,
+              wxText: shareConfig.desc,
+              wxImg: shareConfig.imgUrl,
+              wxUrl: shareConfig.link,
+              wbImg: shareConfig.imgUrl,
+              wbText: shareConfig.title + ' ' + shareConfig.link,
+              shareDone: shareConfig.shareDone
+            })
+          } else {
+            window.newsappAPI.share.setShareData({
+              wbImg: shareConfig.imgUrl,
+              shareDone: shareConfig.shareDone
+            })
           }
-          el.innerHTML = html
-
-          window.__newsapp_share_done = shareConfig.shareDone
           break
         case 'micromessenger':
           var config = {
@@ -173,7 +169,7 @@
     init(function () {
       switch (appName) {
         case 'newsapp':
-          window.NewsappClient.share()
+          window.newsappAPI.share.openShareMenu()
           break
         case 'micromessenger':
           fallback && fallback(true)
@@ -201,6 +197,4 @@
       config()
     }
   }
-}(window))
-
-export default window.NewsappShare
+}())
