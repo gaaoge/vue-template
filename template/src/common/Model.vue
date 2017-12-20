@@ -1,6 +1,6 @@
 <template>
-  <transition name="common-mask">
-    <div class="common-mask" v-show="isShow" @touchmove="preventDefault" @click="onClick">
+  <transition name="common-model">
+    <div class="common-model" v-show="isShow" @touchmove="preventDefault" @click="onClick">
       <slot></slot>
     </div>
   </transition>
@@ -8,7 +8,7 @@
 
 <script>
   export default {
-    name: 'common-mask',
+    name: 'common-model',
     data () {
       return {
         isShow: false
@@ -42,7 +42,7 @@
 </script>
 
 <style type="text/postcss">
-  .common-mask {
+  .common-model {
     position: fixed;
     top: 0;
     right: 0;
@@ -52,11 +52,11 @@
     z-index: 9999;
   }
 
-  .common-mask-enter-active, .common-mask-leave-active {
+  .common-model-enter-active, .common-model-leave-active {
     transition: opacity .3s;
   }
 
-  .common-mask-enter, .common-mask-leave-active {
+  .common-model-enter, .common-model-leave-active {
     opacity: 0;
   }
 </style>

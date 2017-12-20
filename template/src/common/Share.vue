@@ -1,9 +1,9 @@
 <template>
   <div class="common-share">
-    <common-mask ref="notice" :clickHide="true">
+    <common-model ref="notice" :clickHide="true">
       <div class="notice"></div>
-    </common-mask>
-    <common-mask ref="panel">
+    </common-model>
+    <common-model ref="panel">
       <div class="panel">
         <div class="weibo" @click="openShare('weibo')"></div>
         <div class="qq" @click="openShare('qq')"></div>
@@ -11,7 +11,7 @@
         <div class="yixin" @click="openShare('yixin')"></div>
         <div class="close" @click="hidePanel"></div>
       </div>
-    </common-mask>
+    </common-model>
   </div>
 </template>
 
