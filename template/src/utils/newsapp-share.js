@@ -119,6 +119,7 @@
           } else {
             window.newsappAPI.share.setShareData({
               wbImg: shareConfig.imgUrl,
+              wbText: shareConfig.title + ' ' + shareConfig.link,
               shareDone: shareConfig.shareDone
             })
           }
