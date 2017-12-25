@@ -53,8 +53,6 @@ module.exports = {
     app: './src/main.js',
     vendor: [
       'rem-adapter',
-      'newsapp-share',
-      'newsapp-stats',
       'normalize.css',
       'whatwg-fetch'
     ]

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "newsapp-share": "git+https://g.hz.netease.com/mf2e/newsapp-share.git",
     "normalize.css": "^7.0.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
@@ -57,16 +58,5 @@
     "last 2 versions",
     "iOS >= 8",
     "Android >= 4.0"
-  ],
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "useBuiltIns": true
-        }
-      ],
-      "stage-0"
-    ]
-  }
+  ]
 }

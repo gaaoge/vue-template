@@ -16,13 +16,15 @@
 </template>
 
 <script>
+  import NewsappShare from 'newsapp-share'
+
   export default {
     data () {
       return {}
     },
     methods: {
       show () {
-        window.NewsappShare.show((isApp) => {
+        NewsappShare.show((isApp) => {
           if (isApp) {
             this.$refs.notice.show()
             setTimeout(() => {
@@ -34,7 +36,7 @@
         })
       },
       openShare (type) {
-        window.location.href = window.NewsappShare.urls[type]
+        window.location.href = NewsappShare.getShareUrl(type)
       },
       hidePanel () {
         this.$refs.panel.hide()
