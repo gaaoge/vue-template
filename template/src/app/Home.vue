@@ -9,9 +9,7 @@
   export default {
     name: 'app-home',
     data () {
-      return {
-
-      }
+      return {}
     }
   }
 </script>
