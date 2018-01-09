@@ -1,3 +1,8 @@
+/**
+ * rem适配工具类
+ * Created by GG on 2018/1/9.
+ */
+
 const designWidth = 750 // 设计稿宽度
 const designHeight = 1206 // 设计稿高度
 const designRem = 100 // 目标rem对应px的比例
@@ -25,19 +30,23 @@ function updateRem () {
   document.documentElement.style.fontSize = clientWidth / designWidth * designRem / defaultRem * 100 + '%'
 }
 
-let tid
-window.addEventListener('resize', function () {
-  clearTimeout(tid)
-  tid = setTimeout(updateRem, 100)
-}, false)
-window.addEventListener('pageshow', function (e) {
-  if (e.persisted) {
+function initRem () {
+  let tid
+  window.addEventListener('resize', function () {
     clearTimeout(tid)
     tid = setTimeout(updateRem, 100)
-  }
-}, false)
-updateRem()
+  }, false)
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      clearTimeout(tid)
+      tid = setTimeout(updateRem, 100)
+    }
+  }, false)
+  updateRem()
+}
 
 export {
-  getRem
+  getRem,
+  updateRem,
+  initRem
 }

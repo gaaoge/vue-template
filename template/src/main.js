@@ -3,11 +3,17 @@
  */
 
 import 'babel-polyfill'
-import Vue from 'vue'
+import 'normalize.css'
+import 'whatwg-fetch'
 
+import Vue from 'vue'
 import router from './router'
 import store from './store'
+import { initRem } from './utils/rem'
 import App from './App.vue'
+
+// 初始化rem
+initRem()
 
 // Vue实例
 window.vm = new Vue({

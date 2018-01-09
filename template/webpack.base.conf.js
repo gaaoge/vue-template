@@ -50,12 +50,7 @@ const px2remOptions = {
 
 module.exports = {
   entry: {
-    app: './src/main.js',
-    vendor: [
-      'rem-adapter',
-      'normalize.css',
-      'whatwg-fetch'
-    ]
+    app: './src/main.js'
   },
   output: {
     path: path.resolve(__dirname, 'build/')
@@ -86,7 +81,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: ['node_modules', 'src/utils']
+    modules: ['node_modules']
   },
   plugins: [
     new HtmlWebpackPlugin({
