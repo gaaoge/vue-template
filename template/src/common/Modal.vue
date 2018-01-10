@@ -1,6 +1,6 @@
 <template>
-  <transition name="common-model">
-    <div class="common-model" v-show="isShow" @touchmove="preventDefault" @click="onClick">
+  <transition name="common-modal">
+    <div class="common-modal" v-show="isShow" @touchmove="preventDefault" @click="onClick">
       <slot></slot>
     </div>
   </transition>
@@ -8,7 +8,7 @@
 
 <script>
   export default {
-    name: 'common-model',
+    name: 'common-modal',
     data () {
       return {
         isShow: false
@@ -42,7 +42,7 @@
 </script>
 
 <style type="text/postcss">
-  .common-model {
+  .common-modal {
     position: fixed;
     top: 0;
     right: 0;
@@ -52,11 +52,11 @@
     z-index: 9999;
   }
 
-  .common-model-enter-active, .common-model-leave-active {
+  .common-modal-enter-active, .common-modal-leave-active {
     transition: opacity .3s;
   }
 
-  .common-model-enter, .common-model-leave-active {
+  .common-modal-enter, .common-modal-leave-active {
     opacity: 0;
   }
 </style>

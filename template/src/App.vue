@@ -6,15 +6,15 @@
 
 <script>
   import Vue from 'vue'
-  import NewsappShare from 'newsapp-share'
-  import CommonModel from './common/Model.vue'
+  import CommonModal from './common/Modal.vue'
   import CommonShare from './common/Share.vue'
+  import NewsappShare from 'newsapp-share'
 
   export default {
     name: 'app',
     created () {
       // 注册全局通用组件
-      Vue.component('common-model', CommonModel)
+      Vue.component('common-modal', CommonModal)
       Vue.component('common-share', CommonShare)
 
       // 分享配置

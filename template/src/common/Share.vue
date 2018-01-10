@@ -1,8 +1,8 @@
 <template>
   <div class="common-share">
-    <common-model ref="notice" :clickHide="true">
+    <common-modal ref="notice" :clickHide="true">
       <div class="notice"></div>
-    </common-model>
+    </common-modal>
   </div>
 </template>
 
