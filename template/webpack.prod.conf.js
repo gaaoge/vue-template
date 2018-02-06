@@ -59,7 +59,7 @@ module.exports = merge.smart(base, {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['build']),
+    new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([{
       from: 'resource/statics',
       to: 'resource/statics'

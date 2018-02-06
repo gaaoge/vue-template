@@ -62,7 +62,7 @@ function formatDate (dateInput, format) {
   return format
 }
 
-//单页面高度适配
+// 单页面高度适配
 function getResizeStyle (targetHeight = 603) {
   if (window.innerWidth > window.innerHeight) return
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="app-home">
-    <h5 @click="$refs.share.show()">Hello Vue!</h5>
+  <div class="app-home" >
+    <hello-vue @click.native="share"></hello-vue>
     <common-share ref="share"></common-share>
   </div>
 </template>
@@ -10,14 +10,17 @@
     name: 'app-home',
     data () {
       return {}
+    },
+    methods: {
+      share () {
+        this.$refs.share.show()
+      }
     }
   }
 </script>
 
 <style type="text/postcss">
   .app-home {
-    text-align: center;
-    font-size: 100px;
-    line-height: 200px;
+    height: 100%;
   }
 </style>

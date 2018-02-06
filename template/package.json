@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "hello-vue": "git+https://g.hz.netease.com/newsapp-activity/vue-components/hello-vue.git",
     "newsapp-share": "git+https://g.hz.netease.com/mf2e/newsapp-share.git",
     "normalize.css": "^7.0.0",
     "vue": "^2.5.13",
@@ -58,5 +59,10 @@
     "last 2 versions",
     "iOS >= 8",
     "Android >= 4.0"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://g.hz.netease.com/newsapp-activity/VueTemplate.git"
+  },
+  "license": "MIT"
 }

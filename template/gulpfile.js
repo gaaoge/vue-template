@@ -11,11 +11,11 @@ const replace = require('gulp-replace')
 const filter = require('gulp-filter')
 
 const path = {
-  build: 'build/'
+  dist: 'dist/'
 }
 
 gulp.task('tinypng', function () {
-  return gulp.src(path.build + 'resource/assets/**/*.{png,jpg,jpeg}')
+  return gulp.src(path.dist + 'resource/assets/**/*.{png,jpg,jpeg}')
     .pipe(tinypng({
       key: '6-qmxQevyQCCYb-gqGTMnF6LTE8Dzo3j',
       sigFile: 'assets_tinypng/.sigfile',
@@ -27,14 +27,14 @@ gulp.task('tinypng', function () {
 
 gulp.task('tinypng_copy', function () {
   return gulp.src('assets_tinypng/**/*')
-    .pipe(gulp.dest(path.build + 'resource/assets'))
+    .pipe(gulp.dest(path.dist + 'resource/assets'))
 })
 
 gulp.task('test', ['tinypng_copy'], function () {
   const username = pkg.author.name
   const host = 'ftp-test'
 
-  exec(`cp -rf ${path.build} ${pkg.name}`, function () {
+  exec(`cp -rf ${path.dist} ${pkg.name}`, function () {
     exec(`scp -r ${pkg.name} ${username}@${host}:/home/appops/app/activity`, function (e) {
       e && console.log(e)
       exec(`rm -rf ${pkg.name}`)
@@ -46,7 +46,7 @@ gulp.task('pre', ['tinypng_copy'], function () {
   const username = pkg.author.name
   const host = 'ftp-pre'
 
-  exec(`cp -rf ${path.build} ${pkg.name}`, function () {
+  exec(`cp -rf ${path.dist} ${pkg.name}`, function () {
     exec(`scp -r ${pkg.name} ${username}@${host}:/home/appops/htmlfile/activity`, function (e) {
       e && console.log(e)
       exec(`rm -rf ${pkg.name}`)
@@ -63,7 +63,7 @@ gulp.task('publish', ['tinypng_copy'], function () {
     parallel: 5
   })
 
-  const target = filter(path.build + 'index.html', {restore: true})
+  const target = filter(path.dist + 'index.html', {restore: true})
   const statistics = [
     '<script src="//analytics.163.com/ntes.js"></script>',
     '<script>var _ntes_nacc="mapp";neteaseTracker();</script>',
@@ -73,7 +73,7 @@ gulp.task('publish', ['tinypng_copy'], function () {
     '<script>var _hmt=_hmt||[];(function(){var b=document.createElement("script");b.src="//hm.baidu.com/hm.js?7fa45cfaddbf8ba5591da1950285d665";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a)})();</script>'
   ].join('')
 
-  return gulp.src(path.build + '**/*')
+  return gulp.src(path.dist + '**/*')
     .pipe(target)
     .pipe(replace('<!--statistics-->', statistics))
     .pipe(target.restore)

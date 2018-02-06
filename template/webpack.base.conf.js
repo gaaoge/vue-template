@@ -11,7 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 const spritesOptions = {
-  spritePath: './build/resource/assets/',
+  spritePath: './dist/resource/assets/',
   spritesmith: {padding: 20},
   groupBy: function (image) {
     let groupname = path.basename(image.styleFilePath, '.vue').toLowerCase()
@@ -53,7 +53,7 @@ module.exports = {
     app: './src/main.js'
   },
   output: {
-    path: path.resolve(__dirname, 'build/')
+    path: path.resolve(__dirname, 'dist/')
   },
   module: {
     rules: [
@@ -81,7 +81,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: ['node_modules']
+    modules: [path.resolve('node_modules')]
   },
   plugins: [
     new HtmlWebpackPlugin({

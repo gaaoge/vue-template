@@ -30,23 +30,20 @@ function updateRem () {
   document.documentElement.style.fontSize = clientWidth / designWidth * designRem / defaultRem * 100 + '%'
 }
 
-function initRem () {
-  let tid
-  window.addEventListener('resize', function () {
+let tid
+window.addEventListener('resize', function () {
+  clearTimeout(tid)
+  tid = setTimeout(updateRem, 100)
+}, false)
+window.addEventListener('pageshow', function (e) {
+  if (e.persisted) {
     clearTimeout(tid)
     tid = setTimeout(updateRem, 100)
-  }, false)
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) {
-      clearTimeout(tid)
-      tid = setTimeout(updateRem, 100)
-    }
-  }, false)
-  updateRem()
-}
+  }
+}, false)
+updateRem()
 
 export {
   getRem,
-  updateRem,
-  initRem
+  updateRem
 }
