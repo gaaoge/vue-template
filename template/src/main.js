@@ -10,7 +10,7 @@ import 'whatwg-fetch'
 import Vue from 'vue'
 import router from './router'
 import store from './store'
-import App from './App.vue'
+import App from './App'
 
 import HelloVue from 'hello-vue'
 

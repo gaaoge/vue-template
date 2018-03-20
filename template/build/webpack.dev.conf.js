@@ -3,30 +3,34 @@
  */
 
 const base = require('./webpack.base.conf')
+const css = require('./css.conf')
 const merge = require('webpack-merge')
 
 module.exports = merge.smart(base, {
+  mode: 'development',
   output: {
-    filename: '[name].js'
+    filename: 'js/[name].js'
   },
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
+        test: /\.vue$/,
+        loader: 'vue-loader',
         options: {
-          name: '[name].[ext]',
-          outputPath: 'resource/assets/'
+          postcss: css.postcss
         }
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader?insertAt=top!css-loader'
       }
     ]
   },
   devServer: {
     host: '0.0.0.0',
-    clientLogLevel: 'none',
-    noInfo: true,
     compress: true,
-    historyApiFallback: true
+    stats: 'errors-only',
+    clientLogLevel: 'none'
   },
   devtool: '#eval-source-map'
 })

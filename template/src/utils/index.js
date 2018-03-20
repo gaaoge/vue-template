@@ -74,9 +74,15 @@ function getResizeStyle (targetHeight = 603) {
   }
 }
 
+// 获取static目录文件的实际路径
+function getStaticPath (name) {
+  return __webpack_public_path__ + name // eslint-disable-line
+}
+
 export {
   getSearch,
   setSearch,
   formatDate,
-  getResizeStyle
+  getResizeStyle,
+  getStaticPath
 }

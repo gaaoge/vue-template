@@ -1,5 +1,6 @@
 .DS_Store
 .idea
-node_modules/
+.ftppass
 dist/
-assets_tinypng/
+node_modules/
+resource/sprites

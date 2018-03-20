@@ -6,9 +6,10 @@
 
 <script>
   import Vue from 'vue'
-  import CommonModal from './common/Modal.vue'
-  import CommonShare from './common/Share.vue'
+  import CommonModal from './common/Modal'
+  import CommonShare from './common/Share'
   import NewsappShare from 'newsapp-share'
+  import { getStaticPath } from './utils'
 
   export default {
     name: 'app',
@@ -21,7 +22,7 @@
       NewsappShare.config({
         title: '分享标题',
         desc: '分享描述',
-        imgUrl: 'resource/statics/share-icon.png',
+        imgUrl: getStaticPath('share-icon.png'),
         link: ''
       })
     }

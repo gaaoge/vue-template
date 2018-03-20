@@ -1,5 +1,5 @@
 /**
- * Created by GG on 16/12/01.
+ * Created by GG on 18/03/19.
  */
 
 const path = require('path')
@@ -7,11 +7,10 @@ const postcss = require('postcss')
 const cssnext = require('postcss-cssnext')
 const sprites = require('postcss-sprites')
 const px2rem = require('postcss-plugin-px2rem')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 
 const spritesOptions = {
-  spritePath: './dist/resource/assets/',
+  spritePath: 'resource/sprites/',
   spritesmith: {padding: 20},
   groupBy: function (image) {
     let groupname = path.basename(image.styleFilePath, '.vue').toLowerCase()
@@ -44,54 +43,27 @@ const spritesOptions = {
     }
   }
 }
+
 const px2remOptions = {
   propBlackList: ['border-width']
 }
 
-module.exports = {
-  entry: {
-    app: './src/main.js'
+const cssLoader = ExtractTextWebpackPlugin.extract({
+  fallback: 'style-loader',
+  use: {
+    loader: 'css-loader',
+    options: {
+      minimize: true
+    }
   },
-  output: {
-    path: path.resolve(__dirname, 'dist/')
-  },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          postcss: [cssnext(), sprites(spritesOptions), px2rem(px2remOptions)]
-        }
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader?insertAt=top!css-loader'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
+  publicPath: '../'
+})
 
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
-    ]
-  },
-  resolve: {
-    modules: [path.resolve('node_modules')]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-        return module.context && module.context.indexOf('node_modules') !== -1
-      }
-    })
-  ]
+module.exports = {
+  postcss: [
+    cssnext(),
+    sprites(spritesOptions),
+    px2rem(px2remOptions)
+  ],
+  cssLoader
 }
