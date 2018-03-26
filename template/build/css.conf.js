@@ -2,7 +2,6 @@
  * Created by GG on 18/03/19.
  */
 
-const path = require('path')
 const postcss = require('postcss')
 const cssnext = require('postcss-cssnext')
 const sprites = require('postcss-sprites')
@@ -15,7 +14,7 @@ const spritesOptions = {
   spritesmith: {padding: 20},
   groupBy: function (image) {
     let groupName = groupNames.indexOf(image.styleFilePath)
-    if(groupName === -1) {
+    if (groupName === -1) {
       groupNames.push(image.styleFilePath)
       groupName = groupNames.length - 1
     }

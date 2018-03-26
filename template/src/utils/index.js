@@ -76,11 +76,7 @@ function getResizeStyle (targetHeight = 603) {
 
 // 获取static目录文件的实际路径
 function getStaticPath (path) {
-  if (process.env.NODE_ENV === 'production') {
-    return __webpack_public_path__ + 'static/' + path // eslint-disable-line
-  } else {
-    return 'resource/static/' + path
-  }
+  return __webpack_public_path__ + 'static/' + path // eslint-disable-line
 }
 
 export {

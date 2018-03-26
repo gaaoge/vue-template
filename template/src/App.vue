@@ -17,7 +17,7 @@
       Vue.component('common-modal', CommonModal)
       Vue.component('common-toast', CommonToast)
 
-      //注入$app实例
+      // 注入$app实例
       Vue.mixin({
         beforeCreate () {
           this.$app = this.$root.$children[0]

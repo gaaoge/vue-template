@@ -24,7 +24,7 @@
       })
     },
     methods: {
-      hello() {
+      hello () {
         this.$app.toast('Hello Vue!')
       },
       share () {
