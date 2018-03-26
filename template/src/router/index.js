@@ -5,7 +5,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const AppHome = () => import('../app/Home')
+import AppHome from '../app/Home'
 
 Vue.use(VueRouter)
 

@@ -1,30 +1,33 @@
 <template>
   <div class="app">
     <router-view></router-view>
+    <common-toast ref="toast"></common-toast>
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
   import CommonModal from './common/Modal'
-  import CommonShare from './common/Share'
-  import NewsappShare from 'newsapp-share'
-  import { getStaticPath } from './utils'
+  import CommonToast from './common/Toast'
 
   export default {
     name: 'app',
     created () {
       // 注册全局通用组件
       Vue.component('common-modal', CommonModal)
-      Vue.component('common-share', CommonShare)
+      Vue.component('common-toast', CommonToast)
 
-      // 分享配置
-      NewsappShare.config({
-        title: '分享标题',
-        desc: '分享描述',
-        imgUrl: getStaticPath('share-icon.png'),
-        link: ''
+      //注入$app实例
+      Vue.mixin({
+        beforeCreate () {
+          this.$app = this.$root.$children[0]
+        }
       })
+    },
+    methods: {
+      toast (content) {
+        this.$refs.toast.show(content)
+      }
     }
   }
 </script>

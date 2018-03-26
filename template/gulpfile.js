@@ -44,7 +44,7 @@ gulp.task('publish', function () {
   return easeftp.verify(ftppass.easeftp).then(function () {
     return easeftp.upload({
       online: 'activity/' + pkg.name,
-      files: path.resolve(__dirname, 'dist'),
+      files: path.resolve('dist'),
       exclude: ['index.html', 'service-worker.js']
     })
   }).catch(function (e) {

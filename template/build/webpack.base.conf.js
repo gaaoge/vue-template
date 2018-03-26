@@ -10,7 +10,7 @@ module.exports = {
     app: './src/main.js'
   },
   output: {
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve('dist')
   },
   module: {
     rules: [
@@ -18,10 +18,6 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.json(\?.*)?$/,
-        loader: 'json-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -51,7 +47,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.css', '.vue', '.json'],
-    modules: [path.resolve('node_modules')]
+    alias: {
+      utils: path.resolve('src/utils')
+    }
   },
   optimization: {
     splitChunks: {

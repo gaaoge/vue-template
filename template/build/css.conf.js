@@ -9,12 +9,17 @@ const sprites = require('postcss-sprites')
 const px2rem = require('postcss-plugin-px2rem')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 
+const groupNames = []
 const spritesOptions = {
   spritePath: 'resource/sprites/',
   spritesmith: {padding: 20},
   groupBy: function (image) {
-    let groupname = path.basename(image.styleFilePath, '.vue').toLowerCase()
-    return Promise.resolve(groupname)
+    let groupName = groupNames.indexOf(image.styleFilePath)
+    if(groupName === -1) {
+      groupNames.push(image.styleFilePath)
+      groupName = groupNames.length - 1
+    }
+    return Promise.resolve(groupName.toString())
   },
   hooks: {
     onUpdateRule: function (rule, token, image) {

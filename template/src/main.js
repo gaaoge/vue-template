@@ -2,7 +2,7 @@
  * Created by GG on 2016/11/30.
  */
 
-import './utils/rem'
+import 'utils/rem'
 import 'babel-polyfill'
 import 'normalize.css'
 import 'whatwg-fetch'
