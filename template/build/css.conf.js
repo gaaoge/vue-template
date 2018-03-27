@@ -10,7 +10,7 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 
 const groupNames = []
 const spritesOptions = {
-  spritePath: 'resource/sprites/',
+  spritePath: 'sprites/',
   spritesmith: {padding: 20},
   groupBy: function (image) {
     let groupName = groupNames.indexOf(image.styleFilePath)

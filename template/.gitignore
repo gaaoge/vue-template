@@ -3,4 +3,4 @@
 .ftppass
 dist/
 node_modules/
-resource/sprites
+sprites/

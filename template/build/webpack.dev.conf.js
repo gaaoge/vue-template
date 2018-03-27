@@ -28,7 +28,6 @@ module.exports = merge.smart(base, {
   },
   devServer: {
     host: '0.0.0.0',
-    contentBase: 'resource',
     compress: true,
     stats: 'errors-only',
     clientLogLevel: 'none'

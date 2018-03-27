@@ -56,7 +56,7 @@ module.exports = merge.smart(base, {
       allowExternal: true
     }),
     new CopyWebpackPlugin([{
-      from: 'resource/static',
+      from: 'static',
       to: 'static'
     }]),
     new ExtractTextWebpackPlugin({

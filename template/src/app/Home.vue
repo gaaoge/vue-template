@@ -1,13 +1,14 @@
 <template>
   <div class="app-home">
     <hello-vue @click.native="hello"></hello-vue>
-    <div class="logo" @click="share"></div>
+    <app-logo @click.native="share"></app-logo>
   </div>
 </template>
 
 <script>
   import NewsappShare from 'newsapp-share'
   import { getStaticPath } from 'utils'
+  import AppLogo from './components/Logo'
 
   export default {
     name: 'app-home',
@@ -23,6 +24,9 @@
         link: ''
       })
     },
+    components: {
+      AppLogo
+    },
     methods: {
       hello () {
         this.$app.toast('Hello Vue!')
@@ -37,13 +41,5 @@
 <style type="text/postcss">
   .app-home {
     height: 100%;
-
-    & .logo {
-      display: block;
-      width: 400px;
-      height: 400px;
-      margin: 0 auto;
-      background: url("/resource/assets/logo.png");
-    }
   }
 </style>
