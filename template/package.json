@@ -1,10 +1,10 @@
 {
-  "name": "{{name}}",
+  "name": "vue-template",
   "version": "3.0.0",
-  "description": "{{description}}",
+  "description": "Vue项目开发模板",
   "author": {
-    "name": "{{author}}",
-    "email": "{{email}}"
+    "name": "gaoge",
+    "email": "gaoge@corp.netease.com"
   },
   "scripts": {
     "dev": "webpack-dev-server --hot --config build/webpack.dev.conf.js",
@@ -31,13 +31,13 @@
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
-    "easeftp": "^1.0.34",
+    "easeftp": "^1.0.35",
     "eslint-plugin-html": "^4.0.2",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.6.1",
     "html-webpack-plugin": "^3.1.0",
+    "mini-css-extract-plugin": "^0.4.0",
     "offline-plugin": "^5.0.0-0",
     "postcss": "^6.0.21",
     "postcss-cssnext": "^3.1.0",
@@ -50,7 +50,7 @@
     "vinyl-ftp": "^0.6.1",
     "vue-loader": "^14.2.2",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.2.0",
+    "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.2"

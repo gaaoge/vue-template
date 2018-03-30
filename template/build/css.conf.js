@@ -6,7 +6,7 @@ const postcss = require('postcss')
 const cssnext = require('postcss-cssnext')
 const sprites = require('postcss-sprites')
 const px2rem = require('postcss-plugin-px2rem')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const groupNames = []
 const spritesOptions = {
@@ -52,16 +52,20 @@ const px2remOptions = {
   propBlackList: ['border-width']
 }
 
-const cssLoader = ExtractTextWebpackPlugin.extract({
-  fallback: 'style-loader',
-  use: {
+const loader = [
+  {
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+      publicPath: '../'
+    }
+  },
+  {
     loader: 'css-loader',
     options: {
       minimize: true
     }
-  },
-  publicPath: '../'
-})
+  }
+]
 
 module.exports = {
   postcss: [
@@ -69,5 +73,5 @@ module.exports = {
     sprites(spritesOptions),
     px2rem(px2remOptions)
   ],
-  cssLoader
+  loader
 }

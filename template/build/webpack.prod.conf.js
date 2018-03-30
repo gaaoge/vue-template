@@ -10,14 +10,14 @@ const merge = require('webpack-merge')
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TinyPNGWebpackPlugin = require('tinypng-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 
 module.exports = merge.smart(base, {
   mode: 'production',
   output: {
-    filename: 'js/[name].[chunkhash].js'
+    filename: 'js/[name].[contenthash].js'
   },
   module: {
     rules: [
@@ -27,13 +27,13 @@ module.exports = merge.smart(base, {
         options: {
           postcss: css.postcss,
           loaders: {
-            css: css.cssLoader
+            css: css.loader
           }
         }
       },
       {
         test: /\.css$/,
-        loader: css.cssLoader
+        loader: css.loader
       }
     ]
   },
@@ -59,11 +59,8 @@ module.exports = merge.smart(base, {
       from: 'static',
       to: 'static'
     }]),
-    new ExtractTextWebpackPlugin({
-      filename: (getPath) => {
-        return getPath('css/[name].[contenthash].css')
-      },
-      allChunks: true
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash].css'
     }),
     new TinyPNGWebpackPlugin({
       key: '6-qmxQevyQCCYb-gqGTMnF6LTE8Dzo3j'
