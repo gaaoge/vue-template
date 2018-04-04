@@ -18,6 +18,7 @@
     width: 400px;
     height: 400px;
     margin: 0 auto;
-    background: url("../assets/logo.png");
+    background-image: url("../assets/logo.png");
+    background-size: 100%;
   }
 </style>

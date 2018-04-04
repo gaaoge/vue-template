@@ -41,5 +41,6 @@
 <style type="text/postcss">
   .app-home {
     height: 100%;
+    overflow: hidden;
   }
 </style>

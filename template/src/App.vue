@@ -36,11 +36,10 @@
   html, body {
     height: 100%;
     overflow: hidden;
-    background: #fff;
   }
 
   body {
-    font: 28px/1.2 sans-serif;
+    font: 24px/1.5 sans-serif;
     -webkit-tap-highlight-color: transparent;
     -webkit-overflow-scrolling: touch;
     -webkit-user-select: none;
@@ -52,12 +51,5 @@
     height: 100%;
     margin: 0 auto;
     overflow: hidden;
-
-    &:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
   }
 </style>
