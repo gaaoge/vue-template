@@ -3,7 +3,6 @@
  */
 
 const base = require('./webpack.base.conf')
-const css = require('./css.conf')
 const merge = require('webpack-merge')
 
 module.exports = merge.smart(base, {
@@ -15,10 +14,7 @@ module.exports = merge.smart(base, {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          postcss: css.postcss
-        }
+        loader: 'vue-loader'
       },
       {
         test: /\.css$/,

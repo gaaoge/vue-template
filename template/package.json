@@ -1,15 +1,15 @@
 {
-  "name": "vue-template",
+  "name": "{{name}}",
   "version": "3.0.0",
-  "description": "Vue项目开发模板",
+  "description": "{{description}}",
   "author": {
-    "name": "gaoge",
-    "email": "gaoge@corp.netease.com"
+    "name": "{{author}}",
+    "email": "{{email}}"
   },
   "scripts": {
     "dev": "webpack-dev-server --hot --config build/webpack.dev.conf.js",
-    "build": "webpack --progress --config build/webpack.prod.conf.js",
-    "build-cdn": "webpack --progress --config build/webpack.cdn.conf.js",
+    "build": "node build/build.js",
+    "build-cdn": "node build/build.js --cdn",
     "standard": "standard --parser babel-eslint --plugin html '**/*.{js,vue}' --fix"
   },
   "dependencies": {
@@ -20,7 +20,7 @@
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -34,18 +34,20 @@
     "easeftp": "^1.0.35",
     "eslint-plugin-html": "^4.0.2",
     "file-loader": "^1.1.11",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
+    "gulp-postcss": "^7.0.1",
     "gulp-replace": "^0.6.1",
-    "html-webpack-plugin": "^3.1.0",
+    "gulp-tinypng-plugin": "^1.0.7",
+    "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
     "offline-plugin": "^5.0.0-0",
     "postcss": "^6.0.21",
     "postcss-cssnext": "^3.1.0",
     "postcss-plugin-px2rem": "^0.7.0",
     "postcss-sprites": "^4.2.1",
+    "rev-hash": "^2.0.0",
     "standard": "^11.0.1",
     "style-loader": "^0.20.3",
-    "tinypng-webpack-plugin": "^2.0.0",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "vinyl-ftp": "^0.6.1",
     "vue-loader": "^14.2.2",

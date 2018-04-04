@@ -4,20 +4,33 @@
 
 const pkg = require('../package.json')
 const base = require('./webpack.base.conf')
-const css = require('./css.conf')
 const merge = require('webpack-merge')
 
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TinyPNGWebpackPlugin = require('tinypng-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
+
+const cssLoader = [
+  {
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+      publicPath: '../'
+    }
+  },
+  {
+    loader: 'css-loader',
+    options: {
+      minimize: true
+    }
+  }
+]
 
 module.exports = merge.smart(base, {
   mode: 'production',
   output: {
-    filename: 'js/[name].[contenthash].js'
+    filename: 'js/[name].[contenthash:10].js'
   },
   module: {
     rules: [
@@ -25,15 +38,14 @@ module.exports = merge.smart(base, {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          postcss: css.postcss,
           loaders: {
-            css: css.loader
+            css: cssLoader
           }
         }
       },
       {
         test: /\.css$/,
-        loader: css.loader
+        loader: cssLoader
       }
     ]
   },
@@ -53,17 +65,15 @@ module.exports = merge.smart(base, {
   },
   plugins: [
     new CleanWebpackPlugin(['../dist'], {
-      allowExternal: true
+      allowExternal: true,
+      verbose: false
     }),
     new CopyWebpackPlugin([{
       from: 'static',
       to: 'static'
     }]),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css'
-    }),
-    new TinyPNGWebpackPlugin({
-      key: '6-qmxQevyQCCYb-gqGTMnF6LTE8Dzo3j'
+      filename: 'css/[name].[contenthash:10].css'
     }),
     new OfflinePlugin({
       excludes: ['index.html'],

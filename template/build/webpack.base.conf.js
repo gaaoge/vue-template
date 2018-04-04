@@ -23,7 +23,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[hash].[ext]',
+          name: '[name].[hash:10].[ext]',
           outputPath: 'img/'
         }
       },
@@ -31,7 +31,7 @@ module.exports = {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[hash].[ext]',
+          name: '[name].[hash:10].[ext]',
           outputPath: 'media/'
         }
       },
@@ -39,7 +39,7 @@ module.exports = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[hash].[ext]',
+          name: '[name].[hash:10].[ext]',
           outputPath: 'font/'
         }
       }
@@ -48,6 +48,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.css', '.vue', '.json'],
     alias: {
+      app: path.resolve('src/app'),
       utils: path.resolve('src/utils')
     }
   },
