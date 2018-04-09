@@ -60,7 +60,7 @@ module.exports = {
         default: {
           reuseExistingChunk: true,
           minChunks: 2,
-          name: 'app'
+          name: 'split'
         },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
