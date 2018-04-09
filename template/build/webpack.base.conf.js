@@ -54,18 +54,18 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      default: {
-        chunks: 'all',
-        minChunks: 2,
-        minSize: 0,
-        reuseExistingChunk: true
-      },
+      chunks: 'all',
+      minSize: 0,
       cacheGroups: {
-        vendor: {
-          test: /node_modules/,
-          chunks: 'initial',
-          name: 'vendor',
-          enforce: true
+        default: {
+          reuseExistingChunk: true,
+          minChunks: 2,
+          name: 'app'
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          enforce: true,
+          name: 'vendor'
         }
       }
     }

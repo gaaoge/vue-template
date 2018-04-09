@@ -48,9 +48,9 @@ function createSprites () {
           fs.unlink(path, () => {})
         })
         return path.join(opts.spritePath, spritesheet.groups.concat([
-            revHash(spritesheet.image),
-            spritesheet.extension
-          ]).join('.')
+          revHash(spritesheet.image),
+          spritesheet.extension
+        ]).join('.')
         )
       }
     }
