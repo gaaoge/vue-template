@@ -13,6 +13,8 @@ const revHash = require('rev-hash')
 const tinypng = require('gulp-tinypng-plugin')
 const workbox = require('workbox-build')
 
+let originalImages = []
+
 function createSprites () {
   const spritesOptions = {
     spritePath: 'dist/img/sprites',
@@ -46,13 +48,13 @@ function createSprites () {
         })
       },
       onSaveSpritesheet (opts, spritesheet) {
-        Object.keys(spritesheet.coordinates).forEach((path) => {
-          fs.unlink(path, () => {})
-        })
+        originalImages = originalImages.concat(Object.keys(spritesheet.coordinates))
+        originalImages = Array.from(new Set(originalImages))
+
         return path.join(opts.spritePath, spritesheet.groups.concat([
-          revHash(spritesheet.image),
-          spritesheet.extension
-        ]).join('.')
+            revHash(spritesheet.image),
+            spritesheet.extension
+          ]).join('.')
         )
       }
     }
@@ -65,6 +67,10 @@ function createSprites () {
 }
 
 function compressImages () {
+  originalImages.forEach((path) => {
+    fs.unlink(path, () => {})
+  })
+
   return gulp.src('dist/img/**/*.png')
     .pipe(tinypng({
       key: '6-qmxQevyQCCYb-gqGTMnF6LTE8Dzo3j',
