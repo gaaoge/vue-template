@@ -52,10 +52,9 @@ function createSprites () {
         originalImages = Array.from(new Set(originalImages))
 
         return path.join(opts.spritePath, spritesheet.groups.concat([
-            revHash(spritesheet.image),
-            spritesheet.extension
-          ]).join('.')
-        )
+          revHash(spritesheet.image),
+          spritesheet.extension
+        ]).join('.'))
       }
     }
   }
