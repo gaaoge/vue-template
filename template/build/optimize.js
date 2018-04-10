@@ -2,6 +2,7 @@
  * Created by GG on 18/04/02.
  */
 
+const pkg = require('../package.json')
 const path = require('path')
 const fs = require('fs')
 const gulp = require('gulp')
@@ -10,6 +11,7 @@ const postcss = require('gulp-postcss')
 const sprites = require('postcss-sprites')
 const revHash = require('rev-hash')
 const tinypng = require('gulp-tinypng-plugin')
+const workbox = require('workbox-build')
 
 function createSprites () {
   const spritesOptions = {
@@ -71,5 +73,29 @@ function compressImages () {
     .pipe(gulp.dest('dist/img'))
 }
 
-const optimize = gulp.series(createSprites, compressImages)
+function generateSW () {
+  let manifestTransforms = []
+  if (process.argv.includes('--cdn')) {
+    manifestTransforms.push((entries) => {
+      return {
+        manifest: entries.map((entry) => {
+          if (entry.url !== 'index.html') {
+            entry.url = `${pkg.cdn}/${pkg.name}/` + entry.url
+          }
+          return entry
+        })
+      }
+    })
+  }
+
+  workbox.generateSW({
+    swDest: 'dist/service-worker.js',
+    cacheId: pkg.name,
+    globDirectory: 'dist/',
+    globPatterns: ['**/*'],
+    manifestTransforms
+  })
+}
+
+const optimize = gulp.series(createSprites, compressImages, generateSW)
 module.exports = optimize

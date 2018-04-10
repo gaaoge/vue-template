@@ -2,7 +2,6 @@
  * Created by GG on 16/12/01.
  */
 
-const pkg = require('../package.json')
 const base = require('./webpack.base.conf')
 const merge = require('webpack-merge')
 
@@ -10,7 +9,6 @@ const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OfflinePlugin = require('offline-plugin')
 
 const cssLoader = [
   {
@@ -74,16 +72,6 @@ module.exports = merge.smart(base, {
     }]),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:10].css'
-    }),
-    new OfflinePlugin({
-      excludes: ['index.html'],
-      ServiceWorker: {
-        output: 'service-worker.js',
-        publicPath: 'service-worker.js',
-        cacheName: pkg.name,
-        minify: true
-      },
-      AppCache: false
     })
   ]
 })

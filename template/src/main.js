@@ -27,5 +27,9 @@ window.vm = new Vue({
 
 // 离线缓存Service Worker
 if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install()
+  if ('serviceWorker' in navigator) {
+    window.onload = () => {
+      navigator.serviceWorker.register('service-worker.js')
+    }
+  }
 }
