@@ -6,34 +6,26 @@
 </template>
 
 <script>
-  import NewsappShare from 'newsapp-share'
-  import { getStaticPath } from 'utils'
+  import { mapActions } from 'vuex'
   import AppLogo from './components/Logo'
+  import NewsappShare from 'newsapp-share'
 
   export default {
     name: 'app-home',
     data () {
       return {}
     },
-    mounted () {
-      // 分享配置
-      NewsappShare.config({
-        title: '分享标题',
-        desc: '分享描述',
-        imgUrl: getStaticPath('share-icon.png'),
-        link: ''
-      })
-    },
     components: {
       AppLogo
     },
     methods: {
       hello () {
-        this.$app.toast('Hello Vue!')
+        this.toast('Hello Vue!')
       },
       share () {
         NewsappShare.show()
-      }
+      },
+      ...mapActions(['toast'])
     }
   }
 </script>

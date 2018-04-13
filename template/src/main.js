@@ -13,9 +13,15 @@ import store from './store'
 import App from './App'
 
 import HelloVue from 'hello-vue'
+import CommonModal from './common/Modal'
+import CommonToast from './common/Toast'
 
-// 安装Vue组件
+// 安装Vue功能插件
 Vue.use(HelloVue)
+
+// 注册全局通用组件
+Vue.component('common-modal', CommonModal)
+Vue.component('common-toast', CommonToast)
 
 // Vue实例
 window.vm = new Vue({

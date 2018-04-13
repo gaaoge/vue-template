@@ -24,16 +24,24 @@ function setSearch (name, value, url) {
 
   let data = getSearch(null, url)
   data[name] = value
-  let search = ''
-  for (let i in data) {
-    search += '&' + encodeURIComponent(i) + '=' + encodeURIComponent(data[i])
-  }
-  search = search.replace(/&/, '?')
+
+  let search = '?' + toSearchParams(data)
 
   let hash = /#.*/.exec(url)
   hash = (hash && hash[0]) || ''
 
   return href + search + hash
+}
+
+// 将对象转换为Search参数
+function toSearchParams (params) {
+  let result = []
+  for (let i in params) {
+    if (params.hasOwnProperty(i)) {
+      result.push(encodeURIComponent(i) + '=' + encodeURIComponent(params[i]))
+    }
+  }
+  return result.join('&')
 }
 
 // 格式化时间
@@ -82,6 +90,7 @@ function getStaticPath (path) {
 export {
   getSearch,
   setSearch,
+  toSearchParams,
   formatDate,
   getResizeStyle,
   getStaticPath

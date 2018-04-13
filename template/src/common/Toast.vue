@@ -7,30 +7,22 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     data () {
       return {
-        content: '',
-        isShow: false,
         timer: null
       }
     },
-    methods: {
-      show (content) {
-        this.reset()
-        this.$nextTick(() => {
-          this.content = content
-          this.isShow = true
-          this.timer = setTimeout(() => {
-            this.isShow = false
-          }, 2000)
-        })
+    computed: {
+      isShow () {
+        return this.toastConfig.isShow
       },
-      reset () {
-        this.content = ''
-        this.isShow = false
-        clearTimeout(this.timer)
-      }
+      content () {
+        return this.toastConfig.content
+      },
+      ...mapState(['toastConfig'])
     }
   }
 </script>
