@@ -95,6 +95,8 @@ function generateSW () {
 
   workbox.generateSW({
     swDest: 'dist/service-worker.js',
+    importWorkboxFrom: 'disabled',
+    importScripts: ['https://static.ws.126.net/utf8/libs/workbox/v3.1.0/workbox-sw.js'],
     cacheId: pkg.name,
     globDirectory: 'dist/',
     globPatterns: ['**/*'],
