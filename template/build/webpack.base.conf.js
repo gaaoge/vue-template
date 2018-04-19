@@ -58,7 +58,7 @@ module.exports = {
       minSize: 0,
       cacheGroups: {
         default: {
-          reuseExistingChunk: true,
+          reuseExistingChunk: false,
           minChunks: 2,
           name: 'split'
         },
