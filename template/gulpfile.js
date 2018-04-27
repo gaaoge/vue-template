@@ -13,7 +13,7 @@ const easeftp = require('easeftp')
 const ftppass = JSON.parse(fs.readFileSync('.ftppass', 'utf-8'))
 
 gulp.task('test', function () {
-  exec(`cp -rf dist ${pkg.name}`, function () {
+  return exec(`cp -rf dist ${pkg.name}`, function () {
     exec(`scp -r ${pkg.name} ${ftppass.test.username}@${ftppass.test.host}:/home/appops/app/activity`, function (e) {
       e && console.log(e)
       exec(`rm -rf ${pkg.name}`)
@@ -22,7 +22,7 @@ gulp.task('test', function () {
 })
 
 gulp.task('pre', function () {
-  exec(`cp -rf dist ${pkg.name}`, function () {
+  return exec(`cp -rf dist ${pkg.name}`, function () {
     exec(`scp -r ${pkg.name} ${ftppass.pre.username}@${ftppass.pre.host}:/home/appops/htmlfile/activity`, function (e) {
       e && console.log(e)
       exec(`rm -rf ${pkg.name}`)
