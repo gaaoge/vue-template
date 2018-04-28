@@ -87,11 +87,36 @@ function getStaticPath (path) {
   return __webpack_public_path__ + 'static/' + path // eslint-disable-line
 }
 
+// 获取当前页面绝对路径
+function getAbsPath (url) {
+  if (url) {
+    let a = document.createElement('a')
+    a.href = url
+    return a.href
+  } else {
+    return window.location.href.replace(/(\?|#).*/, '')
+  }
+}
+
+// 加载script
+function loadScript (url, callback) {
+  let script = document.createElement('script')
+  script.src = url
+  script.onload = function () {
+    callback && callback()
+    script.parentNode.removeChild(script)
+  }
+  let target = document.getElementsByTagName('script')[0]
+  target.parentNode.insertBefore(script, target)
+}
+
 export {
   getSearch,
   setSearch,
   toSearchParams,
   formatDate,
   getResizeStyle,
-  getStaticPath
+  getStaticPath,
+  getAbsPath,
+  loadScript
 }
