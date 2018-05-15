@@ -38,6 +38,9 @@ module.exports = merge.smart(base, {
         options: {
           loaders: {
             css: cssLoader
+          },
+          transformToRequire: {
+            audio: 'src'
           }
         }
       },
