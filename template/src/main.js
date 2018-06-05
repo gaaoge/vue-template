@@ -33,7 +33,7 @@ window.vm = new Vue({
 
 // 离线缓存Service Worker
 if (process.env.NODE_ENV === 'production') {
-  if ('serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
     window.onload = () => {
       navigator.serviceWorker.register('service-worker.js')
     }

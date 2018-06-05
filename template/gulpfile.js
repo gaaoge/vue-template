@@ -4,12 +4,11 @@
 
 const pkg = require('./package.json')
 const fs = require('fs')
-const path = require('path')
 const gulp = require('gulp')
 const exec = require('child_process').exec
 const replace = require('gulp-replace')
 const vinylftp = require('vinyl-ftp')
-const easeftp = require('easeftp')
+const easeftp = require('easeftp/upload')
 const ftppass = JSON.parse(fs.readFileSync('.ftppass', 'utf-8'))
 
 gulp.task('test', function () {
@@ -41,13 +40,11 @@ gulp.task('publish', function () {
     .pipe(replace('<!--statistics-->', statistics))
     .pipe(conn.dest('qa/activity/' + pkg.name))
 
-  return easeftp.verify(ftppass.easeftp).then(function () {
-    return easeftp.upload({
-      online: 'activity/' + pkg.name,
-      files: path.resolve('dist'),
-      exclude: ['index.html', 'service-worker.js']
-    })
-  }).catch(function (e) {
-    console.log(e)
+  return easeftp.addFile(['dist/**/*'], {
+    ...ftppass.easeftp,
+    path: 'activity/' + pkg.name,
+    exclude: ['index.html', 'service-worker.js'],
+    debug: true,
+    retryTimes: 3
   })
 })
