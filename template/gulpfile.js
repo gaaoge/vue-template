@@ -4,6 +4,7 @@
 
 const pkg = require('./package.json')
 const fs = require('fs')
+const path = require('path')
 const gulp = require('gulp')
 const exec = require('child_process').exec
 const replace = require('gulp-replace')
@@ -40,11 +41,11 @@ gulp.task('publish', function () {
     .pipe(replace('<!--statistics-->', statistics))
     .pipe(conn.dest('qa/activity/' + pkg.name))
 
-  return easeftp.addFile(['dist/**/*'], {
+  return easeftp.addFile(['**/*'], {
     ...ftppass.easeftp,
     path: 'activity/' + pkg.name,
     exclude: ['index.html', 'service-worker.js'],
     debug: true,
-    retryTimes: 3
+    cwd: path.resolve('dist')
   })
 })

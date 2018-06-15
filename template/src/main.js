@@ -16,6 +16,8 @@ import HelloVue from 'hello-vue'
 import CommonModal from './common/Modal'
 import CommonToast from './common/Toast'
 
+import { loadScript } from 'utils'
+
 // 安装Vue功能插件
 Vue.use(HelloVue)
 
@@ -39,3 +41,11 @@ if (process.env.NODE_ENV === 'production') {
     }
   }
 }
+
+// 移动端console
+if (!/^c\.m\.163\.com/.test(window.location.host)) {
+  loadScript('//cdn.jsdelivr.net/npm/eruda', () => {
+    window.eruda.init()
+  })
+}
+
