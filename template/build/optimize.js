@@ -45,6 +45,9 @@ function createSprites () {
         }).cloneAfter({
           prop: 'background-size',
           value: `${sizeX || 0}% ${sizeY || 0}%`
+        }).cloneAfter({
+          prop: 'background-repeat',
+          value: 'no-repeat'
         })
       },
       onSaveSpritesheet (opts, spritesheet) {
