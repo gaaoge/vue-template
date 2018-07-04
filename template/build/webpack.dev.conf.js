@@ -13,17 +13,12 @@ module.exports = merge.smart(base, {
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          transformToRequire: {
-            audio: 'src'
-          }
-        }
-      },
-      {
         test: /\.css$/,
-        loader: 'style-loader?insertAt=top!css-loader'
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader'
+        ]
       }
     ]
   },

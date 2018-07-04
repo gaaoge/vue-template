@@ -32,7 +32,7 @@
 
 <style type="text/postcss">
   .app-home {
-    height: 100%;
-    overflow: hidden;
+    height: 100vh;
+    padding: 10px 0;
   }
 </style>

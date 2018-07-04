@@ -13,6 +13,7 @@ import store from './store'
 import App from './App'
 
 import HelloVue from 'hello-vue'
+import CommonMarquee from './common/Marquee'
 import CommonModal from './common/Modal'
 import CommonToast from './common/Toast'
 
@@ -22,6 +23,7 @@ import { loadScript } from 'utils'
 Vue.use(HelloVue)
 
 // 注册全局通用组件
+Vue.component('common-marquee', CommonMarquee)
 Vue.component('common-modal', CommonModal)
 Vue.component('common-toast', CommonToast)
 
@@ -48,4 +50,3 @@ if (!/^c\.m\.163\.com/.test(window.location.host)) {
     window.eruda.init()
   })
 }
-

@@ -24,11 +24,6 @@
 </script>
 
 <style type="text/postcss">
-  html, body {
-    height: 100%;
-    overflow: hidden;
-  }
-
   body {
     font: 24px/1.5 sans-serif;
     -webkit-tap-highlight-color: transparent;
@@ -36,11 +31,13 @@
     -webkit-user-select: none;
   }
 
+  div {
+    box-sizing: border-box;
+  }
+
   .app {
     position: relative;
     width: 750px;
-    height: 100%;
     margin: 0 auto;
-    overflow: hidden;
   }
 </style>

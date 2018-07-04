@@ -4,6 +4,7 @@
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   entry: {
@@ -14,6 +15,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          transformAssetUrls: {
+            audio: 'src'
+          }
+        }
+      },
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -81,6 +91,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html'
-    })
+    }),
+    new VueLoaderPlugin()
   ]
 }

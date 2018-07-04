@@ -10,21 +10,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const cssLoader = [
-  {
-    loader: MiniCssExtractPlugin.loader,
-    options: {
-      publicPath: '../'
-    }
-  },
-  {
-    loader: 'css-loader',
-    options: {
-      minimize: true
-    }
-  }
-]
-
 module.exports = merge.smart(base, {
   mode: 'production',
   output: {
@@ -33,20 +18,23 @@ module.exports = merge.smart(base, {
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            css: cssLoader
-          },
-          transformToRequire: {
-            audio: 'src'
-          }
-        }
-      },
-      {
         test: /\.css$/,
-        loader: cssLoader
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
+          'postcss-loader'
+        ]
+
       }
     ]
   },
