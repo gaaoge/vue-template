@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // 移动端console
-if (!/^c\.m\.163\.com/.test(window.location.host)) {
+if (process.env.NODE_ENV !== 'production') {
   loadScript('//cdn.jsdelivr.net/npm/eruda', () => {
     window.eruda.init()
   })

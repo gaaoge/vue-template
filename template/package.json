@@ -9,8 +9,8 @@
   "cdn": "//static.ws.126.net/163/activity",
   "scripts": {
     "dev": "webpack-dev-server --hot --config build/webpack.dev.conf.js",
-    "build-test": "node build/build.js",
-    "build-publish": "node build/build.js --cdn",
+    "build": "node build/build.js",
+    "build-cdn": "node build/build.js --cdn",
     "standard": "standard --parser babel-eslint --plugin html '**/*.{js,vue}' --fix"
   },
   "dependencies": {
