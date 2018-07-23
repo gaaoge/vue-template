@@ -82,7 +82,7 @@
   }
 </script>
 
-<style type="text/postcss">
+<style>
   .common-marquee {
     overflow: hidden;
 

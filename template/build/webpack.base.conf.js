@@ -58,7 +58,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.css', '.vue', '.json'],
     alias: {
-      app: path.resolve('src/app'),
+      '@': path.resolve('src'),
+      assets: path.resolve('src/assets'),
+      components: path.resolve('src/components'),
+      pages: path.resolve('src/pages'),
       utils: path.resolve('src/utils')
     }
   },
@@ -79,14 +82,6 @@ module.exports = {
         }
       }
     }
-  },
-  node: {
-    setImmediate: false,
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty'
   },
   plugins: [
     new HtmlWebpackPlugin({

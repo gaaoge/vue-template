@@ -27,7 +27,7 @@
   }
 </script>
 
-<style type="text/postcss">
+<style>
   .common-toast {
     position: fixed;
     left: 50%;

@@ -13,9 +13,9 @@ import store from './store'
 import App from './App'
 
 import HelloVue from 'hello-vue'
-import CommonMarquee from './common/Marquee'
-import CommonModal from './common/Modal'
-import CommonToast from './common/Toast'
+import CommonMarquee from 'components/common/Marquee'
+import CommonModal from 'components/common/Modal'
+import CommonToast from 'components/common/Toast'
 
 import { loadScript } from 'utils'
 

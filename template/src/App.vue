@@ -23,7 +23,7 @@
   }
 </script>
 
-<style type="text/postcss">
+<style>
   body {
     font: 24px/1.5 sans-serif;
     -webkit-tap-highlight-color: transparent;

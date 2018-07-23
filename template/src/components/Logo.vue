@@ -13,7 +13,7 @@
   }
 </script>
 
-<style type="text/postcss">
+<style>
   .app-logo {
     width: 400px;
     height: 400px;

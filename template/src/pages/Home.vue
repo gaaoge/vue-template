@@ -7,7 +7,7 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import AppLogo from './components/Logo'
+  import AppLogo from 'components/Logo'
   import NewsappShare from 'newsapp-share'
 
   export default {
@@ -30,7 +30,7 @@
   }
 </script>
 
-<style type="text/postcss">
+<style>
   .app-home {
     height: 100vh;
     padding: 10px 0;

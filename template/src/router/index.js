@@ -4,15 +4,12 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-import AppHome from '../app/Home'
+import routes from './routes'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  routes: [
-    {path: '/', component: AppHome}
-  ]
+  routes
 })
 
 export default router

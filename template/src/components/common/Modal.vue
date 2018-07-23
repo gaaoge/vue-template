@@ -41,7 +41,7 @@
   }
 </script>
 
-<style type="text/postcss">
+<style>
   .common-modal {
     position: fixed;
     top: 0;
