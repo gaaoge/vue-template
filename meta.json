@@ -14,11 +14,6 @@
       "type": "string",
       "required": true,
       "label": "author"
-    },
-    "email": {
-      "type": "string",
-      "required": true,
-      "label": "email"
     }
   },
   "skipInterpolation": ["build/**/*", "src/**/*", "static/**/*"]
