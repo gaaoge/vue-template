@@ -13,15 +13,13 @@
     "author": {
       "type": "string",
       "required": true,
-      "label": "author",
-      "default": "gaoge"
+      "label": "author"
     },
     "email": {
       "type": "string",
       "required": true,
-      "label": "email",
-      "default": "gaoge@corp.netease.com"
+      "label": "email"
     }
   },
-  "skipInterpolation": "src/**/*"
+  "skipInterpolation": ["build/**/*", "src/**/*", "static/**/*"]
 }
