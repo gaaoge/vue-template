@@ -7,7 +7,7 @@
 
 ``` bash
 $ npm install -g vue-cli
-$ vue init gaaoge/VueTemplate my-project
+$ vue init gaaoge/vue-template my-project
 $ cd my-project
 $ npm install 或 yarn
 $ npm run dev
