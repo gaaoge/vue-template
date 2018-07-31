@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "{{description}}",
   "author": "{{author}}",
-  "cdn": "https://static.ws.126.net/163/activity",
+  "projectId": "{{projectId}}",
+  "cdn": "{{cdn}}",
   "scripts": {
     "dev": "webpack-dev-server --hot --config build/webpack.dev.conf.js",
     "build": "node build/build.js",

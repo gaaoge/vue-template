@@ -14,6 +14,18 @@
       "type": "string",
       "required": true,
       "label": "author"
+    },
+    "projectId": {
+      "type": "string",
+      "required": true,
+      "label": "蚂蚁统计id",
+      "default": "NTM-BXR8M5Z5-1"
+    },
+    "cdn": {
+      "type": "string",
+      "required": true,
+      "label": "cdn域名地址",
+      "default": "https://static.ws.126.net/163/activity"
     }
   },
   "skipInterpolation": ["build/**/*", "src/**/*", "static/**/*"]
