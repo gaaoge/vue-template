@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "{{description}}",
   "author": "{{author}}",
-  "projectId": "{{projectId}}",
+  "projectid": "{{projectid}}",
   "cdn": "{{cdn}}",
   "scripts": {
     "dev": "webpack-dev-server --hot --config build/webpack.dev.conf.js",
