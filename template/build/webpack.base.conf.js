@@ -31,26 +31,40 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[hash:10].[ext]',
-          outputPath: 'img/'
-        }
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: '[name].[hash:10].[ext]',
+              outputPath: 'static/img/'
+            }
+          },
+          {
+            loader: 'tinify-loader',
+            options: {
+              apikey: 'ai3NQ23wq2pbQvy2JNylfuQMNJ99YAOZ',
+              cache: path.resolve('node_modules/.cache/tinify')
+            }
+          }
+        ]
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
+          limit: 10000,
           name: '[name].[hash:10].[ext]',
-          outputPath: 'media/'
+          outputPath: 'static/media/'
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
+          limit: 10000,
           name: '[name].[hash:10].[ext]',
-          outputPath: 'font/'
+          outputPath: 'static/font/'
         }
       }
     ]

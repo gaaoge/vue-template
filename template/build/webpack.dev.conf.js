@@ -8,7 +8,7 @@ const merge = require('webpack-merge')
 module.exports = merge.smart(base, {
   mode: 'development',
   output: {
-    filename: 'js/[name].js'
+    filename: 'static/js/[name].js'
   },
   module: {
     rules: [

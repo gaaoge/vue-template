@@ -2,6 +2,7 @@
  * Created by GG on 16/12/01.
  */
 
+const pkg = require('../package.json')
 const base = require('./webpack.base.conf')
 const merge = require('webpack-merge')
 
@@ -9,11 +10,13 @@ const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge.smart(base, {
   mode: 'production',
   output: {
-    filename: 'js/[name].[contenthash:10].js'
+    publicPath: process.argv.includes('--cdn') ? `${pkg.cdn}/${pkg.name}/` : '',
+    filename: 'static/js/[name].[contenthash:10].js'
   },
   module: {
     rules: [
@@ -23,18 +26,12 @@ module.exports = merge.smart(base, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../'
+              publicPath: '../../'
             }
           },
-          {
-            loader: 'css-loader',
-            options: {
-              minimize: true
-            }
-          },
+          'css-loader',
           'postcss-loader'
         ]
-
       }
     ]
   },
@@ -49,7 +46,8 @@ module.exports = merge.smart(base, {
             ascii_only: true
           }
         }
-      })
+      }),
+      new OptimizeCSSAssetsPlugin()
     ]
   },
   plugins: [
@@ -62,7 +60,7 @@ module.exports = merge.smart(base, {
       to: 'static'
     }]),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:10].css'
+      filename: 'static/css/[name].[contenthash:10].css'
     })
   ]
 })

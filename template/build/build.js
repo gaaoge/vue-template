@@ -7,15 +7,10 @@ const prod = require('./webpack.prod.conf')
 
 const chalk = require('chalk')
 const webpack = require('webpack')
-const merge = require('webpack-merge')
-const optimize = require('./optimize')
+const workbox = require('workbox-build')
 
 console.log(chalk.cyan('building...'))
-webpack(merge.smart(prod, {
-  output: {
-    publicPath: process.argv.includes('--cdn') ? `${pkg.cdn}/${pkg.name}/` : ''
-  }
-}), (err, stats) => {
+webpack(prod, (err, stats) => {
   if (err) throw err
   console.log(stats.toString({
     colors: true,
@@ -23,6 +18,31 @@ webpack(merge.smart(prod, {
     children: false
   }))
 
-  console.log(chalk.cyan('optimizing...'))
-  optimize()
+  generateSW()
 })
+
+function generateSW () {
+  let manifestTransforms = []
+  if (process.argv.includes('--cdn')) {
+    manifestTransforms.push((entries) => {
+      return {
+        manifest: entries.map((entry) => {
+          if (entry.url !== 'index.html') {
+            entry.url = `${pkg.cdn}/${pkg.name}/` + entry.url
+          }
+          return entry
+        })
+      }
+    })
+  }
+
+  workbox.generateSW({
+    swDest: 'dist/service-worker.js',
+    importWorkboxFrom: 'disabled',
+    importScripts: ['https://static.ws.126.net/utf8/libs/workbox/v3.1.0/workbox-sw.js'],
+    cacheId: pkg.name,
+    globDirectory: 'dist/',
+    globPatterns: ['**/*'],
+    manifestTransforms
+  })
+}

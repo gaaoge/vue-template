@@ -42,10 +42,11 @@ gulp.task('publish', function () {
     .pipe(conn.dest('qa/activity/' + pkg.name))
 
   return easeftp.addFile(['**/*'], {
-    ...ftppass.easeftp,
-    path: 'activity/' + pkg.name,
-    exclude: ['index.html', 'service-worker.js'],
     debug: true,
-    cwd: path.resolve('dist')
+    ...ftppass.easeftp,
+    path: 'activity/' + pkg.name + '/static',
+    cwd: path.resolve('dist/static')
+  }).then((data) => {
+    console.log(data.urls)
   })
 })
