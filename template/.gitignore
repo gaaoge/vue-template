@@ -3,4 +3,3 @@
 .ftppass
 dist/
 node_modules/
-.gulp/
