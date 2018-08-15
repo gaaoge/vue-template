@@ -38,12 +38,12 @@
     & span {
       display: block;
       max-width: 600px;
-      padding: 40px 30px;
+      padding: 30px;
       color: #fff;
       font-size: 30px;
-      font-weight: 300;
       line-height: 50px;
-      background: color(black alpha(-25%));
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.75);
       white-space: pre-wrap;
     }
   }

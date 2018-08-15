@@ -1,14 +1,19 @@
 import Vue from 'vue'
 
 const TOAST_CONFIG = 'TOAST_CONFIG'
+const MODAL_CONFIG = 'MODAL_CONFIG'
 
 const options = {
   state: {
-    toastConfig: {}
+    toastConfig: {},
+    modalConfig: {}
   },
   mutations: {
     [TOAST_CONFIG] (state, payload) {
       state.toastConfig = payload
+    },
+    [MODAL_CONFIG] (state, payload) {
+      state.modalConfig = payload
     }
   },
   actions: {
@@ -28,6 +33,16 @@ const options = {
           timer
         })
       })
+    },
+    openDialog ({commit}, dialog) {
+      commit(MODAL_CONFIG, {
+        isShow: true,
+        isScroll: dialog.isScroll,
+        dialog
+      })
+    },
+    closeDialog ({commit}) {
+      commit(MODAL_CONFIG, {})
     }
   }
 }

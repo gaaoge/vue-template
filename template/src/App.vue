@@ -2,6 +2,7 @@
   <div class="app">
     <router-view></router-view>
     <common-toast></common-toast>
+    <common-modal></common-modal>
   </div>
 </template>
 

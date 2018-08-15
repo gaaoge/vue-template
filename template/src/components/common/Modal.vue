@@ -1,41 +1,28 @@
 <template>
   <transition name="common-modal">
-    <div class="common-modal" v-show="isShow" @touchmove="preventDefault" @click="onClick">
+    <div class="common-modal" v-if="isShow" @touchmove="preventDefault">
       <slot></slot>
     </div>
   </transition>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     name: 'common-modal',
-    data () {
-      return {
-        isShow: false
-      }
-    },
-    props: {
-      prevent: {
-        type: Boolean,
-        default: true
+    computed: {
+      isShow () {
+        return this.modalConfig.isShow
       },
-      clickHide: {
-        type: Boolean,
-        default: false
-      }
+      isScroll () {
+        return this.modalConfig.isScroll
+      },
+      ...mapState(['modalConfig'])
     },
     methods: {
-      show () {
-        this.isShow = true
-      },
-      hide () {
-        this.isShow = false
-      },
       preventDefault (e) {
-        this.prevent && e.preventDefault()
-      },
-      onClick () {
-        this.clickHide && this.hide()
+        !this.isScroll && e.preventDefault()
       }
     }
   }
@@ -43,12 +30,15 @@
 
 <style>
   .common-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: color(black alpha(-25%));
+    background: rgba(0, 0, 0, 0.75);
     z-index: 9999;
   }
 
