@@ -3,7 +3,7 @@ import Vue from 'vue'
 const TOAST_CONFIG = 'TOAST_CONFIG'
 const MODAL_CONFIG = 'MODAL_CONFIG'
 
-const options = {
+const stores = {
   state: {
     toastConfig: {},
     modalConfig: {}
@@ -47,4 +47,4 @@ const options = {
   }
 }
 
-export default options
+export default stores

@@ -4,13 +4,13 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import options from './options'
+import stores from './stores'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
-  ...options
+  ...stores
 })
 
 export default store
