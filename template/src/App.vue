@@ -9,6 +9,8 @@
 <script>
   import NewsappShare from 'newsapp-share'
   import { getStaticPath } from 'utils'
+  import CommonToast from 'components/common/Toast'
+  import CommonModal from 'components/common/Modal'
 
   export default {
     name: 'app',
@@ -20,6 +22,10 @@
         imgUrl: getStaticPath('share-icon.png'),
         link: ''
       })
+    },
+    components: {
+      CommonToast,
+      CommonModal
     }
   }
 </script>

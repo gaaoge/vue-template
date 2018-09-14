@@ -13,19 +13,12 @@ import store from './store'
 import App from './App'
 
 import HelloVue from 'hello-vue'
-import CommonMarquee from 'components/common/Marquee'
-import CommonModal from 'components/common/Modal'
-import CommonToast from 'components/common/Toast'
 
 import { loadScript } from 'utils'
+import { trackEvent } from 'utils/track'
 
 // 安装Vue功能插件
 Vue.use(HelloVue)
-
-// 注册全局通用组件
-Vue.component('common-marquee', CommonMarquee)
-Vue.component('common-modal', CommonModal)
-Vue.component('common-toast', CommonToast)
 
 // Vue实例
 window.vm = new Vue({
@@ -34,6 +27,13 @@ window.vm = new Vue({
   store,
   render: h => h(App)
 })
+
+// 移动端console
+if (process.env.NODE_ENV === 'development') {
+  loadScript('//cdn.jsdelivr.net/npm/eruda', () => {
+    window.eruda.init()
+  })
+}
 
 // 离线缓存Service Worker
 if (process.env.NODE_ENV === 'production') {
@@ -44,9 +44,9 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
-// 移动端console
-if (process.env.NODE_ENV !== 'production') {
-  loadScript('//cdn.jsdelivr.net/npm/eruda', () => {
-    window.eruda.init()
+// 统计
+if (process.env.NODE_ENV === 'production') {
+  loadScript('//static.ws.126.net/163/frontend/libs/antanalysis.min.js', () => {
+    trackEvent('pageview')
   })
 }
