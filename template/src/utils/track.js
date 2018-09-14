@@ -3,7 +3,7 @@ const projectId = 'NTM-BXR8M5Z5-1'
 function trackEvent (event, info) {
   if (!window['NTESAntAnalysis']) {
     window.addEventListener('NTMReady', () => {
-      track(event, info)
+      trackEvent(event, info)
     })
   } else {
     window['NTESAntAnalysis'].sendData({

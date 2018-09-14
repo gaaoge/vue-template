@@ -15,7 +15,7 @@ import App from './App'
 import HelloVue from 'hello-vue'
 
 import { loadScript } from 'utils'
-import { trackEvent } from 'utils/track'
+import { projectId } from 'utils/track'
 
 // 安装Vue功能插件
 Vue.use(HelloVue)
@@ -46,7 +46,5 @@ if (process.env.NODE_ENV === 'production') {
 
 // 统计
 if (process.env.NODE_ENV === 'production') {
-  loadScript('//static.ws.126.net/163/frontend/libs/antanalysis.min.js', () => {
-    trackEvent('pageview')
-  })
+  loadScript('//static.ws.126.net/163/frontend/antnest/'+ projectId +'.js')
 }
