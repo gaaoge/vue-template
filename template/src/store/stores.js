@@ -11,12 +11,7 @@ const stores = {
   state: {
     toastConfig: {},
     modalConfig: {},
-    shareConfig: {
-      title: '分享标题',
-      desc: '分享描述',
-      imgUrl: getStaticPath('share-icon.png'),
-      link: getAbsPath()
-    }
+    shareConfig: {}
   },
   mutations: {
     [TOAST_CONFIG] (state, payload) {
@@ -47,7 +42,7 @@ const stores = {
         })
       })
     },
-    openDialog ({commit}, payload) {
+    openDialog ({commit}, payload = {}) {
       if (typeof payload === 'string') {
         payload = {dialog: payload}
       }
@@ -60,26 +55,36 @@ const stores = {
     closeDialog ({commit}) {
       commit(MODAL_CONFIG, {})
     },
-    updateShareConfig ({state, commit}, payload) {
-      let shareConfig = Object.assign({}, state.shareConfig, payload)
+    updateShareConfig ({state, commit}, payload = {}) {
+      let shareConfig = Object.assign({
+        title: '分享标题',
+        desc: '分享描述',
+        imgUrl: getStaticPath('share-icon.png'),
+        link: getAbsPath(),
+        shareDone: () => {},
+        onlyImg: false
+      }, state.shareConfig, payload)
+
       commit(SHARE_CONFIG, shareConfig)
       NewsappShare.config(shareConfig)
     },
-    share ({state}, payload) {
+    share ({state}, payload = {}) {
       return new Promise(async (resolve, reject) => {
+        payload.shareConfig && NewsappShare.config(payload.shareConfig)
+
         NewsappShare.config({
           shareDone: () => {
-            NewsappShare.config({shareDone: () => {}})
+            payload.shareConfig && NewsappShare.config(state.shareConfig)
             resolve()
 
             // 统计
             trackEvent('sharedone')
           }
         })
-        NewsappShare.show(payload)
+        NewsappShare.show(payload.tag)
       })
     },
-    async fetch ({state, commit, dispatch}, payload) {
+    async fetch ({state, commit, dispatch}, payload = {}) {
       let host = 'https://163.com' // api接口域名
       let {url, method = 'get', params} = payload
 
@@ -130,6 +135,11 @@ const stores = {
       }
 
       return data
+    },
+    async sleep ({commit}, duration) {
+      return new Promise((resolve, reject) => {
+        setTimeout(resolve, duration)
+      })
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="app-home">
-    <hello-vue @click.native="hello"></hello-vue>
-    <app-logo @click.native="share"></app-logo>
+    <hello-vue @click.native="sayHello"></hello-vue>
+    <app-logo @click.native="doShare"></app-logo>
   </div>
 </template>
 
@@ -18,8 +18,11 @@
       AppLogo
     },
     methods: {
-      hello () {
+      sayHello () {
         this.toast('Hello Vue!')
+      },
+      doShare () {
+        this.share()
       },
       ...mapActions(['toast', 'share'])
     }
