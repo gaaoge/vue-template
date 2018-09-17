@@ -15,12 +15,6 @@
       "required": true,
       "label": "author"
     },
-    "projectid": {
-      "type": "string",
-      "required": true,
-      "label": "蚂蚁统计id",
-      "default": "NTM-BXR8M5Z5-1"
-    },
     "cdn": {
       "type": "string",
       "required": true,

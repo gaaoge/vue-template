@@ -7,25 +7,22 @@
 </template>
 
 <script>
-  import NewsappShare from 'newsapp-share'
-  import { getStaticPath } from 'utils'
+  import { mapActions } from 'vuex'
   import CommonToast from 'components/common/Toast'
   import CommonModal from 'components/common/Modal'
 
   export default {
     name: 'app',
     created () {
-      // 分享配置
-      NewsappShare.config({
-        title: '分享标题',
-        desc: '分享描述',
-        imgUrl: getStaticPath('share-icon.png'),
-        link: ''
-      })
+      // 默认分享配置
+      this.updateShareConfig()
     },
     components: {
       CommonToast,
       CommonModal
+    },
+    methods: {
+      ...mapActions(['updateShareConfig'])
     }
   }
 </script>

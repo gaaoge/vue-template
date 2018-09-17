@@ -46,5 +46,5 @@ if (process.env.NODE_ENV === 'production') {
 
 // 统计
 if (process.env.NODE_ENV === 'production') {
-  loadScript('//static.ws.126.net/163/frontend/antnest/'+ projectId +'.js')
+  loadScript('//static.ws.126.net/163/frontend/antnest/' + projectId + '.js')
 }

@@ -1,7 +1,7 @@
 <template>
   <transition name="common-modal">
     <div class="common-modal" v-if="isShow" @touchmove="preventDefault">
-      <slot></slot>
+      <!-- dialog类组件集中放在此处 -->
     </div>
   </transition>
 </template>

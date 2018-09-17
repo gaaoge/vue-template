@@ -8,7 +8,6 @@
 <script>
   import { mapActions } from 'vuex'
   import AppLogo from 'components/Logo'
-  import NewsappShare from 'newsapp-share'
 
   export default {
     name: 'app-home',
@@ -22,10 +21,7 @@
       hello () {
         this.toast('Hello Vue!')
       },
-      share () {
-        NewsappShare.show()
-      },
-      ...mapActions(['toast'])
+      ...mapActions(['toast', 'share'])
     }
   }
 </script>
