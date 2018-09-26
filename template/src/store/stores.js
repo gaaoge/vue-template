@@ -25,7 +25,7 @@ const stores = {
     }
   },
   actions: {
-    toast ({state, commit}, payload) {
+    toast ({ state, commit }, payload) {
       if (state.toastConfig.timer) {
         clearTimeout(state.toastConfig.timer)
         commit(TOAST_CONFIG, {})
@@ -42,9 +42,9 @@ const stores = {
         })
       })
     },
-    openDialog ({commit}, payload = {}) {
+    openDialog ({ commit }, payload = {}) {
       if (typeof payload === 'string') {
-        payload = {dialog: payload}
+        payload = { dialog: payload }
       }
 
       commit(MODAL_CONFIG, {
@@ -52,10 +52,10 @@ const stores = {
         ...payload
       })
     },
-    closeDialog ({commit}) {
+    closeDialog ({ commit }) {
       commit(MODAL_CONFIG, {})
     },
-    updateShareConfig ({state, commit}, payload = {}) {
+    updateShareConfig ({ state, commit }, payload = {}) {
       let shareConfig = Object.assign({
         title: '分享标题',
         desc: '分享描述',
@@ -68,7 +68,7 @@ const stores = {
       commit(SHARE_CONFIG, shareConfig)
       NewsappShare.config(shareConfig)
     },
-    share ({state}, payload = {}) {
+    share ({ state }, payload = {}) {
       return new Promise(async (resolve, reject) => {
         payload.shareConfig && NewsappShare.config(payload.shareConfig)
 
@@ -84,9 +84,9 @@ const stores = {
         NewsappShare.show(payload.tag)
       })
     },
-    async fetch ({state, commit, dispatch}, payload = {}) {
+    async fetch ({ state, commit, dispatch }, payload = {}) {
       let host = 'https://163.com' // api接口域名
-      let {url, method = 'get', params} = payload
+      let { url, method = 'get', params } = payload
 
       // 本地调试配置
       const debug = process.env.NODE_ENV === 'development'
@@ -136,7 +136,7 @@ const stores = {
 
       return data
     },
-    async sleep ({commit}, duration) {
+    async sleep ({ commit }, duration) {
       return new Promise((resolve, reject) => {
         setTimeout(resolve, duration)
       })
