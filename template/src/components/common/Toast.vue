@@ -45,6 +45,7 @@
       border-radius: 10px;
       background: rgba(0, 0, 0, 0.75);
       white-space: pre-wrap;
+      text-align: center;
     }
   }
 
