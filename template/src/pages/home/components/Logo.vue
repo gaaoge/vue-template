@@ -1,20 +1,15 @@
 <template>
-  <div class="app-logo"></div>
+  <div class="home-logo"></div>
 </template>
 
 <script>
   export default {
-    name: 'app-logo',
-    data () {
-      return {
-  
-      }
-    }
+    name: 'home-logo'
   }
 </script>
 
 <style>
-  .app-logo {
+  .home-logo {
     width: 400px;
     height: 400px;
     margin: 0 auto;

@@ -72,11 +72,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.css', '.vue', '.json'],
     alias: {
-      '@': path.resolve('src'),
-      assets: path.resolve('src/assets'),
-      components: path.resolve('src/components'),
-      pages: path.resolve('src/pages'),
-      utils: path.resolve('src/utils')
+      '@': path.resolve('src')
     }
   },
   optimization: {

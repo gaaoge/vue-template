@@ -8,8 +8,8 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import CommonToast from 'components/common/Toast'
-  import CommonModal from 'components/common/Modal'
+  import CommonToast from '@/components/common/Toast'
+  import CommonModal from '@/components/common/Modal'
 
   export default {
     name: 'app',

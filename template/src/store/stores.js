@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import NewsappShare from 'newsapp-share'
-import { getStaticPath, getAbsPath, toSearchParams } from 'utils'
-import { trackEvent } from 'utils/track'
+import { getStaticPath, getAbsPath, toSearchParams } from '@/utils'
+import { trackEvent } from '@/utils/track'
 
 const TOAST_CONFIG = 'TOAST_CONFIG'
 const MODAL_CONFIG = 'MODAL_CONFIG'

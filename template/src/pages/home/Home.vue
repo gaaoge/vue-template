@@ -1,21 +1,20 @@
 <template>
-  <div class="app-home">
+  <div class="home">
     <hello-vue @click.native="sayHello"></hello-vue>
-    <app-logo @click.native="doShare"></app-logo>
+    <home-logo @click.native="doShare"></home-logo>
   </div>
 </template>
 
 <script>
   import { mapActions } from 'vuex'
-  import AppLogo from 'components/Logo'
+  import { HelloVue } from 'hello-vue'
+  import HomeLogo from './components/Logo'
 
   export default {
-    name: 'app-home',
-    data () {
-      return {}
-    },
+    name: 'home',
     components: {
-      AppLogo
+      HelloVue,
+      HomeLogo
     },
     methods: {
       sayHello () {
@@ -30,7 +29,7 @@
 </script>
 
 <style>
-  .app-home {
+  .home {
     height: 100vh;
     padding: 10px 0;
   }

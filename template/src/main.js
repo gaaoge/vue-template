@@ -2,7 +2,7 @@
  * Created by GG on 2016/11/30.
  */
 
-import 'utils/rem'
+import '@/utils/rem'
 import 'babel-polyfill'
 import 'normalize.css'
 import 'whatwg-fetch'
@@ -12,13 +12,8 @@ import router from './router'
 import store from './store'
 import App from './App'
 
-import HelloVue from 'hello-vue'
-
-import { loadScript } from 'utils'
-import { projectId } from 'utils/track'
-
-// 安装Vue功能插件
-Vue.use(HelloVue)
+import { loadScript } from '@/utils'
+import { projectId } from '@/utils/track'
 
 // Vue实例
 window.vm = new Vue({
