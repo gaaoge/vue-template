@@ -85,18 +85,22 @@ const stores = {
       })
     },
     async fetch ({ state, commit, dispatch }, payload = {}) {
-      let host = 'https://163.com' // api接口域名
-      let { url, method = 'get', params } = payload
+      let { url, method = 'get', params, credentials = 'include' } = config
 
-      // 本地调试配置
-      const debug = process.env.NODE_ENV === 'development'
-      if (debug) {
-        host = 'api'
-        method = 'get'
-        url = url.replace(/(\?|#).*/, '') + '.json'
+      // 配置url和method
+      if (!/^(https?:)?\/\//.test(url)) {
+        if (process.env.NODE_ENV === 'development') {
+          let host = window.location.host
+          url = host + '/api' + url.replace(/[?#].*/, '') + '.json'
+          method = 'get'
+        } else {
+          let host = 'https://163.com' // api接口域名
+          url = host + '/api' + url
+          method = method.toLowerCase()
+        }
       }
 
-      // 设置headers和body
+      // 配置headers和body
       let headers = {}
       let body
       if (method === 'post') {
@@ -107,11 +111,11 @@ const stores = {
       // 发送fetch请求
       let data
       try {
-        let response = await window.fetch(host + url, {
+        let response = await window.fetch(url, {
           method,
           headers,
           body,
-          credentials: 'include'
+          credentials
         })
         data = await response.json()
       } catch (e) {
