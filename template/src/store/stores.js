@@ -85,7 +85,7 @@ const stores = {
       })
     },
     async fetch ({ state, commit, dispatch }, payload = {}) {
-      let { url, method = 'get', params, credentials = 'include' } = config
+      let { url, method = 'get', params, credentials = 'include' } = payload
 
       // 配置url和method
       if (!/^(https?:)?\/\//.test(url)) {
@@ -140,9 +140,9 @@ const stores = {
 
       return data
     },
-    async sleep ({ commit }, duration) {
+    async sleep ({ commit }, payload) {
       return new Promise((resolve, reject) => {
-        setTimeout(resolve, duration)
+        setTimeout(resolve, payload)
       })
     }
   }
