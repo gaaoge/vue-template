@@ -90,7 +90,7 @@ const stores = {
       // 配置url和method
       if (!/^(https?:)?\/\//.test(url)) {
         if (process.env.NODE_ENV === 'development') {
-          let host = window.location.host
+          let host = window.location.protocol + window.location.host
           url = host + '/api' + url.replace(/[?#].*/, '') + '.json'
           method = 'get'
         } else {
