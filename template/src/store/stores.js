@@ -90,12 +90,12 @@ const stores = {
       // 配置url和method
       if (!/^(https?:)?\/\//.test(url)) {
         if (process.env.NODE_ENV === 'development') {
-          let host = window.location.protocol + window.location.host
-          url = host + '/api' + url.replace(/[?#].*/, '') + '.json'
+          let host = window.location.origin + '/api'
+          url = host + url.replace(/[?#].*/, '') + '.json'
           method = 'get'
         } else {
-          let host = 'https://163.com' // api接口域名
-          url = host + '/api' + url
+          let host = window.location.origin + '/api'  //api代表后台api路径
+          url = host + url
           method = method.toLowerCase()
         }
       }
