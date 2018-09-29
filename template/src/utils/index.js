@@ -92,7 +92,7 @@ function getAbsPath (url) {
     a.href = url
     return a.href
   } else {
-    return window.location.href.replace(/(\?|#).*/, '')
+    return window.location.href.replace(/[?#].*/, '')
   }
 }
 
