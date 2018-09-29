@@ -3,24 +3,22 @@
  */
 
 // 获取url参数
-function getSearch (name, url) {
-  url = url || window.location.href
+function getSearch (name, url = window.location.href) {
+  let href = url.replace(/#.*/, '')
 
-  let search = /\?[^#]*/.exec(url)
+  let search = /\?.*/.exec(href)
   search = (search && search[0]) || ''
 
   let data = {}
   search.replace(/([^?=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
-    data[$1] = decodeURIComponent($3)
+    data[decodeURIComponent($1)] = decodeURIComponent($3)
   })
   return name ? data[name] : data
 }
 
 // 设置url参数
-function setSearch (name, value, url) {
-  url = url || window.location.href
-
-  let href = url.replace(/(\?|#).*/, '')
+function setSearch (name, value, url = window.location.href) {
+  let href = url.replace(/[?#].*/, '')
 
   let data = getSearch(null, url)
   data[name] = value
