@@ -68,13 +68,13 @@ const stores = {
       commit(SHARE_CONFIG, shareConfig)
       NewsappShare.config(shareConfig)
     },
-    share ({ state }, payload = {}) {
-      return new Promise(async (resolve, reject) => {
+    async share ({ state }, payload = {}) {
+      return new Promise((resolve, reject) => {
         payload.shareConfig && NewsappShare.config(payload.shareConfig)
 
         NewsappShare.config({
           shareDone: () => {
-            payload.shareConfig && NewsappShare.config(state.shareConfig)
+            NewsappShare.config(state.shareConfig)
             resolve()
 
             // 统计
