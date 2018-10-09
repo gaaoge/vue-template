@@ -45,7 +45,7 @@
     transition: opacity .3s;
   }
 
-  .common-modal-enter, .common-modal-leave-active {
+  .common-modal-enter, .common-modal-leave-to {
     opacity: 0;
   }
 </style>
