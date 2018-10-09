@@ -61,7 +61,10 @@ const stores = {
         desc: '分享描述',
         imgUrl: getStaticPath('share-icon.png'),
         link: getAbsPath(),
-        shareDone: () => {},
+        shareDone: () => {
+          // 统计
+          trackEvent('sharedone')
+        },
         onlyImg: false
       }, state.shareConfig, payload)
 
@@ -72,13 +75,12 @@ const stores = {
       return new Promise((resolve, reject) => {
         payload.shareConfig && NewsappShare.config(payload.shareConfig)
 
+        const shareDone = state.shareConfig.shareDone
         NewsappShare.config({
           shareDone: () => {
             NewsappShare.config(state.shareConfig)
+            shareDone()
             resolve()
-
-            // 统计
-            trackEvent('sharedone')
           }
         })
         NewsappShare.show(payload.tag)
