@@ -122,9 +122,7 @@ const stores = {
         data = await response.json()
       } catch (e) {
         dispatch('toast', '网络请求出错')
-        let err = new Error('网络请求出错')
-        err.code = 10000
-        throw err
+        throw new Error('网络请求出错')
       }
 
       // 处理请求返回结果
