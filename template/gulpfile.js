@@ -31,14 +31,14 @@ gulp.task('pre', function () {
 gulp.task('publish', function () {
   easeftp.addFile(['index.html', 'service-worker.js'], {
     debug: true,
-    ...ftppass.easeftp,
+    ...ftppass.publish,
     path: 'html/activity/' + pkg.name,
     cwd: path.resolve('dist')
   })
 
   return easeftp.addFile(['**/*'], {
     debug: true,
-    ...ftppass.easeftp,
+    ...ftppass.publish,
     path: 'activity/' + pkg.name + '/static',
     cwd: path.resolve('dist/static')
   })
