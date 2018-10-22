@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div class="home-main">
     <hello-vue @click.native="sayHello"></hello-vue>
     <home-logo @click.native="doShare"></home-logo>
   </div>
@@ -11,7 +11,7 @@
   import HomeLogo from './components/Logo'
 
   export default {
-    name: 'home-page',
+    name: 'home-main',
     components: {
       HelloVue,
       HomeLogo
@@ -29,7 +29,7 @@
 </script>
 
 <style>
-  .home-page {
+  .home-main {
     height: 100vh;
     padding: 10px 0;
   }
