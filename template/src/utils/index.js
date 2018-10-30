@@ -69,14 +69,20 @@ function formatDate (dateInput, format) {
 }
 
 // 单页面高度适配
-function getResizeStyle (targetHeight = 603) {
+function getResizeStyle (targetHeight = 603, isTranslate = false) {
   if (window.innerWidth > window.innerHeight) return
 
   let deltaHeight = 603 - window.innerHeight * 375 / window.innerWidth
   let scale = Math.min((targetHeight - deltaHeight) / targetHeight, 1)
   let translateY = (scale - 1) / 2 * (100 / scale) + '%'
+
+  let transform = `scale(${scale})`
+  if (isTranslate) {
+    transform += `translateY(${translateY})`
+  }
+
   return {
-    transform: 'scale(' + scale + ') translateY(' + translateY + ')'
+    transform
   }
 }
 
