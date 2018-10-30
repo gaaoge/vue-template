@@ -74,11 +74,11 @@ function getResizeStyle (targetHeight = 603, needTranslate = false) {
 
   let deltaHeight = 603 - window.innerHeight * 375 / window.innerWidth
   let scale = Math.min((targetHeight - deltaHeight) / targetHeight, 1)
-  let translateY = (scale - 1) / 2 * (100 / scale) + '%'
 
   let transform = `scale(${scale})`
   if (needTranslate) {
-    transform += `translateY(${translateY})`
+    let translateY = (scale - 1) / 2 * (100 / scale) + '%'
+    transform += ` translateY(${translateY})`
   }
 
   return {
