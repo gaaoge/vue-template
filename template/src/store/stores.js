@@ -1,30 +1,36 @@
 import Vue from 'vue'
-import NewsappShare from 'newsapp-share'
-import { getStaticPath, getAbsPath, toSearchParams } from '@/utils'
-import { trackEvent } from '@/utils/track'
+import { toSearchParams } from '@/utils'
 
-const TOAST_CONFIG = 'TOAST_CONFIG'
 const MODAL_CONFIG = 'MODAL_CONFIG'
-const SHARE_CONFIG = 'SHARE_CONFIG'
+const TOAST_CONFIG = 'TOAST_CONFIG'
 
 const stores = {
   state: {
-    toastConfig: {},
     modalConfig: {},
-    shareConfig: {}
+    toastConfig: {}
   },
   mutations: {
-    [TOAST_CONFIG] (state, payload) {
-      state.toastConfig = payload
-    },
     [MODAL_CONFIG] (state, payload) {
       state.modalConfig = payload
     },
-    [SHARE_CONFIG] (state, payload) {
-      state.shareConfig = payload
+    [TOAST_CONFIG] (state, payload) {
+      state.toastConfig = payload
     }
   },
   actions: {
+    openDialog ({ commit }, payload = {}) {
+      if (typeof payload === 'string') {
+        payload = { dialog: payload }
+      }
+
+      commit(MODAL_CONFIG, {
+        isShow: true,
+        ...payload
+      })
+    },
+    closeDialog ({ commit }) {
+      commit(MODAL_CONFIG, {})
+    },
     toast ({ state, commit }, payload) {
       if (state.toastConfig.timer) {
         clearTimeout(state.toastConfig.timer)
@@ -42,50 +48,6 @@ const stores = {
         })
       })
     },
-    openDialog ({ commit }, payload = {}) {
-      if (typeof payload === 'string') {
-        payload = { dialog: payload }
-      }
-
-      commit(MODAL_CONFIG, {
-        isShow: true,
-        ...payload
-      })
-    },
-    closeDialog ({ commit }) {
-      commit(MODAL_CONFIG, {})
-    },
-    updateShareConfig ({ state, commit }, payload = {}) {
-      let shareConfig = Object.assign({
-        title: '分享标题',
-        desc: '分享描述',
-        imgUrl: getStaticPath('share-icon.png'),
-        link: getAbsPath(),
-        shareDone: () => {
-          // 统计
-          trackEvent('sharedone')
-        },
-        onlyImg: false
-      }, state.shareConfig, payload)
-
-      commit(SHARE_CONFIG, shareConfig)
-      NewsappShare.config(shareConfig)
-    },
-    async share ({ state }, payload = {}) {
-      return new Promise((resolve, reject) => {
-        payload.shareConfig && NewsappShare.config(payload.shareConfig)
-
-        const shareDone = state.shareConfig.shareDone
-        NewsappShare.config({
-          shareDone: () => {
-            NewsappShare.config(state.shareConfig)
-            shareDone()
-            resolve()
-          }
-        })
-        NewsappShare.show(payload.tag)
-      })
-    },
     async fetch ({ state, commit, dispatch }, payload = {}) {
       let { url, method = 'get', params, credentials = 'include' } = payload
 
@@ -96,7 +58,7 @@ const stores = {
           url = host + url.replace(/[?#].*/, '') + '.json'
           method = 'get'
         } else {
-          let host = window.location.origin + '/api'  //api代表后台api路径
+          let host = window.location.origin + '/api' // api代表后台api路径
           url = host + url
           method = method.toLowerCase()
         }
