@@ -32,7 +32,7 @@
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -150%, 0);
     z-index: 10000;
 
     & span {
@@ -55,7 +55,7 @@
 
   .common-toast-enter {
     opacity: 0;
-    transform: translate3d(-50%, -50%, 0) scale(0.8);
+    transform: translate3d(-50%, -150%, 0) scale(0.8);
   }
 
   .common-toast-leave-active {
