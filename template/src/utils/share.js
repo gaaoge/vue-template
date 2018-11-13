@@ -33,6 +33,7 @@ function shareWithConfig (config = {}, tag) {
 
   updateShareConfig(config)
   NewsappShare.show(tag)
+  tag && setTimeout(updateShareConfig, 300)
 }
 
 export {
