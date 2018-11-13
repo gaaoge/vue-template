@@ -3,8 +3,8 @@ import { trackEvent } from '@/utils/track'
 import NewsappShare from 'newsapp-share'
 
 const shareConfig = {
-  title: '知识无极限，答题天天见！',
-  desc: '智力大比拼，最高可赢iPhone XS',
+  title: '默认分享标题',
+  desc: '默认分享描述',
   imgUrl: getStaticPath('share-icon.png'),
   link: getAbsPath(),
   onlyImg: false,
