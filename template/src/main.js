@@ -7,22 +7,17 @@ import 'babel-polyfill'
 import 'normalize.css'
 import 'whatwg-fetch'
 
+import '@/components'
+import '@/directives'
+import '@/filters'
+
 import Vue from 'vue'
-import router from './router'
-import store from './store'
-import App from './App'
+import router from '@/router'
+import store from '@/store'
+import App from '@/App'
 
 import { loadScript, getSearch } from '@/utils'
-import { trackEvent, projectId } from '@/utils/track'
-
-// 注册全局指令
-Vue.directive('track-event', {
-  bind (el, binding) {
-    el.addEventListener('click', () => {
-      trackEvent('click_' + binding.value)
-    })
-  }
-})
+import { projectId } from '@/utils/track'
 
 // Vue实例
 window.vm = new Vue({

@@ -7,15 +7,8 @@
 </template>
 
 <script>
-  import CommonToast from '@/components/common/Toast'
-  import CommonModal from '@/components/common/Modal'
-
   export default {
-    name: 'app',
-    components: {
-      CommonToast,
-      CommonModal
-    }
+    name: 'app'
   }
 </script>
 

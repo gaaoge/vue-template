@@ -9,6 +9,7 @@
   import { mapActions } from 'vuex'
   import { HelloVue } from 'hello-vue'
   import HomeLogo from './components/Logo'
+  import { shareWithConfig } from '@/utils/share'
 
   export default {
     name: 'home-main',
@@ -21,9 +22,9 @@
         this.toast('Hello Vue!')
       },
       doShare () {
-        this.share()
+        shareWithConfig()
       },
-      ...mapActions(['toast', 'share'])
+      ...mapActions(['toast'])
     }
   }
 </script>
