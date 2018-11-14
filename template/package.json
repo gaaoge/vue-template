@@ -11,10 +11,10 @@
     "standard": "standardx \"src/**/*.{js,vue}\" --fix"
   },
   "dependencies": {
+    "@newsapp-activity/hello-vue": "^1.0.0",
+    "@newsapp-activity/newsapp-api": "^1.8.0",
+    "@newsapp-activity/newsapp-share": "^1.4.3",
     "babel-polyfill": "^6.26.0",
-    "hello-vue": "git+https://g.hz.netease.com/newsapp-activity/plugins/hello-vue.git",
-    "newsapp-api": "git+https://g.hz.netease.com/newsapp-activity/tools/newsapp-api.git",
-    "newsapp-share": "git+https://g.hz.netease.com/newsapp-activity/tools/newsapp-share.git",
     "normalize.css": "^8.0.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",

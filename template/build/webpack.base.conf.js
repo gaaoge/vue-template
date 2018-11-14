@@ -72,7 +72,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.css', '.vue', '.json'],
     alias: {
-      '@': path.resolve('src')
+      '@': path.resolve('src'),
+      'hello-vue': '@newsapp-activity/hello-vue',
+      'newsapp-api': '@newsapp-activity/newsapp-api',
+      'newsapp-share': '@newsapp-activity/newsapp-share'
     }
   },
   optimization: {
