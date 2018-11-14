@@ -1,13 +1,13 @@
 <template>
   <transition name="common-modal">
-    <div class="common-modal" v-if="isShow" @touchmove="preventDefault">
+    <div class="common-modal" v-if="isShow" @touchmove="preventDefault" @click.self="clickClose">
       <!-- dialog类组件集中放在此处 -->
     </div>
   </transition>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
 
   export default {
     name: 'common-modal',
@@ -18,12 +18,19 @@
       isScroll () {
         return this.modalConfig.isScroll
       },
+      isClickClose () {
+        return this.modalConfig.isClickClose
+      },
       ...mapState(['modalConfig'])
     },
     methods: {
       preventDefault (e) {
         !this.isScroll && e.preventDefault()
-      }
+      },
+      clickClose (e) {
+        this.isClickClose && this.closeDialog()
+      },
+      ...mapActions(['closeDialog'])
     }
   }
 </script>
