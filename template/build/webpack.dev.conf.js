@@ -26,7 +26,8 @@ module.exports = merge.smart(base, {
     host: '0.0.0.0',
     compress: true,
     stats: 'errors-only',
-    clientLogLevel: 'none'
+    clientLogLevel: 'none',
+    disableHostCheck: true
   },
   devtool: '#eval-source-map'
 })
