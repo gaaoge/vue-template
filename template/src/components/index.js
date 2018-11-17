@@ -4,8 +4,9 @@ import CommonModal from './common/Modal'
 
 import BaseDialog from './base/Dialog'
 
-// 注册全局组件
+// 注册全局公用组件
 Vue.component('common-toast', CommonToast)
 Vue.component('common-modal', CommonModal)
 
+// 注册全局基础组件
 Vue.component('base-dialog', BaseDialog)
