@@ -58,7 +58,7 @@
     transform: translate3d(-50%, -150%, 0) scale(0.8);
   }
 
-  .common-toast-leave-active {
+  .common-toast-leave-to {
     opacity: 0;
   }
 </style>
