@@ -1,8 +1,8 @@
 <template>
   <div class="app">
     <router-view></router-view>
-    <common-toast></common-toast>
     <common-modal></common-modal>
+    <common-toast></common-toast>
   </div>
 </template>
 
