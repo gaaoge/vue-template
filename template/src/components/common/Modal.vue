@@ -1,7 +1,7 @@
 <template>
   <transition name="common-modal">
     <div class="common-modal" v-if="isShow" @touchmove="preventDefault" @click.self="clickClose">
-      <!-- dialog类组件集中放在此处 -->
+      <component :is="dialog"></component>
     </div>
   </transition>
 </template>
@@ -20,6 +20,9 @@
       },
       isClickClose () {
         return this.modalConfig.isClickClose
+      },
+      dialog () {
+        return this.modalConfig.dialog
       },
       ...mapState(['modalConfig'])
     },

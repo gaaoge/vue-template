@@ -19,10 +19,6 @@ const stores = {
   },
   actions: {
     openDialog ({ commit }, payload = {}) {
-      if (typeof payload === 'string') {
-        payload = { dialog: payload }
-      }
-
       commit(MODAL_CONFIG, {
         isShow: true,
         ...payload
