@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'development' || getSearch('debug')) {
 
 if (process.env.NODE_ENV === 'production') {
   // 统计
-  loadScript('//static.ws.126.net/163/frontend/antnest/' + projectId + '.js')
+  loadScript('https://static.ws.126.net/163/frontend/antnest/' + projectId + '.js')
   loadScript('https://hm.baidu.com/hm.js?fbbd5a62f1db722ba672bc37a9bf6b05')
 
   // 错误监控
@@ -25,7 +25,11 @@ if (process.env.NODE_ENV === 'production') {
   // 离线缓存Service Worker
   if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
     window.onload = () => {
-      navigator.serviceWorker.register('service-worker.js')
+      try {
+        navigator.serviceWorker.register('service-worker.js')
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 }
