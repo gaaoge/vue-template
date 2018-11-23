@@ -1,6 +1,6 @@
 <template>
-  <transition name="common-modal">
-    <div class="common-modal" v-if="isShow" @touchmove="preventDefault" @click.self="clickClose">
+  <transition name="app-modal">
+    <div class="app-modal" v-if="isShow" @touchmove="preventDefault" @click.self="clickClose">
       <component :is="dialog"></component>
     </div>
   </transition>
@@ -10,7 +10,7 @@
   import { mapState, mapActions } from 'vuex'
 
   export default {
-    name: 'common-modal',
+    name: 'app-modal',
     computed: {
       isShow () {
         return this.modalConfig.isShow
@@ -39,7 +39,7 @@
 </script>
 
 <style>
-  .common-modal {
+  .app-modal {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,11 +51,11 @@
     z-index: 9999;
   }
 
-  .common-modal-enter-active, .common-modal-leave-active {
+  .app-modal-enter-active, .app-modal-leave-active {
     transition: opacity .3s;
   }
 
-  .common-modal-enter, .common-modal-leave-to {
+  .app-modal-enter, .app-modal-leave-to {
     opacity: 0;
   }
 </style>

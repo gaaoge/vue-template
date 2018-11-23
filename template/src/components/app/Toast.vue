@@ -1,6 +1,6 @@
 <template>
-  <transition name="common-toast">
-    <div class="common-toast" v-if="isShow">
+  <transition name="app-toast">
+    <div class="app-toast" v-if="isShow">
       <span>{{content}}</span>
     </div>
   </transition>
@@ -28,7 +28,7 @@
 </script>
 
 <style>
-  .common-toast {
+  .app-toast {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -49,16 +49,16 @@
     }
   }
 
-  .common-toast-enter-active, .common-toast-leave-active {
+  .app-toast-enter-active, .app-toast-leave-active {
     transition-duration: .3s;
   }
 
-  .common-toast-enter {
+  .app-toast-enter {
     opacity: 0;
     transform: translate3d(-50%, -150%, 0) scale(0.8);
   }
 
-  .common-toast-leave-to {
+  .app-toast-leave-to {
     opacity: 0;
   }
 </style>

@@ -1,8 +1,13 @@
 import Vue from 'vue'
-import CommonToast from './common/Toast'
-import CommonModal from './common/Modal'
+import AppModal from './app/Modal'
+import AppToast from './app/Toast'
 
-// 注册全局公用组件
-Vue.component('common-toast', CommonToast)
-Vue.component('common-modal', CommonModal)
+// 注册全局应用级组件
+Vue.component('app-modal', AppModal)
+Vue.component('app-toast', AppToast)
 
+// 注册全局基础组件
+
+// 注册全局通用组件
+
+// 注册第三方组件
