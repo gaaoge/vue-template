@@ -1,7 +1,9 @@
 import { getAbsPath, getStaticPath } from '@/utils/index'
 import { trackEvent } from '@/utils/track'
 import NewsappShare from 'newsapp-share'
+import NewsappAPI from 'newsapp-api'
 
+window.NewsappAPI = NewsappAPI
 const shareConfig = {
   title: '默认分享标题',
   desc: '默认分享描述',
