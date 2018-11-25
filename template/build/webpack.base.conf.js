@@ -83,11 +83,6 @@ module.exports = {
       chunks: 'all',
       minSize: 0,
       cacheGroups: {
-        pre: {
-          test: /[\\/]utils[\\/][rem|helper]/,
-          priority: 10,
-          name: 'pre'
-        },
         default: {
           reuseExistingChunk: false,
           minChunks: 2,
