@@ -50,13 +50,17 @@ const stores = {
       // 配置url和method
       if (!/^(https?:)?\/\//.test(url)) {
         if (process.env.NODE_ENV === 'development') {
-          let host = window.location.origin + '/api'
-          url = host + url.replace(/[?#].*/, '') + '.json'
+          let host = 'api'
+          url = host + url + '.json'
           method = 'get'
         } else {
           let host = window.location.origin + '/api' // api代表后台api路径
           url = host + url
           method = method.toLowerCase()
+        }
+
+        if (method === 'get' && params) {
+          url = url + '?' + toSearchParams(params)
         }
       }
 
