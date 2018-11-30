@@ -18,8 +18,8 @@
       isScroll () {
         return this.modalConfig.isScroll
       },
-      isClickClose () {
-        return this.modalConfig.isClickClose
+      isForce () {
+        return this.modalConfig.isForce
       },
       dialog () {
         return this.modalConfig.dialog
@@ -31,7 +31,7 @@
         !this.isScroll && e.preventDefault()
       },
       clickClose (e) {
-        this.isClickClose && this.closeDialog()
+        !this.isForce && this.closeDialog()
       },
       ...mapActions(['closeDialog'])
     }
@@ -47,7 +47,7 @@
     top: 0;
     bottom: 0;
     width: 750px;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 9999;
   }
 
