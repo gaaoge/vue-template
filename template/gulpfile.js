@@ -29,11 +29,11 @@ gulp.task('publish-all', function () {
 })
 
 function upload (exclude) {
-  return easeftp.addFile(['static/**/*'], {
+  return easeftp.addFile(['**/*'], {
     debug: true,
     ...ftppass.publish,
     path: 'activity/' + pkg.name + '/static',
-    cwd: path.resolve('dist'),
+    cwd: path.resolve('dist/static'),
     exclude
   }).then(() => {
     easeftp.addFile(['index.html', 'service-worker.js'], {
