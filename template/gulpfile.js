@@ -20,21 +20,20 @@ gulp.task('test', function () {
 })
 
 gulp.task('publish', function () {
-  let exclude = excludeFiles()
-  return upload(exclude)
+  let files = findNewFiles()
+  return upload(files)
 })
 
 gulp.task('publish-all', function () {
-  return upload()
+  let files = findAllFiles()
+  return upload(files)
 })
 
-function upload (exclude) {
-  return easeftp.addFile(['**/*'], {
+function upload (files) {
+  return easeftp.addFile(files, {
     debug: true,
     ...ftppass.publish,
-    path: 'activity/' + pkg.name + '/static',
-    cwd: path.resolve('dist/static'),
-    exclude
+    path: 'activity/' + pkg.name + '/static'
   }).then(() => {
     easeftp.addFile(['index.html', 'service-worker.js'], {
       debug: true,
@@ -45,7 +44,7 @@ function upload (exclude) {
   })
 }
 
-function findFiles (startPath) {
+function findAllFiles () {
   let result = []
 
   function finder (tempPath) {
@@ -54,25 +53,26 @@ function findFiles (startPath) {
       let fPath = path.join(tempPath, val)
       let stats = fs.statSync(fPath)
       if (stats.isDirectory()) finder(fPath)
-      if (stats.isFile()) result.push(fPath)
+      if (stats.isFile() && !/\.DS_Store/.test(fPath)) result.push(fPath)
     })
   }
 
-  finder(startPath)
+  finder('dist/static')
   return result
 }
 
-function excludeFiles () {
-  let files = []
-  let staticFiles = findFiles('dist/static')
-  const cachePath = 'node_modules/.cache/static-cache.json'
+function findNewFiles () {
+  let result = []
 
+  const cachePath = 'node_modules/.cache/static-cache.json'
+  let staticFiles = findAllFiles()
+  let staticCache = []
   try {
-    let staticCache = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
-    files = staticFiles.filter(item => staticCache.indexOf(item) > -1)
-  } catch (e) {
-  }
+    staticCache = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
+  } catch (e) {}
+
+  result = staticFiles.filter(item => staticCache.indexOf(item) === -1)
   fs.writeFileSync(cachePath, JSON.stringify(staticFiles))
 
-  return files
+  return result
 }
