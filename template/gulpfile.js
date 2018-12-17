@@ -19,27 +19,60 @@ gulp.task('test', function () {
   })
 })
 
-gulp.task('pre', function () {
-  return exec(`cp -rf dist ${pkg.name}`, function () {
-    exec(`scp -r ${pkg.name} ${ftppass.pre.username}@${ftppass.pre.host}:/home/appops/htmlfile/activity`, function (e) {
-      e && console.log(e)
-      exec(`rm -rf ${pkg.name}`)
-    })
-  })
+gulp.task('publish', function () {
+  let exclude = excludeFiles()
+  return upload(exclude)
 })
 
-gulp.task('publish', function () {
-  easeftp.addFile(['index.html', 'service-worker.js'], {
-    debug: true,
-    ...ftppass.publish,
-    path: 'html/activity/' + pkg.name,
-    cwd: path.resolve('dist')
-  })
+gulp.task('publish-all', function () {
+  return upload()
+})
 
-  return easeftp.addFile(['**/*'], {
+function upload (exclude) {
+  return easeftp.addFile(['static/**/*'], {
     debug: true,
     ...ftppass.publish,
     path: 'activity/' + pkg.name + '/static',
-    cwd: path.resolve('dist/static')
+    cwd: path.resolve('dist'),
+    exclude
+  }).then(() => {
+    easeftp.addFile(['index.html', 'service-worker.js'], {
+      debug: true,
+      ...ftppass.publish,
+      path: 'html/activity/' + pkg.name,
+      cwd: path.resolve('dist')
+    })
   })
-})
+}
+
+function findFiles (startPath) {
+  let result = []
+
+  function finder (tempPath) {
+    let files = fs.readdirSync(tempPath)
+    files.forEach((val) => {
+      let fPath = path.join(tempPath, val)
+      let stats = fs.statSync(fPath)
+      if (stats.isDirectory()) finder(fPath)
+      if (stats.isFile()) result.push(fPath)
+    })
+  }
+
+  finder(startPath)
+  return result
+}
+
+function excludeFiles () {
+  let files = []
+  let staticFiles = findFiles('dist/static')
+  const cachePath = 'node_modules/.cache/static-cache.json'
+
+  try {
+    let staticCache = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
+    files = staticFiles.filter(item => staticCache.indexOf(item) > -1)
+  } catch (e) {
+  }
+  fs.writeFileSync(cachePath, JSON.stringify(staticFiles))
+
+  return files
+}
