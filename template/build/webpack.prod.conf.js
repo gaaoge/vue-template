@@ -16,7 +16,7 @@ module.exports = merge.smart(base, {
   mode: 'production',
   output: {
     publicPath: process.argv.includes('--cdn') ? `${pkg.cdn}/${pkg.name}/` : '',
-    filename: 'static/js/[name].[contenthash:10].js'
+    filename: 'resource/js/[name].[contenthash:10].js'
   },
   module: {
     rules: [
@@ -57,10 +57,10 @@ module.exports = merge.smart(base, {
     }),
     new CopyWebpackPlugin([{
       from: 'static',
-      to: 'static'
+      to: 'resource/static'
     }]),
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[contenthash:10].css'
+      filename: 'resource/css/[name].[contenthash:10].css'
     })
   ]
 })

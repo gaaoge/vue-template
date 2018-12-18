@@ -37,7 +37,7 @@ module.exports = {
             options: {
               limit: 10000,
               name: '[name].[hash:10].[ext]',
-              outputPath: 'static/img/'
+              outputPath: 'resource/img/'
             }
           },
           {
@@ -50,12 +50,21 @@ module.exports = {
         ]
       },
       {
+        test: /\.(gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: '[name].[hash:10].[ext]',
+          outputPath: 'resource/img/'
+        }
+      },
+      {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
           name: '[name].[hash:10].[ext]',
-          outputPath: 'static/media/'
+          outputPath: 'resource/media/'
         }
       },
       {
@@ -64,7 +73,7 @@ module.exports = {
         options: {
           limit: 10000,
           name: '[name].[hash:10].[ext]',
-          outputPath: 'static/font/'
+          outputPath: 'resource/font/'
         }
       }
     ]
