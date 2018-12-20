@@ -68,15 +68,17 @@ function uploadSCP (files, callback) {
     'dist/service-worker.js'
   ])
   files.forEach(file => {
-    console.log(chalk.green(file))
+    console.log(chalk.yellow(file))
   })
 
   return gulp.src(files, { base: 'dist' })
     .pipe(gulp.dest(`${pkg.name}`))
     .on('end', () => {
+      console.log(chalk.green('正在上传...'))
       return exec(`scp -r ${pkg.name} ${ftppass.test.username}@${ftppass.test.host}:/home/appops/app/activity`, () => {
         exec(`rm -rf ${pkg.name}`)
         callback && callback()
+        console.log(chalk.green('上传成功'))
       })
     })
 }
