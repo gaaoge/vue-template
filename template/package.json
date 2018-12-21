@@ -41,6 +41,7 @@
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^3.0.0",
     "postcss-plugin-px2rem": "^0.7.0",
+    "preload-webpack-plugin": "^3.0.0-beta.3",
     "standardx": "^3.0.1",
     "style-loader": "^0.23.0",
     "tinify-loader": "^0.2.4",
