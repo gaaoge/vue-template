@@ -69,7 +69,7 @@ function formatDate (dateInput, format) {
 }
 
 // 单页面高度适配
-function getResizeStyle (targetHeight = 603, needTranslate = false) {
+function getResizeStyle (targetHeight = 603, needTranslate = true) {
   if (window.innerWidth >= window.innerHeight) return
 
   let deltaHeight = 603 - window.innerHeight * 375 / window.innerWidth
