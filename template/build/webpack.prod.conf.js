@@ -15,7 +15,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = merge.smart(base, {
   mode: 'production',
   output: {
-    publicPath: process.argv.includes('--cdn') ? `${pkg.cdn}/${pkg.name}/` : '',
+    publicPath: `${pkg.cdn}/${pkg.name}/`,
     filename: 'resource/js/[name].[contenthash:10].js'
   },
   module: {

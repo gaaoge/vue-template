@@ -11,23 +11,7 @@ const exec = require('child_process').exec
 const easeftp = require('easeftp/upload')
 const ftppass = JSON.parse(fs.readFileSync('.ftppass', 'utf-8'))
 
-gulp.task('test', function () {
-  return findNewFiles('test', uploadSCP)
-})
-
-gulp.task('publish', function () {
-  return findNewFiles('publish', uploadCDN)
-})
-
-gulp.task('test-all', function () {
-  return uploadSCP(findAllFiles())
-})
-
-gulp.task('publish-all', function () {
-  return uploadCDN(findAllFiles())
-})
-
-function findAllFiles () {
+function findFiles (rootPath) {
   let result = []
 
   function finder (tempPath) {
@@ -43,47 +27,11 @@ function findAllFiles () {
     })
   }
 
-  finder('dist/resource')
+  finder(rootPath)
   return result
 }
 
-function findNewFiles (task, upload) {
-  let allFiles = findAllFiles()
-
-  let cacheFiles = []
-  let cachePath = 'node_modules/.cache/' + task + '-files.json'
-  if (fs.existsSync(cachePath)) {
-    cacheFiles = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
-  }
-  let files = allFiles.filter(item => cacheFiles.indexOf(item) === -1)
-
-  return upload(files, () => {
-    fs.writeFileSync(cachePath, JSON.stringify(allFiles))
-  })
-}
-
-function uploadSCP (files, callback) {
-  files = files.concat([
-    'dist/index.html',
-    'dist/service-worker.js'
-  ])
-  files.forEach(file => {
-    console.log(chalk.yellow(file))
-  })
-
-  return gulp.src(files, { base: 'dist' })
-    .pipe(gulp.dest(`${pkg.name}`))
-    .on('end', () => {
-      console.log(chalk.green('正在上传...'))
-      return exec(`scp -r ${pkg.name} ${ftppass.test.username}@${ftppass.test.host}:/home/appops/app/activity`, () => {
-        exec(`rm -rf ${pkg.name}`)
-        callback && callback()
-        console.log(chalk.green('上传成功'))
-      })
-    })
-}
-
-function uploadCDN (files, callback) {
+function uploadFiles (files, callback) {
   files = files.map(item => item.replace(/^dist\//, ''))
 
   return easeftp.addFile(files, {
@@ -93,12 +41,54 @@ function uploadCDN (files, callback) {
     cwd: path.resolve('dist')
   }).then(() => {
     callback && callback()
+  })
+}
 
-    easeftp.addFile(['index.html', 'service-worker.js'], {
-      debug: true,
+function uploadResource (isAll) {
+  let allFiles = findFiles('dist/resource')
+
+  let cacheFiles = []
+  let cachePath = 'node_modules/.cache/cache-files.json'
+  if (fs.existsSync(cachePath)) {
+    cacheFiles = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
+  }
+  let newFiles = allFiles.filter(item => cacheFiles.indexOf(item) === -1)
+
+  return uploadFiles(isAll ? allFiles : newFiles, () => {
+    fs.writeFileSync(cachePath, JSON.stringify(allFiles))
+  })
+}
+
+function updateHtml (isTest) {
+  if (isTest) {
+    const dir = `dist/${pkg.name}`
+    !fs.existsSync(dir) && fs.mkdirSync(dir)
+    fs.copyFileSync('dist/index.html', `${dir}/index.html`)
+
+    return exec(`scp -r ${dir} ${ftppass.test.username}@${ftppass.test.host}:/home/appops/app/activity`, () => {
+      exec(`rm -rf ${dir}`)
+    })
+  } else {
+    return easeftp.addFile(['index.html', 'service-worker.js'], {
       ...ftppass.publish,
       path: 'html/activity/' + pkg.name,
       cwd: path.resolve('dist')
     })
-  })
+  }
 }
+
+exports.test = gulp.series(function resource () {
+  return uploadResource(false)
+}, function html () {
+  return updateHtml(true)
+})
+
+exports.publish = gulp.series(function resource () {
+  return uploadResource(false)
+}, function html () {
+  return updateHtml(false)
+})
+
+exports.refresh = gulp.series(function resource () {
+  return uploadResource(true)
+})

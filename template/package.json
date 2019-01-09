@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "webpack-dev-server --hot --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
-    "build-cdn": "node build/build.js --cdn",
     "standard": "standardx \"src/**/*.{js,vue}\" --fix"
   },
   "dependencies": {

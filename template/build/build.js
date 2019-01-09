@@ -22,9 +22,8 @@ webpack(prod, (err, stats) => {
 })
 
 function generateSW () {
-  let manifestTransforms = []
-  if (process.argv.includes('--cdn')) {
-    manifestTransforms.push((entries) => {
+  let manifestTransforms = [
+    (entries) => {
       return {
         manifest: entries.map((entry) => {
           if (entry.url !== 'index.html') {
@@ -33,8 +32,8 @@ function generateSW () {
           return entry
         })
       }
-    })
-  }
+    }
+  ]
 
   workbox.generateSW({
     swDest: 'dist/service-worker.js',
