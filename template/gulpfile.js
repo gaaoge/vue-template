@@ -17,7 +17,7 @@ function findFiles (rootPath) {
   function finder (tempPath) {
     let files = fs.readdirSync(tempPath)
     files.forEach((val) => {
-      let fPath = path.join(tempPath, val)
+      let fPath = path.posix.join(tempPath, val)
       let stats = fs.statSync(fPath)
 
       if (stats.isDirectory()) {
