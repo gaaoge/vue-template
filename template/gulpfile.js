@@ -6,8 +6,6 @@ const pkg = require('./package.json')
 const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const chalk = require('chalk')
-const exec = require('child_process').exec
 const easeftp = require('easeftp/upload')
 const ftppass = JSON.parse(fs.readFileSync('.ftppass', 'utf-8'))
 
@@ -36,7 +34,7 @@ function uploadFiles (files, callback) {
 
   return easeftp.addFile(files, {
     debug: true,
-    ...ftppass.publish,
+    ...ftppass,
     path: 'activity/' + pkg.name,
     cwd: path.resolve('dist')
   }).then(() => {
@@ -60,21 +58,12 @@ function uploadResource (isAll) {
 }
 
 function updateHtml (isTest) {
-  if (isTest) {
-    const dir = `dist/${pkg.name}`
-    !fs.existsSync(dir) && fs.mkdirSync(dir)
-    fs.copyFileSync('dist/index.html', `${dir}/index.html`)
-
-    return exec(`scp -r ${dir} ${ftppass.test.username}@${ftppass.test.host}:/home/appops/app/activity`, () => {
-      exec(`rm -rf ${dir}`)
-    })
-  } else {
-    return easeftp.addFile(['index.html', 'service-worker.js'], {
-      ...ftppass.publish,
-      path: 'html/activity/' + pkg.name,
-      cwd: path.resolve('dist')
-    })
-  }
+  return easeftp.addFile(['index.html', 'service-worker.js'], {
+    debug: true,
+    ...ftppass,
+    path: `${isTest ? 'test' : 'html'}/activity/${pkg.name}`,
+    cwd: path.resolve('dist')
+  })
 }
 
 exports.test = gulp.series(function resource () {
