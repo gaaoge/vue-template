@@ -18,7 +18,7 @@ const router = new VueRouter({
 
 router.afterEach((to) => {
   // 更新标题
-  let title = to.meta.title || 'Vue'
+  let title = to.meta.title || process.env.VUE_APP_TITLE
   isNewsapp && NewsappAPI.ui.modifyTitle(title)
   document.title = title
 
