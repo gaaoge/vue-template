@@ -1,5 +1,3 @@
-const projectId = 'NTM-BXR8M5Z5-1'
-
 function trackEvent (event, info) {
   if (!window['NTESAntAnalysis']) {
     window.addEventListener('NTMReady', () => {
@@ -7,7 +5,7 @@ function trackEvent (event, info) {
     })
   } else {
     window['NTESAntAnalysis'].sendData({
-      projectid: projectId,
+      projectid: process.env.VUE_APP_PROJECT_ID,
       val_nm: 'c-ntm',
       val_act: event,
       info
@@ -16,6 +14,5 @@ function trackEvent (event, info) {
 }
 
 export {
-  projectId,
   trackEvent
 }

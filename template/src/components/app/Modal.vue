@@ -1,6 +1,6 @@
 <template>
   <transition name="app-modal">
-    <div class="app-modal" v-if="isShow" @touchmove="preventDefault" @click.self="clickClose">
+    <div v-if="isShow" class="app-modal" @touchmove="preventDefault" @click.self="clickClose">
       <component :is="dialog"></component>
     </div>
   </transition>

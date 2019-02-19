@@ -15,12 +15,16 @@
       "required": true,
       "label": "author"
     },
-    "cdn": {
+    "title": {
       "type": "string",
       "required": true,
-      "label": "cdn域名地址",
-      "default": "https://static.ws.126.net/163/activity"
+      "label": "title"
+    },
+    "projectId": {
+      "type": "string",
+      "required": true,
+      "label": "title"
     }
   },
-  "skipInterpolation": ["build/**/*", "src/**/*", "static/**/*"]
+  "skipInterpolation": ["mock/**/*", "src/**/*"]
 }

@@ -1,7 +1,7 @@
 <template>
   <transition name="app-toast">
-    <div class="app-toast" v-if="isShow">
-      <span>{{content}}</span>
+    <div v-if="isShow" class="app-toast">
+      <span>{{ content }}</span>
     </div>
   </transition>
 </template>

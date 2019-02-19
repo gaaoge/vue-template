@@ -48,20 +48,14 @@ const stores = {
       let { url, method = 'get', params, credentials = 'include' } = payload
 
       // 配置url和method
-      if (!/^(https?:)?\/\//.test(url)) {
-        if (process.env.NODE_ENV === 'development') {
-          let host = 'api'
-          url = host + url + '.json'
-          method = 'get'
-        } else {
-          let host = window.location.origin + '/api' // api代表后台api路径
-          url = host + url
-          method = method.toLowerCase()
-        }
-
-        if (method === 'get' && params) {
-          url = url + '?' + toSearchParams(params)
-        }
+      if (!/^(https?:)?\/\//.test(url) && process.env.NODE_ENV === 'production') {
+        let isTest = /wp\.m\.163\.com\/163\/test/.test(window.location.href)
+        let host = isTest ? process.env.VUE_APP_TEST_HOST : process.env.VUE_APP_PUBLISH_HOST
+        url = host + url
+      }
+      method = method.toLowerCase()
+      if (method === 'get' && params) {
+        url = url + '?' + toSearchParams(params)
       }
 
       // 配置headers和body

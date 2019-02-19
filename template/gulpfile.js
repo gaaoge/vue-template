@@ -20,8 +20,9 @@ function findFiles (rootPath) {
 
       if (stats.isDirectory()) {
         finder(fPath)
-      } else if (stats.isFile() && !/\.DS_Store/.test(fPath))
+      } else if (stats.isFile() && !/\.DS_Store/.test(fPath)) {
         result.push(fPath)
+      }
     })
   }
 
@@ -29,21 +30,20 @@ function findFiles (rootPath) {
   return result
 }
 
-function uploadFiles (files, callback) {
-  files = files.map(item => item.replace(/^dist\//, ''))
-
-  return easeftp.addFile(files, {
+function uploadFiles (config) {
+  return easeftp.addFile(config.files, {
     debug: true,
     ...ftppass,
-    path: 'activity/' + pkg.name,
+    path: config.path,
     cwd: path.resolve('dist')
   }).then(() => {
-    callback && callback()
+    config.callback && config.callback()
   })
 }
 
 function uploadResource (isAll) {
   let allFiles = findFiles('dist/resource')
+  allFiles = allFiles.map(item => item.replace(/^dist\//, ''))
 
   let cacheFiles = []
   let cachePath = 'node_modules/.cache/cache-files.json'
@@ -52,17 +52,19 @@ function uploadResource (isAll) {
   }
   let newFiles = allFiles.filter(item => cacheFiles.indexOf(item) === -1)
 
-  return uploadFiles(isAll ? allFiles : newFiles, () => {
-    fs.writeFileSync(cachePath, JSON.stringify(allFiles))
+  return uploadFiles({
+    files: isAll ? allFiles : newFiles,
+    path: 'activity/' + pkg.name,
+    callback: () => {
+      fs.writeFileSync(cachePath, JSON.stringify(allFiles))
+    }
   })
 }
 
 function updateHtml (isTest) {
-  return easeftp.addFile(['index.html', 'service-worker.js'], {
-    debug: true,
-    ...ftppass,
-    path: `${isTest ? 'test' : 'html'}/activity/${pkg.name}`,
-    cwd: path.resolve('dist')
+  return uploadFiles({
+    files: ['index.html', 'service-worker.js'],
+    path: `${isTest ? 'test' : 'html'}/activity/${pkg.name}`
   })
 }
 

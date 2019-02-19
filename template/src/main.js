@@ -2,20 +2,14 @@
  * Created by GG on 2016/11/30.
  */
 
-import '@/utils/rem'
-import '@/utils/helper'
-import 'babel-polyfill'
-import 'normalize.css'
-import 'whatwg-fetch'
-
+import Vue from 'vue'
+import App from '@/App'
+import router from '@/router'
+import store from '@/store'
 import '@/components'
 import '@/directives'
 import '@/filters'
-
-import Vue from 'vue'
-import router from '@/router'
-import store from '@/store'
-import App from '@/App'
+import '@/utils/helper'
 
 // Vue实例
 window.vm = new Vue({
