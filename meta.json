@@ -23,7 +23,7 @@
     "projectId": {
       "type": "string",
       "required": true,
-      "label": "title"
+      "label": "projectId"
     }
   },
   "skipInterpolation": ["mock/**/*", "src/**/*"]
