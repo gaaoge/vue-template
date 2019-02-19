@@ -1,4 +1,5 @@
 const presetEnv = require('postcss-preset-env')
+const autoSize = require('postcss-autosize')
 const pxToViewport = require('postcss-px-to-viewport')
 
 module.exports = {
@@ -6,6 +7,7 @@ module.exports = {
     presetEnv({
       stage: 0
     }),
+    autoSize(),
     pxToViewport({
       viewportWidth: 750,
       viewportUnit: 'vmin',
