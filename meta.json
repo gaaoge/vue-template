@@ -26,5 +26,5 @@
       "label": "projectId"
     }
   },
-  "skipInterpolation": ["mock/**/*", "src/**/*"]
+  "skipInterpolation": ["mock/**/*", "public/**/*", "src/**/*"]
 }
