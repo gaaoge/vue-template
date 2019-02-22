@@ -5,7 +5,7 @@
 
 这是一个基于 [@vue/cli](https://github.com/vuejs/vue-cli) 的项目开发模板。
 
-#### 全局安装vue-cli
+#### 全局安装@vue/cli
 ``` 
 $ npm install -g @vue/cli
 ```
