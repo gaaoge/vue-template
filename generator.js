@@ -52,5 +52,7 @@ module.exports = (api, options, rootOptions) => {
   })
 
   // 生成项目文件
-  api.render('./template')
+  setTimeout(()=> {
+    api.render('./template')
+  }, 1000)
 }
