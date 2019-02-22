@@ -44,15 +44,11 @@ module.exports = (api, options, rootOptions) => {
     }
   })
 
-  // 删除 vue-cli3 默认目录
   api.render(files => {
     Object.keys(files).forEach(name => {
       delete files[name]
     })
-  })
 
-  // 生成项目文件
-  setTimeout(()=> {
     api.render('./template')
-  }, 1000)
+  })
 }
