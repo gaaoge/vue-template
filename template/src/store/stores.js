@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import { toSearchParams } from '@/utils'
+import { isNewsapp } from '@/utils/detect'
 
 import home from '@/pages/home/store'
 
 const MODAL_CONFIG = 'MODAL_CONFIG'
 const TOAST_CONFIG = 'TOAST_CONFIG'
+const REQUEST_HEADER = 'REQUEST_HEADER'
 
 const stores = {
   modules: {
@@ -12,7 +14,8 @@ const stores = {
   },
   state: {
     modalConfig: {},
-    toastConfig: {}
+    toastConfig: {},
+    requestHeader: null
   },
   mutations: {
     [MODAL_CONFIG] (state, payload) {
@@ -20,6 +23,9 @@ const stores = {
     },
     [TOAST_CONFIG] (state, payload) {
       state.toastConfig = payload
+    },
+    [REQUEST_HEADER] (state, payload) {
+      state.requestHeader = payload
     }
   },
   actions: {
@@ -64,7 +70,8 @@ const stores = {
       }
 
       // 配置headers和body
-      let headers = {}
+      !state.requestHeader && await dispatch('getRequestHeader')
+      let headers = Object.assign({}, state.requestHeader)
       let body
       if (method === 'post') {
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -87,7 +94,7 @@ const stores = {
       }
 
       // 处理请求返回结果
-      if (data.code !== 200) {
+      if (data.code !== 10000) {
         switch (data.code) {
           default:
             dispatch('toast', data.message)
@@ -99,12 +106,26 @@ const stores = {
         throw err
       }
 
-      return data
+      return data.data
     },
     async sleep ({ commit }, payload) {
       return new Promise((resolve, reject) => {
         setTimeout(resolve, payload)
       })
+    },
+    async getRequestHeader ({ commit }) {
+      let requestHeader = await new Promise((resolve, reject) => {
+        if (/newsapptest/.test(navigator.userAgent) || !isNewsapp) {
+          resolve({})
+          return
+        }
+
+        NewsappAPI.accountInfo((info) => {
+          resolve(info)
+        })
+      })
+
+      commit(REQUEST_HEADER, requestHeader)
     }
   }
 }
