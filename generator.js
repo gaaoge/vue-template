@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = (api, options, rootOptions) => {
   api.extendPackage(pkg => {
     delete pkg.postcss
@@ -51,5 +53,5 @@ module.exports = (api, options, rootOptions) => {
     })
   })
 
-  api.render('./template')
+  api.render(path.resolve('./template'))
 }
