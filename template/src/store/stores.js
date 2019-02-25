@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import NewsappAPI from 'newsapp-api'
 import { toSearchParams } from '@/utils'
 import { isNewsapp } from '@/utils/detect'
 
