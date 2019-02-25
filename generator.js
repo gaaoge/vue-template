@@ -47,11 +47,10 @@ module.exports = (api, options, rootOptions) => {
   })
 
   api.render(files => {
-    console.log(files)
     Object.keys(files).forEach(name => {
       delete files[name]
     })
   })
 
-  api.render(path.resolve('./template'))
+  api.render(path.resolve(__dirname, './template'))
 }
