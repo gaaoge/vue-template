@@ -1,10 +1,15 @@
 import Vue from 'vue'
 import { toSearchParams } from '@/utils'
 
+import home from '@/pages/home/store'
+
 const MODAL_CONFIG = 'MODAL_CONFIG'
 const TOAST_CONFIG = 'TOAST_CONFIG'
 
 const stores = {
+  modules: {
+    home
+  },
   state: {
     modalConfig: {},
     toastConfig: {}
