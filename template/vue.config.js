@@ -29,7 +29,7 @@ module.exports = {
   chainWebpack: config => {
     config.module
       .rule('images')
-      .test(/\.(png|jpe?g|gif|webp)(\?.*)?$/)
+      .test(/\.(png|jpe?g)(\?.*)?$/)
       .use('tinify-loader')
       .loader('tinify-loader')
       .tap(() => {
@@ -38,7 +38,10 @@ module.exports = {
           cache: path.resolve('node_modules/.cache/tinify-loader')
         }
       })
-      .end()
+
+    config.module
+      .rule('svg')
+      .test(/\.(svg|gif|webp)(\?.*)?$/)
   },
   devServer: {
     before (app) {
