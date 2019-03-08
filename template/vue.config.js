@@ -3,7 +3,7 @@ const path = require('path')
 const apiMocker = require('mocker-api')
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? `//static.ws.126.net/163/activity/${pkg.name}` : '',
+  publicPath: process.env.NODE_ENV === 'production' ? `//static.ws.126.net/163/activity/${pkg.name}/` : '',
   productionSourceMap: false,
   assetsDir: 'resource',
   configureWebpack: {

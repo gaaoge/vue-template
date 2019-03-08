@@ -88,7 +88,7 @@ function getResizeStyle (targetHeight = 603, needTranslate = true) {
 
 // 获取static目录文件的实际路径
 function getStaticPath (path) {
-  return __webpack_public_path__ + 'resource/static/' + path // eslint-disable-line
+  return process.env.BASE_URL + 'resource/static/' + path
 }
 
 // 获取当前页面绝对路径
