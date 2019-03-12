@@ -19,10 +19,10 @@ module.exports = (api, options, rootOptions) => {
         "whatwg-fetch": "^3.0.0"
       },
       devDependencies: {
-        '@vue/cli-plugin-babel': '^3.5.0',
-        '@vue/cli-plugin-eslint': '^3.5.0',
-        '@vue/cli-plugin-pwa': '^3.5.0',
-        '@vue/cli-service': '^3.5.0',
+        '@vue/cli-plugin-babel': '^3.5.1',
+        '@vue/cli-plugin-eslint': '^3.5.1',
+        '@vue/cli-plugin-pwa': '^3.5.1',
+        '@vue/cli-service': '^3.5.1',
         '@vue/eslint-config-standard': '^4.0.0',
         'babel-eslint': '^10.0.1',
         'easeftp': '^2.0.40',

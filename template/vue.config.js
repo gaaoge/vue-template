@@ -5,7 +5,7 @@ const apiMocker = require('mocker-api')
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? `//static.ws.126.net/163/activity/${pkg.name}/` : '',
   productionSourceMap: false,
-  assetsDir: 'resource',
+  assetsDir: 'static',
   configureWebpack: {
     resolve: {
       alias: {
@@ -50,7 +50,7 @@ module.exports = {
   },
   pwa: {
     workboxOptions: {
-      importsDirectory: 'resource',
+      importsDirectory: 'static/js',
       exclude: ['index.html'],
       runtimeCaching: [{
         urlPattern: /index\.html/,
@@ -58,11 +58,11 @@ module.exports = {
       }]
     },
     iconPaths: {
-      favicon32: 'resource/static/share-icon.png',
-      favicon16: 'resource/static/share-icon.png',
-      appleTouchIcon: 'resource/static/share-icon.png',
-      maskIcon: 'resource/static/share-icon.png',
-      msTileImage: 'resource/static/share-icon.png'
+      favicon32: 'static/share-icon.png',
+      favicon16: 'static/share-icon.png',
+      appleTouchIcon: 'static/share-icon.png',
+      maskIcon: 'static/share-icon.png',
+      msTileImage: 'static/share-icon.png'
     }
   }
 }

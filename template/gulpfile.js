@@ -1,15 +1,13 @@
-/**
- * Created by GG on 16/4/28.
- */
-
 const pkg = require('./package.json')
 const fs = require('fs')
+const del = require('del')
 const path = require('path')
-const gulp = require('gulp')
 const easeftp = require('easeftp/upload')
 const ftppass = JSON.parse(fs.readFileSync('.ftppass', 'utf-8'))
 
-function findFiles (rootPath) {
+const cacheDir = path.resolve('node_modules/.cache/easeftp/')
+
+function findFiles (rootPath, replacePath = '') {
   let result = []
 
   function finder (tempPath) {
@@ -20,8 +18,8 @@ function findFiles (rootPath) {
 
       if (stats.isDirectory()) {
         finder(fPath)
-      } else if (stats.isFile() && !/\.DS_Store/.test(fPath)) {
-        result.push(fPath)
+      } else if (stats.isFile()) {
+        result.push(fPath.replace(rootPath, replacePath))
       }
     })
   }
@@ -30,56 +28,55 @@ function findFiles (rootPath) {
   return result
 }
 
-function uploadFiles (config) {
-  return easeftp.addFile(config.files, {
-    debug: true,
-    ...ftppass,
-    path: config.path,
-    cwd: path.resolve('dist')
-  }).then(() => {
-    config.callback && config.callback()
-  })
-}
-
-function uploadResource (isAll) {
-  let allFiles = findFiles('dist/resource')
-  allFiles = allFiles.map(item => item.replace(/^dist\//, ''))
+function uploadStatic () {
+  let allFiles = findFiles(`dist/static/`, 'static/')
 
   let cacheFiles = []
-  let cachePath = 'node_modules/.cache/cache-files.json'
+  let cachePath = `${cacheDir}/cache-files.json`
   if (fs.existsSync(cachePath)) {
     cacheFiles = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
   }
+
   let newFiles = allFiles.filter(item => cacheFiles.indexOf(item) === -1)
 
-  return uploadFiles({
-    files: isAll ? allFiles : newFiles,
+  return easeftp.addFile(newFiles, {
+    debug: true,
+    ...ftppass,
     path: 'activity/' + pkg.name,
-    callback: () => {
-      fs.writeFileSync(cachePath, JSON.stringify(allFiles))
+    cwd: path.resolve('dist')
+  }).then(() => {
+    if (!fs.existsSync(cacheDir)) {
+      cacheDir.split('/').reduce((current, next) => {
+        const full = path.resolve(current, next)
+        if (!fs.existsSync(full)) {
+          fs.mkdirSync(full)
+        }
+        return full
+      }, '/')
     }
+    fs.writeFileSync(cachePath, JSON.stringify(allFiles))
   })
 }
 
-function updateHtml (isTest) {
-  return uploadFiles({
-    files: ['index.html', 'service-worker.js'],
-    path: `${isTest ? 'test' : 'html'}/activity/${pkg.name}`
+function uploadHtml (dir) {
+  return easeftp.addFile(['index.html', 'service-worker.js'], {
+    debug: true,
+    ...ftppass,
+    path: `${dir}/activity/${pkg.name}`,
+    cwd: path.resolve('dist')
   })
 }
 
-exports.test = gulp.series(function resource () {
-  return uploadResource(false)
-}, function html () {
-  return updateHtml(true)
-})
+exports['test'] = async function () {
+  await uploadStatic('h5')
+  await uploadHtml('test')
+}
 
-exports.publish = gulp.series(function resource () {
-  return uploadResource(false)
-}, function html () {
-  return updateHtml(false)
-})
+exports['publish'] = async function () {
+  await uploadStatic('h5')
+  await uploadHtml('html')
+}
 
-exports.refresh = gulp.series(function resource () {
-  return uploadResource(true)
-})
+exports['clear'] = function () {
+  return del([cacheDir])
+}
