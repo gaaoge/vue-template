@@ -1,3 +1,4 @@
+import 'whatwg-fetch'
 import Vue from 'vue'
 import NewsappAPI from 'newsapp-api'
 import { toSearchParams } from '@/utils'
