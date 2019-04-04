@@ -4,7 +4,7 @@ const directives = {
   'track-event': {
     bind (el, binding) {
       el.addEventListener('click', () => {
-        trackEvent('click_' + binding.value)
+        trackEvent(binding.value)
       })
     }
   },
