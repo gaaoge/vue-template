@@ -1,7 +1,7 @@
 <template>
-  <transition name="app-modal">
-    <div v-if="isShow" class="app-modal" @touchmove="preventDefault" @click.self="clickClose">
-      <component :is="dialog"></component>
+  <transition name="base-modal">
+    <div v-if="isShow" class="base-modal" @touchmove="preventDefault" @click.self="clickClose">
+      <slot></slot>
     </div>
   </transition>
 </template>
@@ -10,28 +10,34 @@
   import { mapState, mapActions } from 'vuex'
 
   export default {
-    name: 'app-modal',
+    name: 'base-modal',
+    props: {
+      dialog: {
+        type: String,
+        default: ''
+      }
+    },
     computed: {
+      config () {
+        return this.dialogConfig[this.dialog]
+      },
       isShow () {
-        return this.modalConfig.isShow
+        return !!this.config
       },
       isScroll () {
-        return this.modalConfig.isScroll
+        return this.config.isScroll
       },
       isForce () {
-        return this.modalConfig.isForce
+        return this.config.isForce
       },
-      dialog () {
-        return this.modalConfig.dialog
-      },
-      ...mapState(['modalConfig'])
+      ...mapState(['dialogConfig'])
     },
     methods: {
       preventDefault (e) {
         !this.isScroll && e.preventDefault()
       },
       clickClose (e) {
-        !this.isForce && this.closeDialog()
+        !this.isForce && this.closeDialog(this.dialog)
       },
       ...mapActions(['closeDialog'])
     }
@@ -39,7 +45,7 @@
 </script>
 
 <style>
-  .app-modal {
+  .base-modal {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,11 +57,11 @@
     z-index: 9999;
   }
 
-  .app-modal-enter-active, .app-modal-leave-active {
+  .base-modal-enter-active, .base-modal-leave-active {
     transition: opacity .3s;
   }
 
-  .app-modal-enter, .app-modal-leave-to {
+  .base-modal-enter, .base-modal-leave-to {
     opacity: 0;
   }
 </style>

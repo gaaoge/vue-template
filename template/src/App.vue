@@ -1,7 +1,6 @@
 <template>
   <div class="app">
     <router-view></router-view>
-    <app-modal></app-modal>
     <app-toast></app-toast>
   </div>
 </template>

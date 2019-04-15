@@ -6,8 +6,8 @@ import { isNewsapp } from '@/utils/detect'
 
 import home from '@/pages/home/store'
 
-const MODAL_CONFIG = 'MODAL_CONFIG'
 const TOAST_CONFIG = 'TOAST_CONFIG'
+const DIALOG_CONFIG = 'DIALOG_CONFIG'
 const REQUEST_HEADER = 'REQUEST_HEADER'
 
 const stores = {
@@ -15,32 +15,27 @@ const stores = {
     home
   },
   state: {
-    modalConfig: {},
     toastConfig: {},
+    dialogConfig: {},
     requestHeader: null
   },
   mutations: {
-    [MODAL_CONFIG] (state, payload) {
-      state.modalConfig = payload
-    },
     [TOAST_CONFIG] (state, payload) {
       state.toastConfig = payload
+    },
+    [DIALOG_CONFIG] (state, payload) {
+      state.dialogConfig = payload
     },
     [REQUEST_HEADER] (state, payload) {
       state.requestHeader = payload
     }
   },
   actions: {
-    openDialog ({ commit }, payload = {}) {
-      commit(MODAL_CONFIG, {
-        isShow: true,
-        ...payload
-      })
-    },
-    closeDialog ({ commit }) {
-      commit(MODAL_CONFIG, {})
-    },
-    toast ({ state, commit }, payload) {
+    /**
+     * 展示toast提示
+     * @param {string} content 文本内容
+     */
+    toast ({ state, commit }, content) {
       if (state.toastConfig.timer) {
         clearTimeout(state.toastConfig.timer)
         commit(TOAST_CONFIG, {})
@@ -52,11 +47,52 @@ const stores = {
       Vue.nextTick(() => {
         commit(TOAST_CONFIG, {
           isShow: true,
-          content: payload,
+          content,
           timer
         })
       })
     },
+    /**
+     * 打开弹窗
+     * @param {String|Object} payload 支持字符串或者对象参数
+     *  String参数：弹窗名称
+     *  Object参数：{
+     *    dialog: 弹窗名称
+     *    isScroll: 弹窗是否可滚动
+     *    isForce: 弹窗是否强制展示（点击弹窗周围空白处不可关闭）
+     *    params: 其他弹窗参数
+     *  }
+     */
+    openDialog ({ state: { dialogConfig }, commit }, payload) {
+      let config = Object.assign({}, dialogConfig, {
+        [payload.dialog || payload]: payload
+      })
+      commit(DIALOG_CONFIG, config)
+    },
+    /**
+     * 关闭弹窗
+     * @param {String|Object} payload 支持字符串或者对象参数
+     *  String参数：弹窗名称
+     *  Object参数：{
+     *    dialog: 弹窗名称
+     *  }
+     */
+    closeDialog ({ state: { dialogConfig }, commit }, payload) {
+      let config = Object.assign({}, dialogConfig, {
+        [payload.dialog || payload]: null
+      })
+      commit(DIALOG_CONFIG, config)
+    },
+    /**
+     * 发送fetch请求
+     * @param {Object} payload
+     *  {
+     *    url: 请求url,
+     *    method: 请求方法（默认get）
+     *    params: 请求参数，
+     *    credentials： 是否携带cookies（默认携带）
+     *  }
+     */
     async fetch ({ state, commit, dispatch }, payload = {}) {
       let { url, method = 'get', params, credentials = 'include' } = payload
 
