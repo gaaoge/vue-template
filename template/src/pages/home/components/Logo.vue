@@ -8,7 +8,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .home-logo {
     margin: 0 auto;
     background: url("../assets/logo.png");

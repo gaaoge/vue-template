@@ -27,7 +27,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .home-main {
     height: 100vh;
 

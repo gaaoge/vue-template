@@ -11,7 +11,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   @import "~minireset.css";
 
   body {

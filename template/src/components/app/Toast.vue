@@ -27,7 +27,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .app-toast {
     position: fixed;
     left: 50%;

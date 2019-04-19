@@ -44,7 +44,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .base-modal {
     display: flex;
     justify-content: center;
