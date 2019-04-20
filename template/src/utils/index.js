@@ -129,6 +129,13 @@ async function asyncExec (func, key) {
   }
 }
 
+// 异步等待函数
+async function sleep (seconds) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, seconds)
+  })
+}
+
 export {
   getSearch,
   setSearch,
@@ -138,5 +145,6 @@ export {
   getStaticPath,
   getAbsPath,
   loadScript,
-  asyncExec
+  asyncExec,
+  sleep
 }

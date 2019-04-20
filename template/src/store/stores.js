@@ -146,11 +146,6 @@ const stores = {
 
       return data.data
     },
-    async sleep ({ commit }, payload) {
-      return new Promise((resolve, reject) => {
-        setTimeout(resolve, payload)
-      })
-    },
     async getRequestHeader ({ commit }) {
       let requestHeader = await new Promise((resolve, reject) => {
         if (/newsapptest/.test(navigator.userAgent) || !isNewsapp) {
