@@ -130,9 +130,9 @@ async function asyncExec (func, key) {
 }
 
 // 异步等待函数
-async function sleep (seconds) {
+async function sleep (duration) {
   return new Promise((resolve, reject) => {
-    setTimeout(resolve, seconds)
+    setTimeout(resolve, duration)
   })
 }
 
