@@ -9,7 +9,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        'newsapp-api': '@newsapp-activity/newsapp-api',
+        'js-bridge': '@mf2e/js-bridge',
         'newsapp-share': '@newsapp-activity/newsapp-share'
       }
     },

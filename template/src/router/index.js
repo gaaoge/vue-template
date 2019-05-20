@@ -4,7 +4,7 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import NewsappAPI from 'newsapp-api'
+import { invoke } from 'js-bridge'
 import { isNewsapp } from '@/utils/detect'
 import { updateShareConfig } from '@/utils/share'
 import { trackEvent } from '@/utils/track'
@@ -19,7 +19,7 @@ const router = new VueRouter({
 router.afterEach((to) => {
   // 更新标题
   let title = to.meta.title || process.env.VUE_APP_TITLE
-  isNewsapp && NewsappAPI.ui.modifyTitle(title)
+  isNewsapp && invoke('setTitle', { title }, false)
   document.title = title
 
   // 更新分享配置

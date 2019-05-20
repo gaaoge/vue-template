@@ -62,7 +62,7 @@ function uploadHtml (dir) {
   return easeftp.addFile(['index.html', 'service-worker.js'], {
     debug: true,
     ...ftppass,
-    path: `${dir}/newsapp/activity/${pkg.name}`,
+    path: `html/${dir}/activity/${pkg.name}`,
     cwd: path.resolve('dist')
   })
 }
@@ -74,7 +74,7 @@ exports['test'] = async function () {
 
 exports['publish'] = async function () {
   await uploadStatic()
-  await uploadHtml('html')
+  await uploadHtml('newsapp')
 }
 
 exports['clear'] = function () {

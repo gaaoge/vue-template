@@ -1,6 +1,6 @@
 import 'whatwg-fetch'
 import Vue from 'vue'
-import NewsappAPI from 'newsapp-api'
+import { invoke, isAvailable } from 'js-bridge'
 import { toSearchParams } from '@/utils'
 import { isNewsapp } from '@/utils/detect'
 
@@ -89,43 +89,47 @@ const stores = {
      *  {
      *    url: 请求url,
      *    method: 请求方法（默认get）
-     *    params: 请求参数，
-     *    credentials： 是否携带cookies（默认携带）
+     *    headers: 请求头
+     *    params: 请求参数
      *  }
      */
-    async fetch ({ state, commit, dispatch }, payload = {}) {
-      let { url, method = 'get', params, credentials = 'include' } = payload
-
+    async fetch ({ state, commit, dispatch }, { url, method = 'get', headers = {}, params }) {
       // 配置url和method
       if (!/^(https?:)?\/\//.test(url) && process.env.NODE_ENV === 'production') {
-        let isTest = /wp\.m\.163\.com\/163\/test/.test(window.location.href)
-        let host = isTest ? process.env.VUE_APP_TEST_HOST : process.env.VUE_APP_PUBLISH_HOST
-        url = host + url
+        url = process.env.VUE_APP_HOST + url
       }
       method = method.toLowerCase()
       if (method === 'get' && params) {
         url = url + '?' + toSearchParams(params)
       }
 
-      // 配置headers和body
+      // 配置headers和params
       !state.requestHeader && await dispatch('getRequestHeader')
-      let headers = Object.assign({}, state.requestHeader)
-      let body
+      headers = Object.assign({}, state.requestHeader, headers)
       if (method === 'post') {
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        body = toSearchParams(params)
+        params = toSearchParams(params)
       }
 
       // 发送fetch请求
       let data
       try {
-        let response = await window.fetch(url, {
-          method,
-          headers,
-          body,
-          credentials
-        })
-        data = await response.json()
+        if (isAvailable('request')) {
+          let res = await invoke('request', {
+            method,
+            url,
+            headers,
+            data: params
+          })
+          data = JSON.parse(res)
+        } else {
+          let res = await window.fetch(url, {
+            method,
+            headers,
+            body: params
+          })
+          data = await res.json()
+        }
       } catch (e) {
         dispatch('toast', '网络请求出错')
         throw new Error('网络请求出错')
@@ -135,11 +139,11 @@ const stores = {
       if (data.code !== 10000) {
         switch (data.code) {
           default:
-            dispatch('toast', data.message)
+            dispatch('toast', data.msg)
             break
         }
 
-        let err = new Error(data.message)
+        let err = new Error(data.msg)
         err.code = data.code
         throw err
       }
@@ -153,8 +157,8 @@ const stores = {
           return
         }
 
-        NewsappAPI.accountInfo((info) => {
-          resolve(info)
+        invoke('getHeaders').then(res => {
+          resolve(res)
         })
       })
 

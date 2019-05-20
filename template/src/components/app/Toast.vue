@@ -10,11 +10,6 @@
   import { mapState } from 'vuex'
 
   export default {
-    data () {
-      return {
-        timer: null
-      }
-    },
     computed: {
       isShow () {
         return this.toastConfig.isShow
