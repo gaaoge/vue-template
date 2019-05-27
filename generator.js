@@ -10,8 +10,8 @@ module.exports = (api, options, rootOptions) => {
         'lint': 'vue-cli-service lint'
       },
       dependencies: {
-        '@mf2e/js-bridge': '^1.0.4',
-        '@newsapp-activity/newsapp-share': '^1.4.4',
+        '@mf2e/js-bridge': '^1.0.6',
+        '@newsapp-activity/newsapp-share': '^1.5.0',
         'minireset.css': '^0.0.4',
         'register-service-worker': '^1.6.2',
         'vue': '^2.6.10',
