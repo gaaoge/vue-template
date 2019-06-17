@@ -12,7 +12,7 @@ module.exports = (api, options, rootOptions) => {
       dependencies: {
         '@mf2e/js-bridge': '^1.0.6',
         '@newsapp-activity/newsapp-share': '^1.5.0',
-        'minireset.css': '^0.0.4',
+        'minireset.css': '^0.0.5',
         'register-service-worker': '^1.6.2',
         'vue': '^2.6.10',
         'vue-router': '^3.0.6',
@@ -20,10 +20,10 @@ module.exports = (api, options, rootOptions) => {
         'whatwg-fetch': '^3.0.0'
       },
       devDependencies: {
-        '@vue/cli-plugin-babel': '^3.7.0',
-        '@vue/cli-plugin-eslint': '^3.7.0',
-        '@vue/cli-plugin-pwa': '^3.7.0',
-        '@vue/cli-service': '^3.7.0',
+        '@vue/cli-plugin-babel': '^3.8.0',
+        '@vue/cli-plugin-eslint': '^3.8.0',
+        '@vue/cli-plugin-pwa': '^3.8.0',
+        '@vue/cli-service': '^3.8.0',
         '@vue/eslint-config-standard': '^4.0.0',
         'babel-eslint': '^10.0.1',
         'easeftp': '^2.0.40',
