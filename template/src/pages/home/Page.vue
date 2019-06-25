@@ -1,5 +1,5 @@
 <template>
-  <div class="home-main">
+  <div class="home-page">
     <h5 @click="sayHello">Hello Vue!</h5>
     <home-logo @click.native="doShare"></home-logo>
   </div>
@@ -11,7 +11,7 @@
   import { shareWithConfig } from '@/utils/share'
 
   export default {
-    name: 'home-main',
+    name: 'home-page',
     components: {
       HomeLogo
     },
@@ -28,7 +28,7 @@
 </script>
 
 <style lang="postcss" scoped>
-  .home-main {
+  .home-page {
     height: 100vh;
 
     & > h5 {
