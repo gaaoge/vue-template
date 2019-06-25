@@ -22,7 +22,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
   .app-toast {
     position: fixed;
     left: 50%;

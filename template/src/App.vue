@@ -11,7 +11,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
   @import "~minireset.css";
 
   body {

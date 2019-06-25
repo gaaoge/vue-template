@@ -8,7 +8,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
   .home-logo {
     margin: 0 auto;
     background: url("../assets/logo.png");

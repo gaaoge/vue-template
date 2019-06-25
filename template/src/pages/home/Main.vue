@@ -27,7 +27,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
   .home-main {
     height: 100vh;
 
