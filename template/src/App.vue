@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <router-view></router-view>
     <app-toast></app-toast>
   </div>
@@ -11,7 +11,7 @@
   }
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
   @import "~minireset.css";
 
   body {
@@ -22,7 +22,7 @@
     -webkit-user-select: none;
   }
 
-  .app {
+  #app {
     position: relative;
     width: 750px;
     margin: 0 auto;
