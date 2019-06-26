@@ -1,7 +1,7 @@
 import { getAbsPath, getStaticPath } from '@/utils/index'
 import { trackEvent } from '@/utils/track'
 import NewsappShare from 'newsapp-share'
-import * as jsBridge from '@mf2e/js-bridge'
+import * as jsBridge from 'js-bridge'
 
 window.jsBridge = jsBridge
 const defaultConfig = {
