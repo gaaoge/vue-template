@@ -17,7 +17,7 @@ const defaultConfig = {
 }
 let customConfig = {}
 
-function updateShareConfig (config = {}) {
+function updateShareConfig(config = {}) {
   const origin = config.shareDone
   config.shareDone = () => {
     origin && origin.apply(this, arguments)
@@ -28,7 +28,7 @@ function updateShareConfig (config = {}) {
   NewsappShare.config(customConfig)
 }
 
-function shareWithConfig (config = {}, tag) {
+function shareWithConfig(config = {}, tag) {
   const origin = config.shareDone
   config.shareDone = () => {
     origin && origin.apply(this, arguments)
@@ -38,12 +38,10 @@ function shareWithConfig (config = {}, tag) {
 
   NewsappShare.config(config)
   NewsappShare.show(tag)
-  tag && setTimeout(() => {
-    updateShareConfig(customConfig)
-  }, 300)
+  tag &&
+    setTimeout(() => {
+      updateShareConfig(customConfig)
+    }, 300)
 }
 
-export {
-  updateShareConfig,
-  shareWithConfig
-}
+export { updateShareConfig, shareWithConfig }

@@ -1,5 +1,3 @@
-const filters = {
-
-}
+const filters = {}
 
 export default filters

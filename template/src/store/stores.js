@@ -20,13 +20,13 @@ const stores = {
     requestHeader: null
   },
   mutations: {
-    [TOAST_CONFIG] (state, payload) {
+    [TOAST_CONFIG](state, payload) {
       state.toastConfig = payload
     },
-    [DIALOG_CONFIG] (state, payload) {
+    [DIALOG_CONFIG](state, payload) {
       state.dialogConfig = payload
     },
-    [REQUEST_HEADER] (state, payload) {
+    [REQUEST_HEADER](state, payload) {
       state.requestHeader = payload
     }
   },
@@ -35,7 +35,7 @@ const stores = {
      * 展示toast提示
      * @param {string} content 文本内容
      */
-    toast ({ state, commit }, content) {
+    toast({ state, commit }, content) {
       if (state.toastConfig.timer) {
         clearTimeout(state.toastConfig.timer)
         commit(TOAST_CONFIG, {})
@@ -63,8 +63,8 @@ const stores = {
      *    params: 其他弹窗参数
      *  }
      */
-    openDialog ({ state: { dialogConfig }, commit }, payload) {
-      let config = Object.assign({}, dialogConfig, {
+    openDialog({ state, commit }, payload) {
+      let config = Object.assign({}, state.dialogConfig, {
         [payload.dialog || payload]: payload
       })
       commit(DIALOG_CONFIG, config)
@@ -77,8 +77,8 @@ const stores = {
      *    dialog: 弹窗名称
      *  }
      */
-    closeDialog ({ state: { dialogConfig }, commit }, payload) {
-      let config = Object.assign({}, dialogConfig, {
+    closeDialog({ state, commit }, payload) {
+      let config = Object.assign({}, state.dialogConfig, {
         [payload.dialog || payload]: null
       })
       commit(DIALOG_CONFIG, config)
@@ -93,9 +93,15 @@ const stores = {
      *    params: 请求参数
      *  }
      */
-    async fetch ({ state, commit, dispatch }, { url, method = 'get', headers = {}, params }) {
+    async fetch(
+      { state, dispatch },
+      { url, method = 'get', headers = {}, params }
+    ) {
       // 配置url和method
-      if (!/^(https?:)?\/\//.test(url) && process.env.NODE_ENV === 'production') {
+      if (
+        !/^(https?:)?\/\//.test(url) &&
+        process.env.NODE_ENV === 'production'
+      ) {
         url = process.env.VUE_APP_HOST + url
       }
       method = method.toLowerCase()
@@ -104,7 +110,7 @@ const stores = {
       }
 
       // 配置headers和params
-      !state.requestHeader && await dispatch('getRequestHeader')
+      !state.requestHeader && (await dispatch('getRequestHeader'))
       headers = Object.assign({}, state.requestHeader, headers)
       if (method === 'post') {
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -150,8 +156,8 @@ const stores = {
 
       return data.data
     },
-    async getRequestHeader ({ commit }) {
-      let requestHeader = await new Promise((resolve, reject) => {
+    async getRequestHeader({ commit }) {
+      let requestHeader = await new Promise(resolve => {
         if (/newsapptest/.test(navigator.userAgent) || !isNewsapp) {
           resolve({})
           return

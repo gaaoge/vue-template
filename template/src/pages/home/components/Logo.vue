@@ -3,14 +3,14 @@
 </template>
 
 <script>
-  export default {
-    name: 'home-logo'
-  }
+export default {
+  name: 'home-logo'
+}
 </script>
 
 <style lang="postcss" scoped>
-  .home-logo {
-    margin: 0 auto;
-    background: url("../assets/logo.png");
-  }
+.home-logo {
+  margin: 0 auto;
+  background: url('../assets/logo.png');
+}
 </style>

@@ -3,7 +3,7 @@
  */
 
 // 获取url参数
-function getSearch (name, url = window.location.href) {
+function getSearch(name, url = window.location.href) {
   let href = url.replace(/#.*/, '')
 
   let search = /\?.*/.exec(href)
@@ -17,7 +17,7 @@ function getSearch (name, url = window.location.href) {
 }
 
 // 设置url参数
-function setSearch (name, value, url = window.location.href) {
+function setSearch(name, value, url = window.location.href) {
   let href = url.replace(/[?#].*/, '')
 
   let data = getSearch(null, url)
@@ -32,7 +32,7 @@ function setSearch (name, value, url = window.location.href) {
 }
 
 // 将对象转换为Search参数
-function toSearchParams (params) {
+function toSearchParams(params) {
   let result = []
   for (let i in params) {
     if (params.hasOwnProperty(i)) {
@@ -43,7 +43,7 @@ function toSearchParams (params) {
 }
 
 // 格式化时间
-function formatDate (dateInput, format) {
+function formatDate(dateInput, format) {
   let date = new Date(dateInput)
 
   let o = {
@@ -53,31 +53,37 @@ function formatDate (dateInput, format) {
     'm+': date.getMinutes(), // minute
     's+': date.getSeconds(), // second
     'q+': Math.floor((date.getMonth() + 3) / 3), // quarter
-    'S': date.getMilliseconds() // millisecond
+    S: date.getMilliseconds() // millisecond
   }
 
   if (/(y+)/.test(format)) {
-    format = format.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+    format = format.replace(
+      RegExp.$1,
+      (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+    )
   }
 
   for (let k in o) {
     if (new RegExp('(' + k + ')').test(format)) {
-      format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
+      format = format.replace(
+        RegExp.$1,
+        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
+      )
     }
   }
   return format
 }
 
 // 单页面高度适配
-function getResizeStyle (targetHeight = 603, needTranslate = true) {
+function getResizeStyle(targetHeight = 603, needTranslate = true) {
   if (window.innerWidth >= window.innerHeight) return
 
-  let deltaHeight = 603 - window.innerHeight * 375 / window.innerWidth
+  let deltaHeight = 603 - (window.innerHeight * 375) / window.innerWidth
   let scale = Math.min((targetHeight - deltaHeight) / targetHeight, 1)
 
   let transform = `scale(${scale})`
   if (needTranslate) {
-    let translateY = (scale - 1) / 2 * (100 / scale) + '%'
+    let translateY = ((scale - 1) / 2) * (100 / scale) + '%'
     transform += ` translateY(${translateY})`
   }
 
@@ -87,12 +93,12 @@ function getResizeStyle (targetHeight = 603, needTranslate = true) {
 }
 
 // 获取static目录文件的实际路径
-function getStaticPath (path) {
+function getStaticPath(path) {
   return process.env.BASE_URL + 'static/' + path
 }
 
 // 获取当前页面绝对路径
-function getAbsPath (url) {
+function getAbsPath(url) {
   if (url) {
     let a = document.createElement('a')
     a.href = url
@@ -103,10 +109,10 @@ function getAbsPath (url) {
 }
 
 // 加载script
-function loadScript (url, callback) {
+function loadScript(url, callback) {
   let script = document.createElement('script')
   script.src = url
-  script.onload = function () {
+  script.onload = function() {
     callback && callback()
     script.parentNode.removeChild(script)
   }
@@ -116,7 +122,7 @@ function loadScript (url, callback) {
 
 // 异步执行函数，等待上一次执行完成后才能进行下次的执行
 let asyncKeys = {}
-async function asyncExec (func, key) {
+async function asyncExec(func, key) {
   if (asyncKeys[key]) return
 
   asyncKeys[key] = true
@@ -130,8 +136,8 @@ async function asyncExec (func, key) {
 }
 
 // 异步等待函数
-async function sleep (duration) {
-  return new Promise((resolve, reject) => {
+async function sleep(duration) {
+  return new Promise(resolve => {
     setTimeout(resolve, duration)
   })
 }

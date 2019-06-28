@@ -16,7 +16,7 @@ const router = new VueRouter({
   routes
 })
 
-router.afterEach((to) => {
+router.afterEach(to => {
   // 更新标题
   let title = to.meta.title || process.env.VUE_APP_TITLE
   isNewsapp && invoke('setTitle', { title }, false)

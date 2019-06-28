@@ -6,37 +6,37 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import HomeLogo from './components/Logo'
-  import { shareWithConfig } from '@/utils/share'
+import { mapActions } from 'vuex'
+import HomeLogo from './components/Logo'
+import { shareWithConfig } from '@/utils/share'
 
-  export default {
-    name: 'home-page',
-    components: {
-      HomeLogo
+export default {
+  name: 'home-page',
+  components: {
+    HomeLogo
+  },
+  methods: {
+    sayHello() {
+      this.toast('Hello Vue!')
     },
-    methods: {
-      sayHello () {
-        this.toast('Hello Vue!')
-      },
-      doShare () {
-        shareWithConfig()
-      },
-      ...mapActions(['toast'])
-    }
+    doShare() {
+      shareWithConfig()
+    },
+    ...mapActions(['toast'])
   }
+}
 </script>
 
 <style lang="postcss" scoped>
-  .home-page {
-    height: 100vh;
+.home-page {
+  height: 100vh;
 
-    & > h5 {
-      padding: 150px 0;
-      font-size: 100px;
-      font-weight: bold;
-      line-height: 200px;
-      text-align: center;
-    }
+  & > h5 {
+    padding: 150px 0;
+    font-size: 100px;
+    font-weight: bold;
+    line-height: 200px;
+    text-align: center;
   }
+}
 </style>

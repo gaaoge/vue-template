@@ -3,7 +3,10 @@ const path = require('path')
 const apiMocker = require('mocker-api')
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? `//static.ws.126.net/163/activity/${pkg.name}/` : '',
+  publicPath:
+    process.env.NODE_ENV === 'production'
+      ? `//static.ws.126.net/163/activity/${pkg.name}/`
+      : '',
   productionSourceMap: false,
   assetsDir: 'static',
   configureWebpack: {
@@ -39,12 +42,10 @@ module.exports = {
         }
       })
 
-    config.module
-      .rule('svg')
-      .test(/\.(svg|gif|webp)(\?.*)?$/)
+    config.module.rule('svg').test(/\.(svg|gif|webp)(\?.*)?$/)
   },
   devServer: {
-    before (app) {
+    before(app) {
       apiMocker(app, path.resolve('./mock/index.js'))
     }
   },
@@ -52,10 +53,12 @@ module.exports = {
     workboxOptions: {
       importsDirectory: 'static/js',
       exclude: ['index.html'],
-      runtimeCaching: [{
-        urlPattern: /index\.html/,
-        handler: 'networkFirst'
-      }]
+      runtimeCaching: [
+        {
+          urlPattern: /index\.html/,
+          handler: 'networkFirst'
+        }
+      ]
     },
     iconPaths: {
       favicon32: 'static/share-icon.png',

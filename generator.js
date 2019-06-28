@@ -24,7 +24,7 @@ module.exports = (api, options, rootOptions) => {
         '@vue/cli-plugin-eslint': '^3.8.0',
         '@vue/cli-plugin-pwa': '^3.8.0',
         '@vue/cli-service': '^3.8.0',
-        '@vue/eslint-config-standard': '^4.0.0',
+        '@vue/eslint-config-prettier': '^4.0.1',
         'babel-eslint': '^10.0.1',
         'easeftp': '^2.0.40',
         'eslint': '^5.16.0',
@@ -37,12 +37,7 @@ module.exports = (api, options, rootOptions) => {
         'tinify-loader': '^0.2.4',
         'vue-template-compiler': '^2.6.10'
       },
-      browserslist: [
-        '> 1%',
-        'last 2 versions',
-        'Android >= 4.4',
-        'iOS >= 8'
-      ]
+      browserslist: ['> 1%', 'last 2 versions', 'Android >= 4.4', 'iOS >= 8']
     }
   })
 

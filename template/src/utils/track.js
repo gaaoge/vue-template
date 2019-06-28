@@ -1,4 +1,4 @@
-function trackEvent (event, info) {
+function trackEvent(event, info) {
   if (!window['NTESAntAnalysis']) {
     window.addEventListener('NTMReady', () => {
       trackEvent(event, info)
@@ -13,6 +13,4 @@ function trackEvent (event, info) {
   }
 }
 
-export {
-  trackEvent
-}
+export { trackEvent }

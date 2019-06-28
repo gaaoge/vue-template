@@ -7,12 +7,12 @@ const ftppass = JSON.parse(fs.readFileSync('.ftppass', 'utf-8'))
 
 const cacheDir = path.resolve('node_modules/.cache/easeftp/')
 
-function findFiles (rootPath, replacePath = '') {
+function findFiles(rootPath, replacePath = '') {
   let result = []
 
-  function finder (tempPath) {
+  function finder(tempPath) {
     let files = fs.readdirSync(tempPath)
-    files.forEach((val) => {
+    files.forEach(val => {
       let fPath = path.posix.join(tempPath, val)
       let stats = fs.statSync(fPath)
 
@@ -28,7 +28,7 @@ function findFiles (rootPath, replacePath = '') {
   return result
 }
 
-function uploadStatic () {
+function uploadStatic() {
   let allFiles = findFiles(`dist/static/`, 'static/')
 
   let cacheFiles = []
@@ -39,26 +39,28 @@ function uploadStatic () {
 
   let newFiles = allFiles.filter(item => cacheFiles.indexOf(item) === -1)
 
-  return easeftp.addFile(newFiles, {
-    debug: true,
-    ...ftppass,
-    path: 'activity/' + pkg.name,
-    cwd: path.resolve('dist')
-  }).then(() => {
-    if (!fs.existsSync(cacheDir)) {
-      cacheDir.split('/').reduce((current, next) => {
-        const full = path.resolve(current, next)
-        if (!fs.existsSync(full)) {
-          fs.mkdirSync(full)
-        }
-        return full
-      }, '/')
-    }
-    fs.writeFileSync(cachePath, JSON.stringify(allFiles))
-  })
+  return easeftp
+    .addFile(newFiles, {
+      debug: true,
+      ...ftppass,
+      path: 'activity/' + pkg.name,
+      cwd: path.resolve('dist')
+    })
+    .then(() => {
+      if (!fs.existsSync(cacheDir)) {
+        cacheDir.split('/').reduce((current, next) => {
+          const full = path.resolve(current, next)
+          if (!fs.existsSync(full)) {
+            fs.mkdirSync(full)
+          }
+          return full
+        }, '/')
+      }
+      fs.writeFileSync(cachePath, JSON.stringify(allFiles))
+    })
 }
 
-function uploadHtml (dir) {
+function uploadHtml(dir) {
   return easeftp.addFile(['index.html', 'service-worker.js'], {
     debug: true,
     ...ftppass,
@@ -67,16 +69,16 @@ function uploadHtml (dir) {
   })
 }
 
-exports['test'] = async function () {
+exports['test'] = async function() {
   await uploadStatic()
   await uploadHtml('test')
 }
 
-exports['publish'] = async function () {
+exports['publish'] = async function() {
   await uploadStatic()
   await uploadHtml('newsapp')
 }
 
-exports['clear'] = function () {
+exports['clear'] = function() {
   return del([cacheDir])
 }
