@@ -53,7 +53,7 @@ function formatDate(dateInput, format) {
     'm+': date.getMinutes(), // minute
     's+': date.getSeconds(), // second
     'q+': Math.floor((date.getMonth() + 3) / 3), // quarter
-    S: date.getMilliseconds() // millisecond
+    'S+': date.getMilliseconds() // millisecond
   }
 
   if (/(y+)/.test(format)) {
