@@ -93,10 +93,8 @@ const stores = {
      *    params: 请求参数
      *  }
      */
-    async fetch(
-      { state, dispatch },
-      { url, method = 'get', headers = {}, params }
-    ) {
+    async fetch({ state, dispatch }, payload = {}) {
+      let { url, method = 'get', headers = {}, params } = payload
       // 配置url和method
       if (
         !/^(https?:)?\/\//.test(url) &&
@@ -109,12 +107,13 @@ const stores = {
         url = url + '?' + toSearchParams(params)
       }
 
-      // 配置headers和params
+      // 配置headers和body
       !state.requestHeader && (await dispatch('getRequestHeader'))
       headers = Object.assign({}, state.requestHeader, headers)
+      let body
       if (method === 'post') {
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        params = toSearchParams(params)
+        body = toSearchParams(params)
       }
 
       // 发送fetch请求
@@ -125,14 +124,14 @@ const stores = {
             method,
             url,
             headers,
-            data: params
+            data: body
           })
           data = JSON.parse(res)
         } else {
           let res = await window.fetch(url, {
             method,
             headers,
-            body: params
+            body
           })
           data = await res.json()
         }
