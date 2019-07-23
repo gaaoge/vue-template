@@ -26,7 +26,8 @@ if (process.env.NODE_ENV === 'production') {
         'https://76981b9dcb584c2990e70dc596eeac3c@sentry.music.163.com/13',
         {
           tags: {
-            project: process.env.VUE_APP_TITLE
+            project: process.env.VUE_APP_TITLE,
+            projectId: process.env.VUE_APP_PROJECT_ID
           }
         }
       ).install()
