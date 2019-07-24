@@ -1,4 +1,4 @@
-import Home from '@/pages/home/Page'
+const Home = () => import('@/pages/home/Page')
 
 const routes = [
   { path: '*', redirect: '/home' },

@@ -21,9 +21,6 @@ module.exports = {
         cacheGroups: {
           vendors: {
             name: 'vendors'
-          },
-          common: {
-            name: 'common'
           }
         }
       }
