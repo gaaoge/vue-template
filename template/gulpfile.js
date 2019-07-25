@@ -4,6 +4,7 @@ const del = require('del')
 const path = require('path')
 const easeftp = require('easeftp/upload')
 const ftppass = JSON.parse(fs.readFileSync('.ftppass', 'utf-8'))
+const offlineTool = require('@mf2e/offline-tool')
 
 const cacheDir = path.resolve('node_modules/.cache/easeftp/')
 
@@ -69,6 +70,22 @@ function uploadHtml(dir) {
   })
 }
 
+function uploadZip() {
+  return offlineTool.build(
+    [
+      {
+        name: `activity-${pkg.name}`,
+        description: pkg.description,
+        url: [
+          `//wp.m.163.com/163/html/newsapp/activity/${pkg.name}/index.html`
+        ],
+        srcDir: './dist/index.html'
+      }
+    ],
+    'production'
+  )
+}
+
 exports['test'] = async function() {
   await uploadStatic()
   await uploadHtml('test')
@@ -81,4 +98,8 @@ exports['publish'] = async function() {
 
 exports['clear'] = function() {
   return del([cacheDir])
+}
+
+exports['offline'] = function() {
+  return uploadZip()
 }
