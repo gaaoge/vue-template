@@ -100,7 +100,7 @@ const stores = {
         !/^(https?:)?\/\//.test(url) &&
         process.env.NODE_ENV === 'production'
       ) {
-        url = process.env.VUE_APP_HOST + url
+        url = process.env.VUE_APP_BASE_URL + url
       }
       method = method.toLowerCase()
       if (method === 'get' && params) {
