@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { loadScript } from '@/utils/index'
 import { trackEvent } from '@/utils/track'
 import { register } from 'register-service-worker'
@@ -20,6 +21,10 @@ if (process.env.NODE_ENV === 'production') {
 
   // 统一性能统计及错误监控
   loadScript('//static.ws.126.net/163/frontend/antnest/NTM-BXR8M5Z5-1.js')
+  Vue.config.errorHandler = function VueErrorHandler(e) {
+    !e.code && window.Raven.captureException(e)
+    console.error(e)
+  }
 
   // 离线缓存Service Worker
   register('service-worker.js', {

@@ -136,11 +136,12 @@ const stores = {
           data = await res.json()
         }
       } catch (e) {
-        dispatch('toast', '网络请求出错')
-        throw new Error('网络请求出错')
+        let err = new Error('网络请求出错')
+        err.code = -1
+        throw err
       }
 
-      // 处理请求返回结果
+      // 处理错误返回结果
       if (data.code !== 10000) {
         switch (data.code) {
           default:

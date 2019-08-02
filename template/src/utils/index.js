@@ -35,7 +35,7 @@ function setSearch(name, value, url = window.location.href) {
 function toSearchParams(params) {
   let result = []
   for (let i in params) {
-    if (params.hasOwnProperty(i)) {
+    if (Object.prototype.hasOwnProperty.call(params, i)) {
       result.push(encodeURIComponent(i) + '=' + encodeURIComponent(params[i]))
     }
   }
