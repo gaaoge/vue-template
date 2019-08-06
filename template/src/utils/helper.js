@@ -21,9 +21,9 @@ if (process.env.NODE_ENV === 'production') {
 
   // 统一性能统计及错误监控
   loadScript('//static.ws.126.net/163/frontend/antnest/NTM-BXR8M5Z5-1.js')
-  Vue.config.errorHandler = function VueErrorHandler(e) {
-    !e.code && window.Raven.captureException(e)
-    console.error(e)
+  Vue.config.errorHandler = function(err, vm, info) {
+    window.Raven.captureException(err, { extra: info })
+    console.error(err)
   }
 
   // 离线缓存Service Worker

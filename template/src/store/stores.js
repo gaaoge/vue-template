@@ -136,9 +136,7 @@ const stores = {
           data = await res.json()
         }
       } catch (e) {
-        let err = new Error('网络请求出错')
-        err.code = -1
-        throw err
+        throw new Error('网络请求错误')
       }
 
       // 处理错误返回结果
@@ -149,7 +147,7 @@ const stores = {
             break
         }
 
-        let err = new Error(data.msg)
+        let err = new Error('网络请求错误:' + data.msg)
         err.code = data.code
         throw err
       }

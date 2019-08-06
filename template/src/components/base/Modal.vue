@@ -30,10 +30,10 @@ export default {
       return !!this.config
     },
     isScroll() {
-      return this.config.isScroll
+      return this.config && this.config.isScroll
     },
     isForce() {
-      return this.config.isForce
+      return this.config && this.config.isForce
     },
     ...mapState(['dialogConfig'])
   },
