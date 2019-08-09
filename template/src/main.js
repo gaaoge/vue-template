@@ -7,8 +7,6 @@ import App from '@/App'
 import router from '@/router'
 import store from '@/store'
 import '@/components'
-import '@/directives'
-import '@/filters'
 import '@/utils/helper'
 
 // Vue实例

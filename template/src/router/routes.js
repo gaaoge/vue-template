@@ -1,4 +1,4 @@
-const Home = () => import('@/pages/home/Page')
+const Home = () => import(/* webpackChunkName: "home" */ '@/pages/home/Page')
 
 const routes = [
   { path: '*', redirect: '/home' },

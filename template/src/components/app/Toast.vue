@@ -17,7 +17,7 @@ export default {
     content() {
       return this.toastConfig.content
     },
-    ...mapState(['toastConfig'])
+    ...mapState('app', ['toastConfig'])
   }
 }
 </script>

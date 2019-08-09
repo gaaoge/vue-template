@@ -44,7 +44,7 @@ export default {
     clickClose() {
       !this.isForce && this.closeDialog(this.dialog)
     },
-    ...mapActions(['closeDialog'])
+    ...mapActions('app', ['closeDialog'])
   }
 }
 </script>

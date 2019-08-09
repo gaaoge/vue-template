@@ -48,12 +48,22 @@ module.exports = {
   },
   pwa: {
     workboxOptions: {
-      importsDirectory: 'static/js',
+      importsDirectory: 'static/pwa',
       exclude: ['index.html'],
       runtimeCaching: [
         {
           urlPattern: /index\.html/,
           handler: 'networkFirst'
+        }
+      ]
+    },
+    manifestPath: 'static/pwa/manifest.json',
+    manifestOptions: {
+      icons: [
+        {
+          src: 'static/share-icon.png',
+          sizes: '200x200',
+          type: 'image/png'
         }
       ]
     },

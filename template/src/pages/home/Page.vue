@@ -22,7 +22,7 @@ export default {
     doShare() {
       shareWithConfig()
     },
-    ...mapActions(['toast'])
+    ...mapActions('app', ['toast'])
   }
 }
 </script>
