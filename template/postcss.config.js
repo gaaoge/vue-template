@@ -11,7 +11,8 @@ module.exports = {
     pxToViewport({
       viewportWidth: 750,
       viewportUnit: 'vmin',
-      fontViewportUnit: 'vmin'
+      fontViewportUnit: 'vmin',
+      mediaQuery: true
     })
   ]
 }
