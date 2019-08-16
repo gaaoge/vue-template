@@ -1,13 +1,11 @@
 import Vue from 'vue'
-import AppToast from './app/Toast'
-import BaseModal from './base/Modal'
 
-// 注册全局应用级组件
-Vue.component('app-toast', AppToast)
+// 自动注册全局组件
+const files = require.context('.', true, /\.vue$/)
+files.keys().forEach(key => {
+  if (key === './index.js' || !files(key).default) return
 
-// 注册全局基础组件
-Vue.component('base-modal', BaseModal)
+  Vue.component(key.replace(/(\.\/|\/|\.vue)/g, ''), files(key).default)
+})
 
-// 注册全局通用组件
-
-// 注册第三方组件
+// 注册第三方全局组件
