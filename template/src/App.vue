@@ -6,8 +6,17 @@
 </template>
 
 <script>
+import { invoke } from 'js-bridge'
+
 export default {
-  name: 'app'
+  name: 'app',
+  mounted() {
+    invoke('render', {
+      timestamp: {
+        render: Date.now()
+      }
+    })
+  }
 }
 </script>
 
