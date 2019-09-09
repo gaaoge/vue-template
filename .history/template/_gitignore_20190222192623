@@ -2,7 +2,6 @@
 node_modules/
 dist/
 .ftppass
-.history/
 
 # local env files
 .env.local
