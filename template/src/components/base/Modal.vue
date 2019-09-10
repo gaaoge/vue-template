@@ -35,7 +35,7 @@ export default {
     isForce() {
       return this.config && this.config.isForce
     },
-    ...mapState(['dialogConfig'])
+    ...mapState('app', ['dialogConfig'])
   },
   methods: {
     preventDefault(e) {
