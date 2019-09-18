@@ -5,7 +5,7 @@ const apiMocker = require('mocker-api')
 module.exports = {
   publicPath:
     process.env.NODE_ENV === 'production'
-      ? `//static.ws.126.net/163/activity/${pkg.name}/`
+      ? process.env.VUE_APP_STATIC_PATH
       : '',
   productionSourceMap: false,
   assetsDir: 'static',
