@@ -18,12 +18,9 @@ const stores = {
      *  }
      */
     async fetch({ dispatch }, payload = {}) {
-      let { url, method = 'get', headers = {}, params } = payload
+      let { url, method = 'get', params } = payload
       // 配置url和method
-      if (
-        !/^(https?:)?\/\//.test(url) &&
-        process.env.NODE_ENV === 'production'
-      ) {
+      if (!/^(https?:)?\/\//.test(url)) {
         url = process.env.VUE_APP_BASE_URL + url
       }
       method = method.toLowerCase()
@@ -31,10 +28,11 @@ const stores = {
         url = url + '?' + toSearchParams(params)
       }
 
-      // 配置headers和params
+      // 配置headers和body
+      let headers, body
       if (method === 'post') {
-        headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        params = toSearchParams(params)
+        headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
+        body = toSearchParams(params)
       }
 
       // 发送fetch请求
@@ -54,7 +52,7 @@ const stores = {
           let res = await window.fetch(url, {
             method,
             headers,
-            body: params
+            body
           })
           data = await res.json()
         }
