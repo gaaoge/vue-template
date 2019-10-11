@@ -1,7 +1,7 @@
 import Vue from 'vue'
+import { invoke } from 'js-bridge'
 import { loadScript } from '@/utils/index'
 import { trackEvent } from '@/utils/track'
-import { register } from 'register-service-worker'
 
 // 移动端console
 if (process.env.NODE_ENV === 'development' || /debug/gi.test(location.href)) {
@@ -26,8 +26,7 @@ if (process.env.NODE_ENV === 'production') {
     console.error(err)
   }
 
-  // 离线缓存Service Worker
-  register('service-worker.js', {
-    registrationOptions: { scope: './' }
-  })
+  // 客户端性能上报
+  invoke('updateFailType', { failType: 2002 })
+  invoke('render', { timestamp: { render: Date.now() } })
 }

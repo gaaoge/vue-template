@@ -28,7 +28,7 @@ module.exports = (api, options, rootOptions) => {
         'babel-eslint': '^10.0.2',
         'easeftp': '^2.0.40',
         'eslint': '^6.1.0',
-        'eslint-plugin-prettier': '3.1.0',
+        'eslint-plugin-prettier': '^3.1.0',
         'eslint-plugin-vue': '^5.2.3',
         'gulp': '^4.0.2',
         'mocker-api': '^1.7.8',
@@ -47,6 +47,21 @@ module.exports = (api, options, rootOptions) => {
       delete files[name]
     })
   })
-
   api.render('./template/default')
+
+  // 使用端内离线方案
+  if (options.offline) {
+    api.extendPackage(pkg => {
+      delete pkg.dependencies['register-service-worker']
+      delete pkg.devDependencies['@vue/cli-plugin-pwa']
+
+      return {
+        devDependencies: {
+          '@mf2e/offline-tool': '^0.0.1'
+        }
+      }
+    })
+
+    api.render('./template/offline')
+  }
 }
