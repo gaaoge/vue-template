@@ -10,9 +10,13 @@ const defaultConfig = {
   imgUrl: getStaticPath('share-icon.png'),
   link: getAbsPath(),
   onlyImg: false,
-  shareDone: () => {
+  shareDone: res => {
     // 统计
-    trackEvent('sharedone')
+    if (res && res.scene === 'favorite') {
+      trackEvent('favorite')
+    } else {
+      trackEvent('sharedone')
+    }
   }
 }
 let customConfig = {}
