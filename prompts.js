@@ -2,12 +2,7 @@ module.exports = [
   {
     name: 'name',
     type: 'input',
-    message: '项目名称(英文)'
-  },
-  {
-    name: 'title',
-    type: 'input',
-    message: '项目标题(中文)'
+    message: '项目名称(日期命名)'
   },
   {
     name: 'description',
@@ -18,6 +13,11 @@ module.exports = [
     name: 'author',
     type: 'input',
     message: '项目作者'
+  },
+  {
+    name: 'title',
+    type: 'input',
+    message: '首页标题'
   },
   {
     name: 'projectId',
@@ -31,7 +31,13 @@ module.exports = [
   },
   {
     name: 'password',
-    type: 'input',
+    type: 'password',
     message: 'corp邮箱密码'
+  },
+  {
+    name: 'offline',
+    type: 'confirm',
+    message: '是否端内离线项目？',
+    default: false
   }
 ]

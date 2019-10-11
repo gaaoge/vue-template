@@ -1,5 +1,5 @@
 VUE_APP_TITLE=<%= options.title %>
 VUE_APP_PROJECT_ID=<%= options.projectId %>
-VUE_APP_BASE_URL=https://c.m.163.com/ug/api/
+VUE_APP_BASE_URL=https://c.m.163.com/ug/api
 VUE_APP_STATIC_PATH=https://static.ws.126.net/163/activity/<%= options.name %>
 

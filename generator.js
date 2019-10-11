@@ -20,7 +20,6 @@ module.exports = (api, options, rootOptions) => {
         'whatwg-fetch': '^3.0.0'
       },
       devDependencies: {
-        '@mf2e/offline-tool': '0.0.1',
         '@vue/cli-plugin-babel': '^3.10.0',
         '@vue/cli-plugin-eslint': '^3.10.0',
         '@vue/cli-plugin-pwa': '^4.0.0-beta.3',

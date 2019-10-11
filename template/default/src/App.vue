@@ -6,22 +6,13 @@
 </template>
 
 <script>
-import { invoke } from 'js-bridge'
-
 export default {
-  name: 'app',
-  mounted() {
-    invoke('render', {
-      timestamp: {
-        render: Date.now()
-      }
-    })
-  }
-}
+  name: "app"
+};
 </script>
 
 <style lang="postcss">
-@import '~minireset.css';
+@import "~minireset.css";
 
 body {
   font: 24px/1.5 sans-serif;
