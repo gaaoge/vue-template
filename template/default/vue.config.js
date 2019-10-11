@@ -1,4 +1,3 @@
-const pkg = require('./package.json')
 const path = require('path')
 const apiMocker = require('mocker-api')
 
@@ -53,7 +52,7 @@ module.exports = {
       runtimeCaching: [
         {
           urlPattern: /index\.html/,
-          handler: 'networkFirst'
+          handler: 'NetworkFirst'
         }
       ]
     },

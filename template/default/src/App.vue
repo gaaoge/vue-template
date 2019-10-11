@@ -7,12 +7,12 @@
 
 <script>
 export default {
-  name: "app"
+  name: 'app'
 };
 </script>
 
 <style lang="postcss">
-@import "~minireset.css";
+@import '~minireset.css';
 
 body {
   font: 24px/1.5 sans-serif;
