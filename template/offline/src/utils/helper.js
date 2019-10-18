@@ -27,6 +27,10 @@ if (process.env.NODE_ENV === 'production') {
   }
 
   // 客户端性能上报
-  invoke('updateFailType', { failType: 2002 })
-  invoke('render', { timestamp: { render: Date.now() } })
+  if (isAvailable('updateFailType')) {
+    invoke('updateFailType', { failType: 2002 })
+  }
+  if (isAvailable('render')) {
+    invoke('render', { timestamp: { render: Date.now() } })
+  }
 }
