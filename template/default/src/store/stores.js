@@ -31,7 +31,9 @@ const stores = {
       // 配置headers和body
       let headers, body
       if (method === 'post') {
-        headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
+        headers = {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        }
         body = toSearchParams(params)
       }
 
