@@ -43,7 +43,7 @@ const stores = {
             method,
             url,
             headers,
-            data: params
+            data: body
           })
           data = JSON.parse(res)
         } else {
