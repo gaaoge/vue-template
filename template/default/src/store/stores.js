@@ -1,5 +1,5 @@
 import 'whatwg-fetch'
-import { invoke, isAvailable } from '@mf2e/bridge'
+import { invoke, isAvailable } from '@mf2e/js-bridge'
 import { toSearchParams } from '@/utils'
 import { isNewsapp } from '@/utils/detect'
 import modules from './modules'
