@@ -1,5 +1,5 @@
 import 'whatwg-fetch'
-import { invoke, isAvailable } from 'js-bridge'
+import { invoke, isAvailable } from '@mf2e/bridge'
 import { toSearchParams } from '@/utils'
 import { isNewsapp } from '@/utils/detect'
 import modules from './modules'
@@ -11,7 +11,7 @@ const stores = {
      * 发送fetch请求
      * @param {Object} payload
      *  {
-     *    url: 请求url,
+     *    url: 请求url
      *    method: 请求方法（默认get）
      *    headers: 请求头
      *    params: 请求参数
@@ -59,6 +59,7 @@ const stores = {
           data = await res.json()
         }
       } catch (e) {
+        console.error(e)
         throw new Error('网络请求错误')
       }
 

@@ -1,14 +1,14 @@
+import NewsappShare from '@newsapp-activity/newsapp-share'
 import { getAbsPath, getStaticPath } from '@/utils/index'
 import { trackEvent } from '@/utils/track'
-import NewsappShare from 'newsapp-share'
-import * as jsBridge from 'js-bridge'
+import * as jsBridge from '@mf2e/js-bridge'
 
 window.jsBridge = jsBridge
 const defaultConfig = {
   title: '默认分享标题',
   desc: '默认分享描述',
   imgUrl: getStaticPath('share-icon.png'),
-  link: getAbsPath(),
+  link: getAbsPath() + '?spss=share',
   onlyImg: false,
   shareDone: res => {
     // 统计

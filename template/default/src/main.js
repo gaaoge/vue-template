@@ -2,12 +2,12 @@
  * Created by GG on 2016/11/30.
  */
 
+import '@/utils/helper'
+import '@/components'
 import Vue from 'vue'
-import App from '@/App'
 import router from '@/router'
 import store from '@/store'
-import '@/components'
-import '@/utils/helper'
+import App from '@/App'
 
 // Vue实例
 window.vm = new Vue({

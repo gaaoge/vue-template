@@ -9,12 +9,6 @@ module.exports = {
   productionSourceMap: false,
   assetsDir: 'static',
   configureWebpack: {
-    resolve: {
-      alias: {
-        'js-bridge': '@mf2e/js-bridge',
-        'newsapp-share': '@newsapp-activity/newsapp-share'
-      }
-    },
     optimization: {
       splitChunks: {
         cacheGroups: {

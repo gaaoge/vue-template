@@ -29,4 +29,7 @@ router.afterEach(to => {
   trackEvent('pageview' + to.path.replace(/\//g, '_'))
 })
 
+// 默认页面统计
+trackEvent('pageview')
+
 export default router
