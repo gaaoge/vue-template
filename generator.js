@@ -51,10 +51,7 @@ module.exports = (api, options, rootOptions) => {
 
   // 使用端内离线方案
   if (options.offline) {
-    api.extendPackage(pkg => {
-      delete pkg.dependencies['register-service-worker']
-      delete pkg.devDependencies['@vue/cli-plugin-pwa']
-
+    api.extendPackage(() => {
       return {
         devDependencies: {
           '@mf2e/offline-tool': '^0.0.1'

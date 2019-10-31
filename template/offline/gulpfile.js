@@ -61,7 +61,7 @@ function uploadStatic() {
 }
 
 function uploadHtml(dir) {
-  return easeftp.addFile(['index.html'], {
+  return easeftp.addFile(['index.html', 'service-worker.js'], {
     debug: true,
     ...ftppass,
     path: `html/${dir}/activity/${pkg.name}`,
