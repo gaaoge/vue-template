@@ -40,6 +40,7 @@ module.exports = {
     }
   },
   pwa: {
+    name: process.env.VUE_APP_TITLE,
     workboxOptions: {
       importsDirectory: 'static/pwa',
       exclude: ['index.html'],
@@ -51,6 +52,7 @@ module.exports = {
       ]
     },
     manifestPath: 'static/pwa/manifest.json',
+    manifestCrossorigin: true,
     manifestOptions: {
       icons: [
         {
