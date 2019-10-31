@@ -10,9 +10,9 @@ module.exports = (api, options, rootOptions) => {
         'lint': 'vue-cli-service lint'
       },
       dependencies: {
-        '@mf2e/js-bridge': '^1.0.7',
-        '@newsapp-activity/newsapp-share': '^1.6.0',
-        'minireset.css': '^0.0.5',
+        '@mf2e/js-bridge': '^1.0.8',
+        '@newsapp-activity/newsapp-share': '^1.6.1',
+        'minireset.css': '^0.0.6',
         'register-service-worker': '^1.6.2',
         'vue': '^2.6.10',
         'vue-router': '^3.1.3',
@@ -22,17 +22,17 @@ module.exports = (api, options, rootOptions) => {
       devDependencies: {
         '@vue/cli-plugin-babel': '^3.12.0',
         '@vue/cli-plugin-eslint': '^3.12.0',
-        '@vue/cli-plugin-pwa': '^4.0.0-beta.3',
+        '@vue/cli-plugin-pwa': '^4.0.5',
         '@vue/cli-service': '^3.12.0',
         '@vue/eslint-config-prettier': '^5.0.0',
         'babel-eslint': '^10.0.3',
         'easeftp': '^2.0.40',
-        'eslint': '^6.5.1',
+        'eslint': '^6.6.0',
         'eslint-plugin-prettier': '^3.1.1',
         'eslint-plugin-vue': '^5.2.3',
         'gulp': '^4.0.2',
         'mocker-api': '^1.9.0',
-        'postcss-autosize': '^1.0.1',
+        'postcss-autosize': '^1.0.2',
         'postcss-preset-env': '^6.7.0',
         'postcss-px-to-viewport': '^1.1.1',
         'tinify-loader': '^0.2.4',
@@ -54,7 +54,7 @@ module.exports = (api, options, rootOptions) => {
     api.extendPackage(() => {
       return {
         devDependencies: {
-          '@mf2e/offline-tool': '^0.0.1'
+          '@mf2e/offline-tool': '^0.0.5'
         }
       }
     })
