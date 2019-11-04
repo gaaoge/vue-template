@@ -112,7 +112,6 @@ function getAbsPath(url) {
 function loadScript(url, callback) {
   let script = document.createElement('script')
   script.src = url
-  script.async = 'async'
   script.onload = function() {
     callback && callback()
     script.parentNode.removeChild(script)
