@@ -2,10 +2,7 @@ const path = require('path')
 const apiMocker = require('mocker-api')
 
 module.exports = {
-  publicPath:
-    process.env.NODE_ENV === 'production'
-      ? process.env.VUE_APP_STATIC_PATH
-      : '',
+  publicPath: process.env.VUE_APP_PUBLIC_PATH,
   productionSourceMap: false,
   assetsDir: 'static',
   configureWebpack: {
@@ -33,8 +30,15 @@ module.exports = {
       })
 
     config.module.rule('svg').test(/\.(svg|gif|webp)(\?.*)?$/)
+
+    config.plugin('prefetch').tap(options => {
+      options[0].fileBlacklist = options[0].fileBlacklist || []
+      options[0].fileBlacklist.push(/home.*\.(js|css)$/)
+      return options
+    })
   },
   devServer: {
+    disableHostCheck: true,
     before(app) {
       apiMocker(app, path.resolve('./mock/index.js'))
     }
@@ -56,7 +60,7 @@ module.exports = {
     manifestOptions: {
       icons: [
         {
-          src: 'static/share-icon.png',
+          src: '../share-icon.png',
           sizes: '200x200',
           type: 'image/png'
         }

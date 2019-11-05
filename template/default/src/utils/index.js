@@ -94,7 +94,7 @@ function getResizeStyle(targetHeight = 603, needTranslate = true) {
 
 // 获取static目录文件的实际路径
 function getStaticPath(path) {
-  return process.env.VUE_APP_STATIC_PATH + '/static/' + path
+  return process.env.VUE_APP_PUBLIC_PATH + '/static/' + path
 }
 
 // 获取当前页面绝对路径
