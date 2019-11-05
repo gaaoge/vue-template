@@ -12,6 +12,7 @@ module.exports = (api, options, rootOptions) => {
       dependencies: {
         '@mf2e/js-bridge': '^1.0.8',
         '@newsapp-activity/newsapp-share': '^1.6.1',
+        'core-js': '^3.3.2',
         'minireset.css': '^0.0.6',
         'register-service-worker': '^1.6.2',
         'vue': '^2.6.10',
@@ -20,10 +21,12 @@ module.exports = (api, options, rootOptions) => {
         'whatwg-fetch': '^3.0.0'
       },
       devDependencies: {
-        '@vue/cli-plugin-babel': '^3.12.0',
-        '@vue/cli-plugin-eslint': '^3.12.0',
+        '@vue/cli-plugin-babel': '^4.0.5',
+        '@vue/cli-plugin-eslint': '^4.0.5',
         '@vue/cli-plugin-pwa': '^4.0.5',
-        '@vue/cli-service': '^3.12.0',
+        '@vue/cli-plugin-router': '^4.0.5',
+        '@vue/cli-plugin-vuex': '^4.0.5',
+        '@vue/cli-service': '^4.0.5',
         '@vue/eslint-config-prettier': '^5.0.0',
         'babel-eslint': '^10.0.3',
         'easeftp': '^2.0.40',
@@ -35,6 +38,7 @@ module.exports = (api, options, rootOptions) => {
         'postcss-autosize': '^1.0.2',
         'postcss-preset-env': '^6.7.0',
         'postcss-px-to-viewport': '^1.1.1',
+        'prettier': '^1.18.2',
         'tinify-loader': '^0.2.4',
         'vue-template-compiler': '^2.6.10'
       },
