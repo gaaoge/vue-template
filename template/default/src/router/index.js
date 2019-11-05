@@ -4,7 +4,7 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { invoke } from 'js-bridge'
+import { invoke } from '@mf2e/js-bridge'
 import { isNewsapp } from '@/utils/detect'
 import { updateShareConfig } from '@/utils/share'
 import { trackEvent } from '@/utils/track'
