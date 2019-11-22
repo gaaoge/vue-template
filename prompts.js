@@ -35,6 +35,12 @@ module.exports = [
     message: 'corp邮箱密码'
   },
   {
+    name: 'dragonbones',
+    type: 'confirm',
+    message: '是否使用dragonbones龙骨动画？',
+    default: false
+  },
+  {
     name: 'offline',
     type: 'confirm',
     message: '是否端内离线项目？',
