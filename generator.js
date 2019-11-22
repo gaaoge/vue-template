@@ -64,7 +64,7 @@ module.exports = (api, options, rootOptions) => {
       }
     })
 
-    api.render('./template/offline')
+    api.render('./template/dragonbones')
   }
 
   // 使用端内离线方案
