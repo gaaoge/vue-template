@@ -8,8 +8,7 @@ module.exports = (api, options, rootOptions) => {
       author: options.author,
       scripts: {
         'lint': 'vue-cli-service lint',
-        'test': 'node uploader.js --test',
-        'publish': 'node uploader.js --publish'
+        'upload': 'node uploader.js'
       },
       dependencies: {
         '@mf2e/js-bridge': '^1.0.9',

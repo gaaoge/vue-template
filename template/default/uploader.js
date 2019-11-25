@@ -1,8 +1,12 @@
 const pkg = require('./package.json')
 const fs = require('fs')
 const path = require('path')
+const chalk = require('chalk')
+const inquirer = require('inquirer')
 const Uploader = require('@newap/uploader')
+
 const cacheDir = path.resolve('node_modules/.cache/uploader/')
+let uploadEnv
 
 function findFiles(rootPath, replacePath = '') {
   let result = []
@@ -53,7 +57,7 @@ async function uploadStatic() {
 
 async function uploadHtml() {
   let html = /index\.html/
-  if (process.argv[2] === '--test') {
+  if (uploadEnv === 'test') {
     fs.copyFileSync('./dist/index.html', './dist/test.html')
     html = /test\.html/
   }
@@ -67,6 +71,25 @@ async function uploadHtml() {
 }
 
 async function upload() {
+  let data = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'env',
+      message: '请选择:',
+      choices: [
+        {
+          name: chalk.bold.yellow('测试环境'),
+          value: 'test'
+        },
+        {
+          name: chalk.bold.yellow('线上环境'),
+          value: 'publish'
+        }
+      ]
+    }
+  ])
+  uploadEnv = data.env
+
   await uploadStatic()
   await uploadHtml()
 }
