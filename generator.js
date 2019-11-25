@@ -7,7 +7,9 @@ module.exports = (api, options, rootOptions) => {
       description: options.description,
       author: options.author,
       scripts: {
-        'lint': 'vue-cli-service lint'
+        'lint': 'vue-cli-service lint',
+        'test': 'node uploader.js --test',
+        'publish': 'node uploader.js --publish'
       },
       dependencies: {
         '@mf2e/js-bridge': '^1.0.9',
@@ -21,6 +23,7 @@ module.exports = (api, options, rootOptions) => {
         'whatwg-fetch': '^3.0.0'
       },
       devDependencies: {
+        '@newap/uploader': '^2.2.15',
         '@vue/cli-plugin-babel': '^4.0.5',
         '@vue/cli-plugin-eslint': '^4.0.5',
         '@vue/cli-plugin-pwa': '^4.0.5',
@@ -29,11 +32,9 @@ module.exports = (api, options, rootOptions) => {
         '@vue/cli-service': '^4.0.5',
         '@vue/eslint-config-prettier': '^6.0.0',
         'babel-eslint': '^10.0.3',
-        'easeftp': '^2.0.40',
         'eslint': '^6.6.0',
         'eslint-plugin-prettier': '^3.1.1',
         'eslint-plugin-vue': '^6.0.1',
-        'gulp': '^4.0.2',
         'mocker-api': '^1.9.0',
         'postcss-autosize': '^1.0.2',
         'postcss-preset-env': '^6.7.0',
