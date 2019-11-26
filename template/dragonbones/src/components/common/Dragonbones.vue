@@ -88,7 +88,6 @@ export default {
   methods: {
     async load() {
       let loader = new PIXI.Loader()
-
       loader.add(this.skeJSON, `${this.pathPrefix}_ske.json`)
       if (this.texCount > 1) {
         for (let i = 0; i < this.texCount; i++) {
@@ -138,15 +137,15 @@ export default {
       })
     },
     async create() {
+      await this.build()
       this.app = new PIXI.Application({
         view: this.$el,
         width: this.width,
         height: this.height,
         transparent: true
       })
-
-      await this.build()
       this.app.stage.addChild(this.display)
+      this.app.renderer.view.style['touch-action'] = 'auto'
       this.app.renderer.plugins.interaction.autoPreventDefault = false
       this.autoPlay && this.display.animation.play(this.animationName)
     },
