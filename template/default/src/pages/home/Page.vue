@@ -1,19 +1,19 @@
 <template>
   <div class="home-page">
-    <h5 @click="sayHello">Hello Vue!</h5>
-    <home-logo @click.native="doShare"></home-logo>
+    <h5 class="title" @click="sayHello">Hello Vue!</h5>
+    <vue-logo @click.native="doShare"></vue-logo>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import HomeLogo from './components/Logo'
+import VueLogo from './components/VueLogo'
 import { shareWithConfig } from '@/utils/share'
 
 export default {
   name: 'home-page',
   components: {
-    HomeLogo
+    VueLogo
   },
   methods: {
     sayHello() {
@@ -30,13 +30,13 @@ export default {
 <style lang="postcss" scoped>
 .home-page {
   height: 100vh;
+}
 
-  & > h5 {
-    padding: 150px 0;
-    font-size: 100px;
-    font-weight: bold;
-    line-height: 200px;
-    text-align: center;
-  }
+.title {
+  padding: 150px 0;
+  font-size: 100px;
+  font-weight: bold;
+  line-height: 200px;
+  text-align: center;
 }
 </style>

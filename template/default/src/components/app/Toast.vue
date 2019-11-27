@@ -10,6 +10,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  name: 'app-toast',
   computed: {
     isShow() {
       return this.toastConfig.isShow
