@@ -52,13 +52,14 @@ export default {
 <style lang="postcss" scoped>
 .base-modal {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: fixed;
   top: 0;
   bottom: 0;
   width: 750px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 9999;
 }
 
