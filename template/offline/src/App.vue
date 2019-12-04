@@ -8,11 +8,9 @@
 <script>
 import { renderStart, renderEnd } from '@/utils/offline'
 
+renderStart()
 export default {
   name: 'app',
-  beforeCreate() {
-    renderStart()
-  },
   mounted() {
     renderEnd()
   }
