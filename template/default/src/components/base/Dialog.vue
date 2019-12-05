@@ -43,11 +43,11 @@ export default {
 @keyframes dialog {
   0% {
     opacity: 0;
-    transform: scale(0.6);
+    transform: scale3d(0.6);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale3d(1);
   }
 }
 
