@@ -26,7 +26,7 @@ const files = findFiles(`mock`)
 const proxy = {}
 
 files.forEach(file => {
-  if (file === '/index.js' || !files(key).default) return
+  if (file === '/index.js') return
 
   let path = file.replace('.json', '')
   proxy[`${path}`] = require(`.${file}`)
