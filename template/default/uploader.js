@@ -19,7 +19,7 @@ function findFiles(rootPath, replacePath = '') {
 
       if (stats.isDirectory()) {
         finder(fPath)
-      } else if (stats.isFile()) {
+      } else if (stats.isFile() && !/DS_Store/.test(fPath)) {
         result.push(fPath.replace(rootPath, replacePath))
       }
     })
