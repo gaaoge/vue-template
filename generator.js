@@ -12,7 +12,7 @@ module.exports = (api, options, rootOptions) => {
       },
       dependencies: {
         '@mf2e/js-bridge': '^1.0.9',
-        '@newsapp-activity/newsapp-share': '^1.6.1',
+        '@newsapp-activity/newsapp-share': '^1.6.3',
         'core-js': '^3.4.2',
         'minireset.css': '^0.0.6',
         'register-service-worker': '^1.6.2',

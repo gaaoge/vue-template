@@ -10,6 +10,11 @@ const defaultConfig = {
   imgUrl: getStaticPath('share-icon.png'),
   link: getAbsPath() + '?spss=share',
   onlyImg: false,
+  shareBefore: () => {
+    setTimeout(() => {
+      updateShareConfig(customConfig)
+    }, 300)
+  },
   shareDone: res => {
     // 统计
     if (res && res.scene === 'favorite') {
