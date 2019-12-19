@@ -144,7 +144,7 @@ async function sleep(duration) {
 
 // 扩展函数方法
 function expandFunc(target, origin) {
-  target = () => {
+  return () => {
     target && target.apply(this, arguments)
     origin && origin.apply(this, arguments)
   }

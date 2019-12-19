@@ -25,16 +25,16 @@ const defaultConfig = {
 let customConfig = {}
 
 function updateShareConfig(config = {}) {
-  expandFunc(config.shareBefore, defaultConfig.shareBefore)
-  expandFunc(config.shareDone, defaultConfig.shareDone)
+  config.shareBefore = expandFunc(config.shareBefore, defaultConfig.shareBefore)
+  config.shareDone = expandFunc(config.shareDone, defaultConfig.shareDone)
 
   customConfig = Object.assign({}, defaultConfig, config)
   NewsappShare.config(customConfig)
 }
 
 function shareWithConfig(config = {}, tag) {
-  expandFunc(config.shareBefore, defaultConfig.shareBefore)
-  expandFunc(config.shareDone, defaultConfig.shareDone)
+  config.shareBefore = expandFunc(config.shareBefore, defaultConfig.shareBefore)
+  config.shareDone = expandFunc(config.shareDone, defaultConfig.shareDone)
 
   NewsappShare.config(config)
   NewsappShare.show(tag)
