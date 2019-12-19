@@ -142,6 +142,14 @@ async function sleep(duration) {
   })
 }
 
+// 扩展函数方法
+function expandFunc(target, origin) {
+  target = () => {
+    target && target.apply(this, arguments)
+    origin && origin.apply(this, arguments)
+  }
+}
+
 export {
   getSearch,
   setSearch,
@@ -152,5 +160,6 @@ export {
   getAbsPath,
   loadScript,
   asyncExec,
-  sleep
+  sleep,
+  expandFunc
 }

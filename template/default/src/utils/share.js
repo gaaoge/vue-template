@@ -1,5 +1,5 @@
 import NewsappShare from '@newsapp-activity/newsapp-share'
-import { getAbsPath, getStaticPath } from '@/utils/index'
+import { getAbsPath, getStaticPath, expandFunc } from '@/utils'
 import { trackEvent } from '@/utils/track'
 import * as jsBridge from '@mf2e/js-bridge'
 
@@ -11,12 +11,10 @@ const defaultConfig = {
   link: getAbsPath() + '?spss=share',
   onlyImg: false,
   shareBefore: () => {
-    setTimeout(() => {
-      updateShareConfig(customConfig)
-    }, 300)
+    trackEvent('click_share')
+    updateShareConfig(customConfig)
   },
   shareDone: res => {
-    // 统计
     if (res && res.scene === 'favorite') {
       trackEvent('favorite')
     } else {
@@ -27,30 +25,19 @@ const defaultConfig = {
 let customConfig = {}
 
 function updateShareConfig(config = {}) {
-  const origin = config.shareDone
-  config.shareDone = () => {
-    origin && origin.apply(this, arguments)
-    defaultConfig.shareDone.apply(this, arguments)
-  }
+  expandFunc(config.shareBefore, defaultConfig.shareBefore)
+  expandFunc(config.shareDone, defaultConfig.shareDone)
 
   customConfig = Object.assign({}, defaultConfig, config)
   NewsappShare.config(customConfig)
 }
 
 function shareWithConfig(config = {}, tag) {
-  const origin = config.shareDone
-  config.shareDone = () => {
-    origin && origin.apply(this, arguments)
-    defaultConfig.shareDone.apply(this, arguments)
-    updateShareConfig(customConfig)
-  }
+  expandFunc(config.shareBefore, defaultConfig.shareBefore)
+  expandFunc(config.shareDone, defaultConfig.shareDone)
 
   NewsappShare.config(config)
   NewsappShare.show(tag)
-  tag &&
-    setTimeout(() => {
-      updateShareConfig(customConfig)
-    }, 300)
 }
 
 export { updateShareConfig, shareWithConfig }
