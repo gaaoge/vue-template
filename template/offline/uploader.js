@@ -38,6 +38,7 @@ async function uploadStatic() {
     cacheFiles = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
   }
 
+  console.log(chalk.bold.yellow('正在上传static...'))
   await new Uploader({
     dir: './dist/static',
     target: `activity/${pkg.name}/static`,
@@ -67,6 +68,7 @@ async function uploadHtml() {
   )
   include.push(/service-worker\.js/)
 
+  console.log(chalk.bold.yellow('正在上传html...'))
   await new Uploader({
     dir: './dist',
     target: `html/newsapp/activity/${pkg.name}`,
@@ -77,6 +79,7 @@ async function uploadHtml() {
 
 async function uploadZip() {
   if (uploadConfig.targets.includes('index')) {
+    console.log(chalk.bold.yellow('正在上传zip...'))
     await offlineTool.build(
       [
         {
@@ -119,11 +122,8 @@ async function upload() {
     }
   ])
 
-  console.log(chalk.bold.yellow('正在上传static...'))
   await uploadStatic()
-  console.log(chalk.bold.yellow('正在上传html...'))
   await uploadHtml()
-  console.log(chalk.bold.yellow('正在上传zip...'))
   await uploadZip()
 }
 

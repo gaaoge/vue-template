@@ -37,6 +37,7 @@ async function uploadStatic() {
     cacheFiles = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
   }
 
+  console.log(chalk.bold.yellow('正在上传static...'))
   await new Uploader({
     dir: './dist/static',
     target: `activity/${pkg.name}/static`,
@@ -66,6 +67,7 @@ async function uploadHtml() {
   )
   include.push(/service-worker\.js/)
 
+  console.log(chalk.bold.yellow('正在上传html...'))
   await new Uploader({
     dir: './dist',
     target: `page/newsapp/activity/${pkg.name}`,
@@ -99,9 +101,7 @@ async function upload() {
     }
   ])
 
-  console.log(chalk.bold.yellow('正在上传static...'))
   await uploadStatic()
-  console.log(chalk.bold.yellow('正在上传html...'))
   await uploadHtml()
 }
 
