@@ -11,6 +11,9 @@ module.exports = {
         cacheGroups: {
           vendors: {
             name: 'vendors'
+          },
+          common: {
+            name: 'common'
           }
         }
       }
@@ -30,12 +33,6 @@ module.exports = {
       })
 
     config.module.rule('svg').test(/\.(svg|gif|webp)(\?.*)?$/)
-
-    config.plugin('prefetch').tap(options => {
-      options[0].fileBlacklist = options[0].fileBlacklist || []
-      options[0].fileBlacklist.push(/home.*\.(js|css)$/)
-      return options
-    })
   },
   devServer: {
     disableHostCheck: true,

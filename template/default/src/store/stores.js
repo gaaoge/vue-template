@@ -21,7 +21,10 @@ const stores = {
       let { url, method = 'get', params } = payload
       // 配置url和method
       if (!/^(https?:)?\/\//.test(url)) {
-        url = process.env.VUE_APP_BASE_URL + url
+        let host = /test\.html$/.test(location.pathname)
+          ? process.env.VUE_APP_TEST_HOST
+          : process.env.VUE_APP_BASE_HOST
+        url = host + url
       }
       method = method.toLowerCase()
       if (method === 'get' && params) {
