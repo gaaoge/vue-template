@@ -1,7 +1,7 @@
 <template>
   <transition name="app-toast">
     <div v-if="isShow" class="app-toast">
-      <span>{{ content }}</span>
+      <div class="toast">{{ content }}</div>
     </div>
   </transition>
 </template>
@@ -25,24 +25,15 @@ export default {
 
 <style lang="postcss" scoped>
 .app-toast {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -150%, 0);
+  top: 0;
+  bottom: 0;
+  width: 750px;
+  pointer-events: none;
   z-index: 10000;
-
-  & span {
-    display: block;
-    max-width: 600px;
-    padding: 30px;
-    color: #fff;
-    font-size: 30px;
-    line-height: 50px;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.75);
-    white-space: pre-wrap;
-    text-align: center;
-  }
 }
 
 .app-toast-enter-active,
@@ -50,12 +41,33 @@ export default {
   transition-duration: 0.3s;
 }
 
-.app-toast-enter {
-  opacity: 0;
-  transform: translate3d(-50%, -150%, 0) scale(0.8);
-}
-
+.app-toast-enter,
 .app-toast-leave-to {
   opacity: 0;
+}
+
+.toast {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin-top: -100px;
+  padding: 30px;
+  color: #fff;
+  font-size: 30px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  white-space: pre-wrap;
+  text-align: center;
+  animation: toast 0.3s both;
+}
+
+@keyframes toast {
+  0% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

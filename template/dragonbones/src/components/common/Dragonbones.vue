@@ -3,12 +3,21 @@
 </template>
 
 <script>
-import * as PIXI from 'pixi.js'
 import { getStaticPath } from '@/utils'
 
-window.PIXI = PIXI
-const dragonbones = require('pixi5-dragonbones')
-const factory = dragonbones.PixiFactory.factory
+let PIXI, dragonbones, factory
+async function init() {
+  if (!PIXI) {
+    PIXI = window.PIXI = await import(
+      /* webpackChunkName: "pixi" */ 'pixi.js-legacy'
+    )
+    dragonbones = await import(
+      /* webpackChunkName: "pixi" */ 'pixi5-dragonbones'
+    )
+    factory = dragonbones.PixiFactory.factory
+  }
+}
+init()
 
 export default {
   name: 'common-dragonbones',
@@ -25,16 +34,6 @@ export default {
       type: [String, Number],
       default: 0
     },
-    armatureName: {
-      type: String,
-      default() {
-        return this.name
-      }
-    },
-    animationName: {
-      type: String,
-      default: ''
-    },
     texCount: {
       type: [String, Number],
       default: 1
@@ -43,9 +42,11 @@ export default {
       type: Boolean,
       default: true
     },
-    stopProgress: {
-      type: [String, Number],
-      default: 0
+    config: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
   data() {
@@ -66,20 +67,48 @@ export default {
     },
     pathPrefix() {
       return getStaticPath(`dragonbones/${this.name}`)
+    },
+    armatureName() {
+      return this.config.armatureName || this.name
+    },
+    armatureSlots() {
+      return this.config.armatureSlots || []
+    },
+    animationName() {
+      return this.config.animationName || ''
+    },
+    animationProgress() {
+      return this.config.animationProgress || 0
     }
   },
   watch: {
+    async armatureName() {
+      if (this.display) {
+        this.app.stage.removeChild(this.display)
+        this.display.destroy()
+        await this.build()
+        this.app.stage.addChild(this.display)
+        this.autoPlay && this.display.animation.play(this.animationName)
+      }
+    },
+    armatureSlots() {
+      this.armatureSlots.forEach(item => {
+        let slot = this.display.armature.getSlot(item.name)
+        slot && (slot.visible = item.visible)
+      })
+    },
     animationName() {
       this.display.animation.play(this.animationName)
     },
-    stopProgress() {
+    animationProgress() {
       this.display.animation.gotoAndStopByProgress(
         this.animationName,
-        this.stopProgress
+        this.animationProgress
       )
     }
   },
-  mounted() {
+  async mounted() {
+    await init()
     this.create()
   },
   destroyed() {
@@ -125,6 +154,11 @@ export default {
     async build() {
       if (!factory.getDragonBonesData(this.name)) await this.parse()
       this.display = factory.buildArmatureDisplay(this.armatureName, this.name)
+      this.armatureSlots.forEach(item => {
+        let slot = this.display.armature.getSlot(item.name)
+        slot && (slot.visible = item.visible)
+      })
+
       const events = [
         dragonbones.EventObject.START,
         dragonbones.EventObject.LOOP_COMPLETE,

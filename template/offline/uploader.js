@@ -7,7 +7,7 @@ const Uploader = require('@newap/uploader')
 const offlineTool = require('@mf2e/offline-tool')
 
 const cacheDir = path.resolve('node_modules/.cache/uploader/')
-let uploadEnv
+let uploadConfig = {}
 
 function findFiles(rootPath, replacePath = '') {
   let result = []
@@ -20,7 +20,7 @@ function findFiles(rootPath, replacePath = '') {
 
       if (stats.isDirectory()) {
         finder(fPath)
-      } else if (stats.isFile()) {
+      } else if (stats.isFile() && !/DS_Store/.test(fPath)) {
         result.push(fPath.replace(rootPath, replacePath))
       }
     })
@@ -34,7 +34,7 @@ async function uploadStatic() {
   let allFiles = findFiles(`dist/static/`)
   let cacheFiles = []
   let cachePath = `${cacheDir}/cache-files.json`
-  if (fs.existsSync(cachePath)) {
+  if (fs.existsSync(cachePath) && !uploadConfig.noCache) {
     cacheFiles = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
   }
 
@@ -57,22 +57,26 @@ async function uploadStatic() {
 }
 
 async function uploadHtml() {
-  let html = /index\.html/
-  if (uploadEnv === 'test') {
+  if (uploadConfig.targets.length === 0) return
+  if (uploadConfig.targets.includes('test')) {
     fs.copyFileSync('./dist/index.html', './dist/test.html')
-    html = /test\.html/
   }
+
+  let include = uploadConfig.targets.map(
+    target => new RegExp(`${target}\.html`)
+  )
+  include.push(/service-worker\.js/)
 
   await new Uploader({
     dir: './dist',
     target: `html/newsapp/activity/${pkg.name}`,
-    include: [html, /service-worker\.js/],
+    include,
     htmlDefaultPath: false
   }).run()
 }
 
 async function uploadZip() {
-  if (uploadEnv === 'publish') {
+  if (uploadConfig.targets.includes('index')) {
     await offlineTool.build(
       [
         {
@@ -81,7 +85,8 @@ async function uploadZip() {
           url: [
             `//wp.m.163.com/163/html/newsapp/activity/${pkg.name}/index.html`
           ],
-          srcDir: './dist/index.html'
+          srcDir: './dist/index.html',
+          apiList: []
         }
       ],
       'production'
@@ -90,27 +95,35 @@ async function uploadZip() {
 }
 
 async function upload() {
-  let data = await inquirer.prompt([
+  uploadConfig = await inquirer.prompt([
     {
-      type: 'list',
-      name: 'env',
-      message: '请选择:',
+      type: 'checkbox',
+      name: 'targets',
+      message: '请选择目标:',
       choices: [
         {
-          name: chalk.bold.yellow('测试环境'),
+          name: chalk.bold.yellow('测试地址'),
           value: 'test'
         },
         {
-          name: chalk.bold.yellow('线上环境'),
-          value: 'publish'
+          name: chalk.bold.yellow('正式地址'),
+          value: 'index'
         }
       ]
+    },
+    {
+      type: 'confirm',
+      name: 'noCache',
+      message: '是否清缓存上传？',
+      default: false
     }
   ])
-  uploadEnv = data.env
 
+  console.log(chalk.bold.yellow('正在上传static...'))
   await uploadStatic()
+  console.log(chalk.bold.yellow('正在上传html...'))
   await uploadHtml()
+  console.log(chalk.bold.yellow('正在上传zip...'))
   await uploadZip()
 }
 
