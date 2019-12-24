@@ -56,11 +56,11 @@ module.exports = (api, options, rootOptions) => {
   api.render('./template/default')
 
   // 使用dragonbones龙骨动画
-  if (options.dragonbones) {
+  if (options.extends.includes('dragonbones')) {
     api.extendPackage(() => {
       return {
         dependencies: {
-          'pixi.js': '^5.2.0',
+          'pixi.js-legacy': '^5.2.0',
           'pixi5-dragonbones': '^5.7.0'
         }
       }
@@ -69,8 +69,8 @@ module.exports = (api, options, rootOptions) => {
     api.render('./template/dragonbones')
   }
 
-  // 使用端内离线方案
-  if (options.offline) {
+  // 使用客户端离线功能
+  if (options.extends.includes('offline')) {
     api.extendPackage(() => {
       return {
         devDependencies: {

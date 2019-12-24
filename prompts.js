@@ -25,15 +25,18 @@ module.exports = [
     message: '蚂蚁统计Id'
   },
   {
-    name: 'dragonbones',
-    type: 'confirm',
-    message: '是否使用dragonbones龙骨动画？',
-    default: false
-  },
-  {
-    name: 'offline',
-    type: 'confirm',
-    message: '是否端内离线项目？',
-    default: false
+    type: 'checkbox',
+    name: 'extends',
+    message: '扩展功能：',
+    choices: [
+      {
+        name: 'dragonbones龙骨动画',
+        value: 'dragonbones'
+      },
+      {
+        name: '客户端离线功能',
+        value: 'offline'
+      }
+    ]
   }
 ]
