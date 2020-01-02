@@ -12,7 +12,6 @@ const defaultConfig = {
   onlyImg: false,
   shareBefore: () => {
     trackEvent('click_share')
-    updateShareConfig(customConfig)
   },
   shareDone: res => {
     if (res && res.scene === 'favorite') {
