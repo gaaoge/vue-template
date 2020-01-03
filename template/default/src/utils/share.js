@@ -34,6 +34,9 @@ function updateShareConfig(config = {}) {
 function shareWithConfig(config = {}, tag) {
   config.shareBefore = expandFunc(config.shareBefore, defaultConfig.shareBefore)
   config.shareDone = expandFunc(config.shareDone, defaultConfig.shareDone)
+  config.shareDone = expandFunc(config.shareDone, () => {
+    updateShareConfig(customConfig)
+  })
 
   NewsappShare.config(config)
   NewsappShare.show(tag)
