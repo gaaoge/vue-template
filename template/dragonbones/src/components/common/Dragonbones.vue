@@ -94,7 +94,16 @@ export default {
     armatureSlots() {
       this.armatureSlots.forEach(item => {
         let slot = this.display.armature.getSlot(item.name)
-        slot && (slot.visible = item.visible)
+        if (slot) {
+          slot.visible = item.visible
+          slot.display.off('tap')
+          if (item.onClick) {
+            slot.display.interactive = true
+            slot.display.on('tap', item.onClick)
+          } else {
+            slot.display.interactive = false
+          }
+        }
       })
     },
     animationName() {
@@ -156,7 +165,13 @@ export default {
       this.display = factory.buildArmatureDisplay(this.armatureName, this.name)
       this.armatureSlots.forEach(item => {
         let slot = this.display.armature.getSlot(item.name)
-        slot && (slot.visible = item.visible)
+        if (slot) {
+          slot.visible = item.visible
+          if (item.onClick) {
+            slot.display.interactive = true
+            slot.display.on('tap', item.onClick)
+          }
+        }
       })
 
       const events = [
