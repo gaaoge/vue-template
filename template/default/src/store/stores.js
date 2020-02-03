@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import { invoke, isAvailable } from '@mf2e/js-bridge'
 import { toSearchParams } from '@/utils'
-import { isNewsapp } from '@/utils/detect'
+import { isNewsapp, isTest } from '@/utils/detect'
 import modules from './modules'
 
 const stores = {
@@ -21,7 +21,7 @@ const stores = {
       let { url, method = 'get', params } = payload
       // 配置url和method
       if (!/^(https?:)?\/\//.test(url)) {
-        let host = /test\.html$/.test(location.pathname)
+        let host = isTest
           ? process.env.VUE_APP_TEST_HOST
           : process.env.VUE_APP_BASE_HOST
         url = host + url

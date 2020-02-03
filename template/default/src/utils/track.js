@@ -1,6 +1,10 @@
+import { isTest } from '@/utils/detect'
+
 const Events = {}
 
 function trackEvent(event, info) {
+  if (isTest) return
+
   if (!window['NTESAntAnalysis']) {
     window.addEventListener('NTMReady', () => {
       trackEvent(event, info)
