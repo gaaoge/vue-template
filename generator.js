@@ -11,38 +11,38 @@ module.exports = (api, options, rootOptions) => {
         'upload': 'node uploader.js'
       },
       dependencies: {
-        '@mf2e/js-bridge': '^1.0.9',
-        '@newsapp-activity/newsapp-share': '^1.6.3',
-        'core-js': '^3.4.2',
+        '@mf2e/js-bridge': '^1.0.11',
+        '@newsapp-activity/newsapp-share': '^1.6.5',
+        'core-js': '^3.6.4',
         'minireset.css': '^0.0.6',
         'register-service-worker': '^1.6.2',
-        'vue': '^2.6.10',
-        'vue-router': '^3.1.3',
+        'vue': '^2.6.11',
+        'vue-router': '^3.1.6',
         'vuex': '^3.1.2',
         'whatwg-fetch': '^3.0.0'
       },
       devDependencies: {
-        '@newap/uploader': '^2.2.15',
-        '@vue/cli-plugin-babel': '^4.0.5',
-        '@vue/cli-plugin-eslint': '^4.0.5',
-        '@vue/cli-plugin-pwa': '^4.0.5',
-        '@vue/cli-plugin-router': '^4.0.5',
-        '@vue/cli-plugin-vuex': '^4.0.5',
-        '@vue/cli-service': '^4.0.5',
+        '@newap/uploader': '^2.2.16',
+        '@vue/cli-plugin-babel': '^4.2.3',
+        '@vue/cli-plugin-eslint': '^4.2.3',
+        '@vue/cli-plugin-pwa': '^4.2.3',
+        '@vue/cli-plugin-router': '^4.2.3',
+        '@vue/cli-plugin-vuex': '^4.2.3',
+        '@vue/cli-service': '^4.2.3',
         '@vue/eslint-config-prettier': '^6.0.0',
-        'babel-eslint': '^10.0.3',
+        'babel-eslint': '^10.1.0',
         'chalk': '^3.0.0',
-        'eslint': '^6.6.0',
-        'eslint-plugin-prettier': '^3.1.1',
-        'eslint-plugin-vue': '^6.0.1',
-        'inquirer': '^7.0.1',
-        'mocker-api': '^1.9.0',
+        'eslint': '^6.8.0',
+        'eslint-plugin-prettier': '^3.1.2',
+        'eslint-plugin-vue': '^6.2.1',
+        'inquirer': '^7.0.6',
+        'mocker-api': '^1.13.0',
         'postcss-autosize': '^1.0.2',
         'postcss-preset-env': '^6.7.0',
         'postcss-px-to-viewport': '^1.1.1',
         'prettier': '^1.19.1',
         'tinify-loader': '^1.0.0',
-        'vue-template-compiler': '^2.6.10'
+        'vue-template-compiler': '^2.6.11'
       },
       browserslist: ['> 1%', 'last 2 versions', 'Android >= 4.4', 'iOS >= 8']
     }
@@ -60,7 +60,7 @@ module.exports = (api, options, rootOptions) => {
     api.extendPackage(() => {
       return {
         dependencies: {
-          'pixi.js-legacy': '^5.2.0',
+          'pixi.js-legacy': '^5.2.1',
           'pixi5-dragonbones': '^5.7.0'
         }
       }
@@ -74,7 +74,7 @@ module.exports = (api, options, rootOptions) => {
     api.extendPackage(() => {
       return {
         devDependencies: {
-          '@mf2e/offline-tool': '^0.0.5'
+          '@mf2e/offline-tool': '^0.1.0'
         }
       }
     })
