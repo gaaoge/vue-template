@@ -57,18 +57,18 @@ module.exports = {
     manifestOptions: {
       icons: [
         {
-          src: '../share-icon.png',
+          src: '../icons/share-icon.png',
           sizes: '200x200',
           type: 'image/png'
         }
       ]
     },
     iconPaths: {
-      favicon32: 'static/share-icon.png',
-      favicon16: 'static/share-icon.png',
-      appleTouchIcon: 'static/share-icon.png',
-      maskIcon: 'static/share-icon.png',
-      msTileImage: 'static/share-icon.png'
+      favicon32: 'static/icons/favicon.ico',
+      favicon16: 'static/icons/favicon.ico',
+      appleTouchIcon: 'static/icons/share-icon.png',
+      maskIcon: 'static/icons/share-icon.png',
+      msTileImage: 'static/icons/share-icon.png'
     }
   }
 }

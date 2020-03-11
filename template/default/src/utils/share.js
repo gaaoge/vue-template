@@ -7,7 +7,7 @@ window.jsBridge = jsBridge
 const defaultConfig = {
   title: '默认分享标题',
   desc: '默认分享描述',
-  imgUrl: getStaticPath('share-icon.png'),
+  imgUrl: getStaticPath('icons/share-icon.png'),
   link: getAbsPath() + '?spss=share',
   onlyImg: false,
   shareBefore: () => {
