@@ -51,7 +51,7 @@ export default {
       skeJSON: `${this.name}_skeJSON`,
       texJSON: `${this.name}_texJSON`,
       texPNG: `${this.name}_texPNG`,
-      pathPrefix: getStaticPath(`dragonbones/v14/${this.name}`)
+      pathPrefix: getStaticPath(`dragonbones/${this.name}`)
     }
   },
   watch: {
