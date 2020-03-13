@@ -1,10 +1,10 @@
 const pkg = require('./package.json')
 const fs = require('fs')
 const path = require('path')
+const http = require('http')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 const Uploader = require('@newap/uploader')
-const http = require('http')
 
 let cacheDir = path.resolve('node_modules/.cache/uploader/')
 let cachePath = `${cacheDir}/cache-files.json`
@@ -68,7 +68,7 @@ async function uploadStatic() {
   console.log(chalk.bold.yellow('正在上传static...'))
 
   let allFiles = findFiles(`dist/static/`)
-  let cacheFiles = uploadConfig.noCache ? [] : getCacheFiles()
+  let cacheFiles = uploadConfig.clearCache ? [] : getCacheFiles()
 
   await new Uploader({
     dir: './dist/static',
@@ -77,7 +77,7 @@ async function uploadStatic() {
   }).run()
 
   saveCacheFiles(allFiles)
-  uploadConfig.noCache && clearStaticCache()
+  uploadConfig.clearCache && clearStaticCache()
 }
 
 async function uploadHtml() {
@@ -121,7 +121,7 @@ async function upload() {
     },
     {
       type: 'confirm',
-      name: 'noCache',
+      name: 'clearCache',
       message: `是否清缓存上传？${chalk.bold.yellow(
         '(若static资源有改动，请选是)'
       )}`,
