@@ -4,8 +4,10 @@ const path = require('path')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 const Uploader = require('@newap/uploader')
+const http = require('http')
 
-const cacheDir = path.resolve('node_modules/.cache/uploader/')
+let cacheDir = path.resolve('node_modules/.cache/uploader/')
+let cachePath = `${cacheDir}/cache-files.json`
 let uploadConfig = {}
 
 function findFiles(rootPath, replacePath = '') {
@@ -29,21 +31,15 @@ function findFiles(rootPath, replacePath = '') {
   return result
 }
 
-async function uploadStatic() {
-  let allFiles = findFiles(`dist/static/`)
+function getCacheFiles() {
   let cacheFiles = []
-  let cachePath = `${cacheDir}/cache-files.json`
-  if (fs.existsSync(cachePath) && !uploadConfig.noCache) {
+  if (fs.existsSync(cachePath)) {
     cacheFiles = JSON.parse(fs.readFileSync(cachePath, 'utf-8'))
   }
+  return cacheFiles
+}
 
-  console.log(chalk.bold.yellow('正在上传static...'))
-  await new Uploader({
-    dir: './dist/static',
-    target: `activity/${pkg.name}/static`,
-    exclude: cacheFiles.map(item => new RegExp(path.basename(item)))
-  }).run()
-
+function saveCacheFiles(files) {
   if (!fs.existsSync(cacheDir)) {
     cacheDir.split('/').reduce((current, next) => {
       const full = path.resolve(current, next)
@@ -53,25 +49,49 @@ async function uploadStatic() {
       return full
     }, '/')
   }
-  fs.writeFileSync(cachePath, JSON.stringify(allFiles))
+  fs.writeFileSync(cachePath, JSON.stringify(files))
+}
+
+function clearStaticCache() {
+  let cacheFiles = getCacheFiles()
+  let updateFiles = cacheFiles.filter(item => item.split('.').length !== 3)
+
+  updateFiles.forEach(item => {
+    let url = `https://static.ws.126.net/163/activity/${pkg.name}/static/${item}`
+    http.get(
+      `http://purge.ws.netease.com/api/purge?url=${encodeURIComponent(url)}`
+    )
+  })
+}
+
+async function uploadStatic() {
+  console.log(chalk.bold.yellow('正在上传static...'))
+
+  let allFiles = findFiles(`dist/static/`)
+  let cacheFiles = uploadConfig.noCache ? [] : getCacheFiles()
+
+  await new Uploader({
+    dir: './dist/static',
+    target: `activity/${pkg.name}/static`,
+    exclude: cacheFiles.map(item => new RegExp(path.basename(item)))
+  }).run()
+
+  saveCacheFiles(allFiles)
+  uploadConfig.noCache && clearStaticCache()
 }
 
 async function uploadHtml() {
-  if (uploadConfig.targets.length === 0) return
+  console.log(chalk.bold.yellow('正在上传html...'))
   if (uploadConfig.targets.includes('test')) {
     fs.copyFileSync('./dist/index.html', './dist/test.html')
   }
 
-  let include = uploadConfig.targets.map(
-    target => new RegExp(`${target}\.html`)
-  )
-  include.push(/service-worker\.js/)
-
-  console.log(chalk.bold.yellow('正在上传html...'))
   await new Uploader({
     dir: './dist',
     target: `page/newsapp/activity/${pkg.name}`,
-    include,
+    include: uploadConfig.targets
+      .map(item => new RegExp(`${item}\.html`))
+      .concat([/service-worker\.js/]),
     htmlDefaultPath: false
   }).run()
 }
@@ -81,7 +101,7 @@ async function upload() {
     {
       type: 'checkbox',
       name: 'targets',
-      message: '请选择目标:',
+      message: `请选择上传目标：${chalk.bold.yellow('(可同时勾选)')}`,
       choices: [
         {
           name: chalk.bold.yellow('测试地址'),
@@ -91,12 +111,20 @@ async function upload() {
           name: chalk.bold.yellow('正式地址'),
           value: 'index'
         }
-      ]
+      ],
+      validate(input) {
+        if (input.length === 0) {
+          return '请至少选择一项'
+        }
+        return true
+      }
     },
     {
       type: 'confirm',
       name: 'noCache',
-      message: '是否清缓存上传？',
+      message: `是否清缓存上传？${chalk.bold.yellow(
+        '(若static资源有改动，请选是)'
+      )}`,
       default: false
     }
   ])
