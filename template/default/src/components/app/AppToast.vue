@@ -25,15 +25,15 @@ export default {
 
 <style lang="postcss" scoped>
 .app-toast {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   top: 0;
   bottom: 0;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 750px;
   pointer-events: none;
-  z-index: 10000;
 }
 
 .app-toast-enter-active,
@@ -55,10 +55,10 @@ export default {
   padding: 30px;
   color: #fff;
   font-size: 30px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.75);
   white-space: pre-wrap;
   text-align: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.75);
   animation: toast 0.3s both;
 }
 

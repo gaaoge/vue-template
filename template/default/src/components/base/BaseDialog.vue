@@ -59,16 +59,16 @@ export default {
 
 <style lang="postcss" scoped>
 .base-dialog {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 0;
-  bottom: 0;
   width: 750px;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 9999;
 }
 
 .base-dialog-enter-active,
