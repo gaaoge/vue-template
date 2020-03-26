@@ -1,12 +1,25 @@
 <template>
-  <transition name="base-dialog">
-    <div v-if="isShow" class="base-dialog" @click.self="onClick">
-      <div class="dialog">
+  <div class="base-dialog">
+    <transition name="mask">
+      <div
+        v-if="isShow"
+        class="mask"
+        :style="maskStyle"
+        @click="clickMask"
+        @touchmove.prevent
+      ></div>
+    </transition>
+    <transition :name="type">
+      <div v-if="isShow" :class="type" @touchmove.prevent>
         <slot></slot>
+        <div v-if="mergedConfig.isShowClose" @click="close">
+          <slot name="close">
+            <div class="close"></div>
+          </slot>
+        </div>
       </div>
-      <div v-if="showClose" class="close" @click="close"></div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -19,35 +32,50 @@ export default {
       type: String,
       default: ''
     },
-    clickClose: {
-      type: Boolean,
-      default: true
+    type: {
+      type: String,
+      default: 'dialog'
     },
-    showClose: {
-      type: Boolean,
-      default: true
+    config: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
+  data() {
+    return {
+      defaultConfig: {
+        maskOpacity: 0.6,
+        isMaskClose: true,
+        isShowClose: true
+      }
     }
   },
   computed: {
     isShow() {
-      return !!this.config
+      return !!this.dialogConfig[this.name]
     },
-    config() {
-      return this.dialogConfig[this.name]
+    totalConfig() {
+      return this.dialogConfig[this.name] || {}
     },
-    params() {
-      return this.config && this.config.params
+    mergedConfig() {
+      let mergedConfig = Object.assign({}, this.defaultConfig, this.config)
+      return Object.assign({}, mergedConfig, this.totalConfig.config)
+    },
+    maskStyle() {
+      return { background: `rgba(0, 0, 0, ${this.mergedConfig.maskOpacity})` }
     },
     ...mapState('app', ['dialogConfig'])
   },
   watch: {
     isShow(val) {
-      this.$emit(val ? 'open' : 'close', this.params)
+      this.$emit(val ? 'open' : 'close', this.totalConfig.params)
     }
   },
   methods: {
-    onClick() {
-      this.clickClose && this.close()
+    clickMask() {
+      this.mergedConfig.isMaskClose && this.close()
     },
     close() {
       this.closeDialog(this.name)
@@ -60,56 +88,84 @@ export default {
 <style lang="postcss" scoped>
 .base-dialog {
   position: fixed;
+  z-index: 9999;
+}
+
+.mask {
+  position: fixed;
   top: 0;
   bottom: 0;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 750px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0.6);
 }
 
-.base-dialog-enter-active,
-.base-dialog-leave-active {
-  transition: opacity 0.3s;
+.mask-enter-active {
+  animation: fade-in 0.3s;
 }
 
-.base-dialog-enter,
-.base-dialog-leave-to {
-  opacity: 0;
+.mask-leave-active {
+  animation: fade-in 0.3s reverse;
 }
 
 .dialog {
-  position: relative;
-  animation: dialog 0.3s both;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dialog-enter-active {
+  animation: scale-in 0.3s;
+}
+
+.dialog-leave-active {
+  animation: scale-in 0.3s reverse;
+}
+
+.panel {
+  position: fixed;
+  bottom: 0;
+}
+
+.panel-enter-active {
+  animation: slide-in 0.3s;
+}
+
+.panel-leave-active {
+  animation: slide-in 0.3s reverse;
 }
 
 .close {
-  flex: none;
-  margin-top: 50px;
+  margin: 50px auto 0;
   background: url('../../assets/dialog-close.png');
-  animation: close 0.3s both;
 }
 
-@keyframes dialog {
-  0% {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes close {
+@keyframes fade-in {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
   }
 }
 </style>

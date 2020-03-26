@@ -44,15 +44,14 @@ const stores = {
      * @param {String|Object} payload 支持字符串或者对象参数
      *  String参数：弹窗名称
      *  Object参数：{
-     *    dialog: 弹窗名称
-     *    isScroll: 弹窗是否可滚动
-     *    isForce: 弹窗是否强制展示（点击弹窗周围空白处不可关闭）
+     *    name: 弹窗名称
+     *    config: 弹窗配置
      *    params: 其他弹窗参数
      *  }
      */
     openDialog({ state, commit }, payload) {
       let config = Object.assign({}, state.dialogConfig, {
-        [payload.dialog || payload]: payload
+        [payload.name || payload]: payload
       })
       commit(DIALOG_CONFIG, config)
     },
@@ -61,12 +60,12 @@ const stores = {
      * @param {String|Object} payload 支持字符串或者对象参数
      *  String参数：弹窗名称
      *  Object参数：{
-     *    dialog: 弹窗名称
+     *    name: 弹窗名称
      *  }
      */
     closeDialog({ state, commit }, payload) {
       let config = Object.assign({}, state.dialogConfig, {
-        [payload.dialog || payload]: null
+        [payload.name || payload]: null
       })
       commit(DIALOG_CONFIG, config)
     },
