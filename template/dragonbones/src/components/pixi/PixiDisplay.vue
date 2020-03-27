@@ -1,6 +1,4 @@
 <script>
-import { DisplayObject } from 'pixi.js-legacy'
-
 export default {
   name: 'pixi-display',
   props: {

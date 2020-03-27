@@ -1,13 +1,13 @@
 <script>
 import { getStaticPath } from '@/utils'
-import Display from './Display'
+import PixiDisplay from './PixiDisplay'
 
 window.PIXI = require('pixi.js-legacy')
 window.dragonbones = require('pixi5-dragonbones')
 
 export default {
   name: 'pixi-dragonbones',
-  mixins: [Display],
+  mixins: [PixiDisplay],
   props: {
     name: {
       type: String,
