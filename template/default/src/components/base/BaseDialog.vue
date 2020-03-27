@@ -1,16 +1,15 @@
 <template>
-  <div class="base-dialog">
+  <div class="base-dialog" @touchmove.prevent>
     <transition name="mask">
       <div
         v-if="isShow"
         class="mask"
         :style="maskStyle"
         @click="clickMask"
-        @touchmove.prevent
       ></div>
     </transition>
     <transition :name="type">
-      <div v-if="isShow" :class="type" @touchmove.prevent>
+      <div v-if="isShow" :class="type">
         <slot></slot>
         <div v-if="mergedConfig.isShowClose" @click="close">
           <slot name="close">
@@ -88,6 +87,7 @@ export default {
 <style lang="postcss" scoped>
 .base-dialog {
   position: fixed;
+  top: 0;
   z-index: 9999;
 }
 
@@ -111,6 +111,7 @@ export default {
   position: fixed;
   top: 50%;
   left: 50%;
+  margin-top: -50px;
   transform: translate(-50%, -50%);
 }
 
@@ -136,8 +137,11 @@ export default {
 }
 
 .close {
-  margin: 50px auto 0;
+  position: absolute;
+  left: 50%;
+  bottom: -100px;
   background: url('../../assets/dialog-close.png');
+  transform: translateX(-50%);
 }
 
 @keyframes fade-in {
