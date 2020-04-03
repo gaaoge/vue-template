@@ -74,24 +74,6 @@ function formatDate(dateInput, format) {
   return format
 }
 
-// 单页面高度适配
-function getResizeStyle(targetHeight = 603, needTranslate = true) {
-  if (window.innerWidth >= window.innerHeight) return
-
-  let deltaHeight = 603 - (window.innerHeight * 375) / window.innerWidth
-  let scale = Math.min((targetHeight - deltaHeight) / targetHeight, 1)
-
-  let transform = `scale(${scale})`
-  if (needTranslate) {
-    let translateY = ((scale - 1) / 2) * (100 / scale) + '%'
-    transform += ` translateY(${translateY})`
-  }
-
-  return {
-    transform
-  }
-}
-
 // 获取static目录文件的实际路径
 function getStaticPath(path) {
   return process.env.VUE_APP_PUBLIC_PATH + '/static/' + path
@@ -155,7 +137,6 @@ export {
   setSearch,
   toSearchParams,
   formatDate,
-  getResizeStyle,
   getStaticPath,
   getAbsPath,
   loadScript,

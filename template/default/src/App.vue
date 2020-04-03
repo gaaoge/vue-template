@@ -21,10 +21,4 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-user-select: none;
 }
-
-#app {
-  position: relative;
-  width: 750px;
-  margin: 0 auto;
-}
 </style>

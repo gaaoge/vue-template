@@ -1,6 +1,6 @@
 const presetEnv = require('postcss-preset-env')
 const autoSize = require('postcss-autosize')
-const pxToViewport = require('postcss-px-to-viewport')
+const px2Rem = require('postcss-plugin-px2rem')
 
 module.exports = {
   plugins: [
@@ -8,11 +8,6 @@ module.exports = {
       stage: 0
     }),
     autoSize(),
-    pxToViewport({
-      viewportWidth: 750,
-      viewportUnit: 'vmin',
-      fontViewportUnit: 'vmin',
-      mediaQuery: true
-    })
+    px2Rem()
   ]
 }

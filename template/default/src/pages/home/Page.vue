@@ -1,8 +1,8 @@
 <template>
-  <div class="home-page">
+  <base-page class="home-page">
     <h5 class="title" @click="sayHello">Hello Vue!</h5>
     <vue-logo @click.native="doShare"></vue-logo>
-  </div>
+  </base-page>
 </template>
 
 <script>
@@ -29,7 +29,7 @@ export default {
 
 <style lang="postcss" scoped>
 .home-page {
-  height: 100vh;
+  background: #fff;
 }
 
 .title {

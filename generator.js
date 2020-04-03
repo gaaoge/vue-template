@@ -38,8 +38,8 @@ module.exports = (api, options, rootOptions) => {
         'inquirer': '^7.0.6',
         'mocker-api': '^1.13.0',
         'postcss-autosize': '^1.0.2',
+        'postcss-plugin-px2rem': '^0.8.1',
         'postcss-preset-env': '^6.7.0',
-        'postcss-px-to-viewport': '^1.1.1',
         'prettier': '^1.19.1',
         'tinify-loader': '^1.0.0',
         'vue-template-compiler': '^2.6.11'
