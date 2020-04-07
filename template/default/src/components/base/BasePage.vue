@@ -27,9 +27,8 @@ export default {
     width() {
       if (this.isLandscape) {
         return designWidth / designRem + 'rem'
-      } else {
-        return '100vw'
       }
+      return '100vw'
     },
     height() {
       if (this.scrollable) {
@@ -37,9 +36,8 @@ export default {
       }
       if (this.isLandscape) {
         return designHeight / designRem + 'rem'
-      } else {
-        return '100vh'
       }
+      return '100vh'
     }
   },
   created() {
