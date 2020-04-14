@@ -72,6 +72,9 @@ export default {
       this.$emit(val ? 'open' : 'close', this.totalConfig.params)
     }
   },
+  destroyed() {
+    this.isShow && this.close()
+  },
   methods: {
     clickMask() {
       this.mergedConfig.isMaskClose && this.close()
@@ -86,17 +89,20 @@ export default {
 
 <style lang="postcss" scoped>
 .base-dialog {
-  position: fixed;
+  position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 9999;
+  pointer-events: none;
 }
 
 .mask {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 750px;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0.6);
+  pointer-events: auto;
 }
 
 .mask-enter-active {
@@ -108,11 +114,12 @@ export default {
 }
 
 .dialog {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   margin-top: -50px;
   transform: translate(-50%, -50%);
+  pointer-events: auto;
 }
 
 .dialog-enter-active {
