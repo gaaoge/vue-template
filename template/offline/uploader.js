@@ -89,7 +89,7 @@ async function uploadHtml() {
 
   await new Uploader({
     dir: './dist',
-    target: `page/newsapp/activity/${pkg.name}`,
+    target: `html/newsapp/activity/${pkg.name}`,
     include: uploadConfig.targets
       .map(item => new RegExp(`${item}\.html`))
       .concat([/service-worker\.js/]),
