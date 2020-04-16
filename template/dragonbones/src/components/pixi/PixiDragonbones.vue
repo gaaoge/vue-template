@@ -11,47 +11,47 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     texCount: {
       type: [String, Number],
-      default: 1
+      default: 1,
     },
     autoPlay: {
       type: Boolean,
-      default: true
+      default: true,
     },
     armatureName: {
       type: String,
-      default: 'armature'
+      default: 'armature',
     },
     armatureSlots: {
       type: Array,
       default() {
         return []
-      }
+      },
     },
     animationName: {
       type: String,
-      default: 'animation'
+      default: 'animation',
     },
     animationFadeInNames: {
       type: Array,
       default() {
         return []
-      }
+      },
     },
     animationProgress: {
       type: [String, Number],
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {
       skeJSON: `${this.name}_skeJSON`,
       texJSON: `${this.name}_texJSON`,
       texPNG: `${this.name}_texPNG`,
-      pathPrefix: getStaticPath(`dragonbones/${this.name}`)
+      pathPrefix: getStaticPath(`dragonbones/${this.name}`),
     }
   },
   watch: {
@@ -62,7 +62,7 @@ export default {
     },
     armatureSlots(val) {
       if (!this.$refs.display) return
-      val.forEach(item => {
+      val.forEach((item) => {
         let slot = this.$refs.display.armature.getSlot(item.name)
         if (slot) {
           slot.visible = item.visible === undefined ? true : item.visible
@@ -82,7 +82,7 @@ export default {
     },
     animationFadeInNames(val) {
       if (!this.$refs.display) return
-      val.forEach(item => {
+      val.forEach((item) => {
         this.$refs.display.animation.fadeIn(
           item,
           -1,
@@ -98,7 +98,7 @@ export default {
       animationState.isPlaying && animationState.stop()
       animationState.currentTime =
         animationState.totalTime * Math.min(val, 0.999999)
-    }
+    },
   },
   async mounted() {
     await this.load()
@@ -156,7 +156,7 @@ export default {
         this.name
       )
 
-      this.armatureSlots.forEach(item => {
+      this.armatureSlots.forEach((item) => {
         let slot = this.$refs.display.armature.getSlot(item.name)
         if (slot) {
           slot.visible = item.visible === undefined ? true : item.visible
@@ -171,17 +171,17 @@ export default {
         dragonbones.EventObject.START,
         dragonbones.EventObject.LOOP_COMPLETE,
         dragonbones.EventObject.COMPLETE,
-        dragonbones.EventObject.SOUND_EVENT
+        dragonbones.EventObject.SOUND_EVENT,
       ]
-      events.forEach(event => {
-        this.$refs.display.addDBEventListener(event, e => {
+      events.forEach((event) => {
+        this.$refs.display.addDBEventListener(event, (e) => {
           this.$emit(event, e)
         })
       })
 
       if (this.autoPlay) {
         this.$refs.display.animation.play(this.animationName)
-        this.animationFadeInNames.forEach(item => {
+        this.animationFadeInNames.forEach((item) => {
           this.$refs.display.animation.fadeIn(
             item,
             -1,
@@ -191,7 +191,7 @@ export default {
           ).resetToPose = false
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>

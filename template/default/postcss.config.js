@@ -5,9 +5,9 @@ const px2Rem = require('postcss-plugin-px2rem')
 module.exports = {
   plugins: [
     presetEnv({
-      stage: 0
+      stage: 0,
     }),
     autoSize(),
-    px2Rem()
-  ]
+    px2Rem(),
+  ],
 }

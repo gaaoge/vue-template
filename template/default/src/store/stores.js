@@ -35,7 +35,7 @@ const stores = {
       let headers, body
       if (method === 'post') {
         headers = {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         }
         body = toSearchParams(params)
       }
@@ -48,7 +48,7 @@ const stores = {
             method,
             url,
             headers,
-            data: body
+            data: body,
           })
           data = JSON.parse(res)
         } else {
@@ -57,7 +57,7 @@ const stores = {
           let res = await window.fetch(url, {
             method,
             headers,
-            body
+            body,
           })
           data = await res.json()
         }
@@ -80,19 +80,19 @@ const stores = {
       }
 
       return data.data
-    }
-  }
+    },
+  },
 }
 
 let requestHeader // 客户端请求头
 function getRequestHeader() {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if (/newsapptest/.test(navigator.userAgent) || !isNewsapp) {
       resolve()
       return
     }
 
-    invoke('getHeaders').then(res => {
+    invoke('getHeaders').then((res) => {
       requestHeader = res
       resolve()
     })

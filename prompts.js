@@ -2,27 +2,27 @@ module.exports = [
   {
     name: 'name',
     type: 'input',
-    message: '项目名称(日期命名)'
+    message: '项目名称(日期命名)',
   },
   {
     name: 'description',
     type: 'input',
-    message: '项目描述'
+    message: '项目描述',
   },
   {
     name: 'author',
     type: 'input',
-    message: '项目作者'
+    message: '项目作者',
   },
   {
     name: 'title',
     type: 'input',
-    message: '首页标题'
+    message: '首页标题',
   },
   {
     name: 'projectId',
     type: 'input',
-    message: '蚂蚁统计Id'
+    message: '蚂蚁统计Id',
   },
   {
     type: 'checkbox',
@@ -31,12 +31,12 @@ module.exports = [
     choices: [
       {
         name: 'dragonbones龙骨动画',
-        value: 'dragonbones'
+        value: 'dragonbones',
       },
       {
         name: '客户端离线功能',
-        value: 'offline'
-      }
-    ]
-  }
+        value: 'offline',
+      },
+    ],
+  },
 ]

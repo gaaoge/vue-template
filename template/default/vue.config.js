@@ -10,16 +10,16 @@ module.exports = {
       splitChunks: {
         cacheGroups: {
           vendors: {
-            name: 'vendors'
+            name: 'vendors',
           },
           common: {
-            name: 'common'
-          }
-        }
-      }
-    }
+            name: 'common',
+          },
+        },
+      },
+    },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.module
       .rule('images')
       .test(/\.(png|jpe?g)(\?.*)?$/)
@@ -28,7 +28,7 @@ module.exports = {
       .tap(() => {
         return {
           apikey: 'ai3NQ23wq2pbQvy2JNylfuQMNJ99YAOZ',
-          cache: path.resolve('node_modules/.cache/tinify-loader')
+          cache: path.resolve('node_modules/.cache/tinify-loader'),
         }
       })
 
@@ -38,7 +38,7 @@ module.exports = {
     disableHostCheck: true,
     before(app) {
       apiMocker(app, path.resolve('./mock/index.js'))
-    }
+    },
   },
   pwa: {
     name: process.env.VUE_APP_TITLE,
@@ -48,9 +48,9 @@ module.exports = {
       runtimeCaching: [
         {
           urlPattern: /index\.html/,
-          handler: 'NetworkFirst'
-        }
-      ]
+          handler: 'NetworkFirst',
+        },
+      ],
     },
     manifestPath: 'static/pwa/manifest.json',
     manifestCrossorigin: true,
@@ -59,16 +59,16 @@ module.exports = {
         {
           src: '../icons/share-icon.png',
           sizes: '200x200',
-          type: 'image/png'
-        }
-      ]
+          type: 'image/png',
+        },
+      ],
     },
     iconPaths: {
       favicon32: 'static/icons/favicon.ico',
       favicon16: 'static/icons/favicon.ico',
       appleTouchIcon: 'static/icons/share-icon.png',
       maskIcon: 'static/icons/share-icon.png',
-      msTileImage: 'static/icons/share-icon.png'
-    }
-  }
+      msTileImage: 'static/icons/share-icon.png',
+    },
+  },
 }

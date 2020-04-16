@@ -15,6 +15,6 @@ if (isOnline) {
 
   // 离线缓存Service Worker
   register('service-worker.js', {
-    registrationOptions: { scope: './' }
+    registrationOptions: { scope: './' },
   })
 }

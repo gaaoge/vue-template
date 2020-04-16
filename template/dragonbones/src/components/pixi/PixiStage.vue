@@ -12,12 +12,12 @@ export default {
   props: {
     width: {
       type: [String, Number],
-      default: 0
+      default: 0,
     },
     height: {
       type: [String, Number],
-      default: 0
-    }
+      default: 0,
+    },
   },
   created() {
     this.create()
@@ -33,7 +33,7 @@ export default {
       let app = new Application({
         width: this.width,
         height: this.height,
-        transparent: true
+        transparent: true,
       })
       this.$refs.app = app
     },
@@ -49,8 +49,8 @@ export default {
     },
     destroy() {
       this.$refs.app.destroy(true, true)
-    }
-  }
+    },
+  },
 }
 </script>
 

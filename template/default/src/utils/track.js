@@ -14,7 +14,7 @@ function trackEvent(event, info) {
       projectid: process.env.VUE_APP_PROJECT_ID,
       val_nm: 'c-ntm',
       val_act: event,
-      info
+      info,
     })
   }
 }

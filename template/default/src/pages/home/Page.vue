@@ -13,7 +13,7 @@ import { shareWithConfig } from '@/utils/share'
 export default {
   name: 'home-page',
   components: {
-    VueLogo
+    VueLogo,
   },
   methods: {
     sayHello() {
@@ -22,8 +22,8 @@ export default {
     doShare() {
       shareWithConfig()
     },
-    ...mapActions('app', ['toast'])
-  }
+    ...mapActions('app', ['toast']),
+  },
 }
 </script>
 

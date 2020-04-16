@@ -7,7 +7,7 @@ const stores = {
   namespaced: true,
   state: {
     toastConfig: {},
-    dialogConfig: {}
+    dialogConfig: {},
   },
   mutations: {
     [TOAST_CONFIG](state, payload) {
@@ -15,7 +15,7 @@ const stores = {
     },
     [DIALOG_CONFIG](state, payload) {
       state.dialogConfig = payload
-    }
+    },
   },
   actions: {
     /**
@@ -35,7 +35,7 @@ const stores = {
         commit(TOAST_CONFIG, {
           isShow: true,
           content,
-          timer
+          timer,
         })
       })
     },
@@ -51,7 +51,7 @@ const stores = {
      */
     openDialog({ state, commit }, payload) {
       let config = Object.assign({}, state.dialogConfig, {
-        [payload.name || payload]: payload
+        [payload.name || payload]: payload,
       })
       commit(DIALOG_CONFIG, config)
     },
@@ -65,7 +65,7 @@ const stores = {
      */
     closeDialog({ state, commit }, payload) {
       let config = Object.assign({}, state.dialogConfig, {
-        [payload.name || payload]: null
+        [payload.name || payload]: null,
       })
       commit(DIALOG_CONFIG, config)
     },
@@ -74,8 +74,8 @@ const stores = {
      */
     clearDialog({ commit }) {
       commit(DIALOG_CONFIG, {})
-    }
-  }
+    },
+  },
 }
 
 export default stores

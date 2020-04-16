@@ -15,7 +15,7 @@ function findFiles(rootPath, replacePath = '') {
 
   function finder(tempPath) {
     let files = fs.readdirSync(tempPath)
-    files.forEach(val => {
+    files.forEach((val) => {
       let fPath = path.posix.join(tempPath, val)
       let stats = fs.statSync(fPath)
 
@@ -54,9 +54,9 @@ function saveCacheFiles(files) {
 
 function clearStaticCache() {
   let cacheFiles = getCacheFiles()
-  let updateFiles = cacheFiles.filter(item => item.split('.').length !== 3)
+  let updateFiles = cacheFiles.filter((item) => item.split('.').length !== 3)
 
-  updateFiles.forEach(item => {
+  updateFiles.forEach((item) => {
     let url = `https://static.ws.126.net/163/activity/${pkg.name}/static/${item}`
     http.get(
       `http://purge.ws.netease.com/api/purge?url=${encodeURIComponent(url)}`
@@ -73,7 +73,7 @@ async function uploadStatic() {
   await new Uploader({
     dir: './dist/static',
     target: `activity/${pkg.name}/static`,
-    exclude: cacheFiles.map(item => new RegExp(path.basename(item)))
+    exclude: cacheFiles.map((item) => new RegExp(path.basename(item))),
   }).run()
 
   saveCacheFiles(allFiles)
@@ -90,9 +90,9 @@ async function uploadHtml() {
     dir: './dist',
     target: `page/newsapp/activity/${pkg.name}`,
     include: uploadConfig.targets
-      .map(item => new RegExp(`${item}\.html`))
+      .map((item) => new RegExp(`${item}\.html`))
       .concat([/service-worker\.js/]),
-    htmlDefaultPath: false
+    htmlDefaultPath: false,
   }).run()
 }
 
@@ -105,19 +105,19 @@ async function upload() {
       choices: [
         {
           name: chalk.bold.yellow('测试地址'),
-          value: 'test'
+          value: 'test',
         },
         {
           name: chalk.bold.yellow('正式地址'),
-          value: 'index'
-        }
+          value: 'index',
+        },
       ],
       validate(input) {
         if (input.length === 0) {
           return '请至少选择一项'
         }
         return true
-      }
+      },
     },
     {
       type: 'confirm',
@@ -125,8 +125,8 @@ async function upload() {
       message: `是否清缓存上传？${chalk.bold.yellow(
         '(若static资源有改动，请选是)'
       )}`,
-      default: false
-    }
+      default: false,
+    },
   ])
 
   await uploadStatic()

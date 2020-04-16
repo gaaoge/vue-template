@@ -14,13 +14,13 @@ export default {
   props: {
     scrollable: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
       isLandscape: false,
-      timer: null
+      timer: null,
     }
   },
   computed: {
@@ -38,7 +38,7 @@ export default {
         return designHeight / designRem + 'rem'
       }
       return '100vh'
-    }
+    },
   },
   created() {
     this.updateRem()
@@ -71,8 +71,8 @@ export default {
     onResize() {
       clearTimeout(this.timer)
       this.timer = setTimeout(this.updateRem, 100)
-    }
-  }
+    },
+  },
 }
 </script>
 

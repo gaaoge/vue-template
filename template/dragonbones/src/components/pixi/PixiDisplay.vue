@@ -4,20 +4,20 @@ export default {
   props: {
     positionX: {
       type: [String, Number],
-      default: 0
+      default: 0,
     },
     positionY: {
       type: [String, Number],
-      default: 0
+      default: 0,
     },
     zIndex: {
       type: [String, Number],
-      default: 'auto'
+      default: 'auto',
     },
     visible: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   watch: {
     positionX(val) {
@@ -35,7 +35,7 @@ export default {
     visible(val) {
       if (!this.$refs.display) return
       this.$refs.display.visible = val
-    }
+    },
   },
   destroyed() {
     this.remove()
@@ -59,10 +59,10 @@ export default {
     remove() {
       this.$parent.$refs.app.stage.removeChild(this.$refs.display)
       this.$refs.display.destroy()
-    }
+    },
   },
   render() {
     return ''
-  }
+  },
 }
 </script>

@@ -13,13 +13,13 @@ const defaultConfig = {
   shareBefore: () => {
     trackEvent('click_share')
   },
-  shareDone: res => {
+  shareDone: (res) => {
     if (res && res.scene === 'favorite') {
       trackEvent('favorite')
     } else {
       trackEvent('sharedone')
     }
-  }
+  },
 }
 let customConfig = {}
 

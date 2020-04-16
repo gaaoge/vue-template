@@ -53,7 +53,7 @@ function formatDate(dateInput, format) {
     'm+': date.getMinutes(), // minute
     's+': date.getSeconds(), // second
     'q+': Math.floor((date.getMonth() + 3) / 3), // quarter
-    'S+': date.getMilliseconds() // millisecond
+    'S+': date.getMilliseconds(), // millisecond
   }
 
   if (/(y+)/.test(format)) {
@@ -94,7 +94,7 @@ function getAbsPath(url) {
 function loadScript(url, callback) {
   let script = document.createElement('script')
   script.src = url
-  script.onload = function() {
+  script.onload = function () {
     callback && callback()
     script.parentNode.removeChild(script)
   }
@@ -119,7 +119,7 @@ async function asyncExec(func, key) {
 
 // 异步等待函数
 async function sleep(duration) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, duration)
   })
 }
@@ -142,5 +142,5 @@ export {
   loadScript,
   asyncExec,
   sleep,
-  expandFunc
+  expandFunc,
 }

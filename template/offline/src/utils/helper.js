@@ -17,7 +17,7 @@ if (isOnline) {
   if (!isNewsapp) {
     // 离线缓存Service Worker
     register('service-worker.js', {
-      registrationOptions: { scope: './' }
+      registrationOptions: { scope: './' },
     })
   } else {
     // render上报

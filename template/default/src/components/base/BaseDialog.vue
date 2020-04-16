@@ -29,26 +29,26 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     type: {
       type: String,
-      default: 'dialog'
+      default: 'dialog',
     },
     config: {
       type: Object,
       default() {
         return {}
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       defaultConfig: {
         maskOpacity: 0.6,
         isMaskClose: true,
-        isShowClose: true
-      }
+        isShowClose: true,
+      },
     }
   },
   computed: {
@@ -65,12 +65,12 @@ export default {
     maskStyle() {
       return { background: `rgba(0, 0, 0, ${this.mergedConfig.maskOpacity})` }
     },
-    ...mapState('app', ['dialogConfig'])
+    ...mapState('app', ['dialogConfig']),
   },
   watch: {
     isShow(val) {
       this.$emit(val ? 'open' : 'close', this.totalConfig.params)
-    }
+    },
   },
   destroyed() {
     this.isShow && this.close()
@@ -82,8 +82,8 @@ export default {
     close() {
       this.closeDialog(this.name)
     },
-    ...mapActions('app', ['closeDialog'])
-  }
+    ...mapActions('app', ['closeDialog']),
+  },
 }
 </script>
 
