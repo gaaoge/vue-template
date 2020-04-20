@@ -1,16 +1,16 @@
 <template>
-  <div class="vue-logo"></div>
+  <div class="logo-widget"></div>
 </template>
 
 <script>
 export default {
-  name: 'vue-logo',
+  name: 'logo-widget',
 }
 </script>
 
 <style lang="postcss" scoped>
-.vue-logo {
+.logo-widget {
   margin: 0 auto;
-  background: url('../assets/logo.png');
+  background: url('../../assets/logo.png');
 }
 </style>

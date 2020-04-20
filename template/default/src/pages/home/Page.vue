@@ -1,28 +1,21 @@
 <template>
   <base-page class="home-page">
-    <h5 class="title" @click="sayHello">Hello Vue!</h5>
-    <vue-logo @click.native="doShare"></vue-logo>
+    <demo-panel></demo-panel>
+    <template #dialogs>
+      <demo-dialog></demo-dialog>
+    </template>
   </base-page>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import VueLogo from './components/VueLogo'
-import { shareWithConfig } from '@/utils/share'
+import DemoPanel from './components/panels/DemoPanel'
+import DemoDialog from './components/dialogs/DemoDialog'
 
 export default {
   name: 'home-page',
   components: {
-    VueLogo,
-  },
-  methods: {
-    sayHello() {
-      this.toast('Hello Vue!')
-    },
-    doShare() {
-      shareWithConfig()
-    },
-    ...mapActions('app', ['toast']),
+    DemoPanel,
+    DemoDialog,
   },
 }
 </script>
@@ -30,13 +23,5 @@ export default {
 <style lang="postcss" scoped>
 .home-page {
   background: #fff;
-}
-
-.title {
-  padding: 150px 0;
-  font-size: 100px;
-  font-weight: bold;
-  line-height: 200px;
-  text-align: center;
 }
 </style>
