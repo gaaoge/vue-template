@@ -134,6 +134,7 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
+  pointer-events: auto;
 }
 
 .panel-enter-active {
