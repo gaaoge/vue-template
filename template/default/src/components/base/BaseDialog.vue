@@ -1,15 +1,8 @@
 <template>
-  <div class="base-dialog" @touchmove.prevent>
-    <transition name="mask">
-      <div
-        v-if="isShow"
-        class="mask"
-        :style="maskStyle"
-        @click="clickMask"
-      ></div>
-    </transition>
-    <transition :name="type">
-      <div v-if="isShow" :class="type">
+  <transition name="base-dialog">
+    <div v-if="isShow" class="base-dialog" @touchmove.prevent>
+      <div class="mask" :style="maskStyle" @click="clickMask"></div>
+      <div :class="type">
         <slot></slot>
         <div v-if="mergedConfig.isShowClose" @click="close">
           <slot name="close">
@@ -17,8 +10,8 @@
           </slot>
         </div>
       </div>
-    </transition>
-  </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -95,22 +88,44 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 9999;
-  pointer-events: none;
+}
+
+.base-dialog-enter-active {
+  transition: all 0.3s;
+
+  & .mask {
+    animation: fade-in 0.3s both;
+  }
+
+  & .dialog {
+    animation: scale-in 0.3s both;
+  }
+
+  & .panel {
+    animation: slide-in 0.3s both;
+  }
+}
+
+.base-dialog-leave-active {
+  transition: all 0.3s;
+
+  & .mask {
+    animation: fade-in 0.3s reverse both;
+  }
+
+  & .dialog {
+    animation: scale-in 0.3s reverse both;
+  }
+
+  & .panel {
+    animation: slide-in 0.3s reverse both;
+  }
 }
 
 .mask {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0.6);
-  pointer-events: auto;
-}
-
-.mask-enter-active {
-  animation: fade-in 0.3s;
-}
-
-.mask-leave-active {
-  animation: fade-in 0.3s reverse;
 }
 
 .dialog {
@@ -119,30 +134,12 @@ export default {
   left: 50%;
   margin-top: -50px;
   transform: translate(-50%, -50%);
-  pointer-events: auto;
-}
-
-.dialog-enter-active {
-  animation: scale-in 0.3s;
-}
-
-.dialog-leave-active {
-  animation: scale-in 0.3s reverse;
 }
 
 .panel {
   position: absolute;
   bottom: 0;
   width: 100%;
-  pointer-events: auto;
-}
-
-.panel-enter-active {
-  animation: slide-in 0.3s;
-}
-
-.panel-leave-active {
-  animation: slide-in 0.3s reverse;
 }
 
 .close {

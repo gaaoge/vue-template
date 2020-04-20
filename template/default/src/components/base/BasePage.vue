@@ -1,6 +1,10 @@
 <template>
   <div class="base-page" :style="{ width, height }">
-    <slot></slot>
+    <base-scroll v-if="scrollable">
+      <slot></slot>
+    </base-scroll>
+    <slot v-else></slot>
+    <slot name="dialogs"></slot>
   </div>
 </template>
 
@@ -31,9 +35,6 @@ export default {
       return '100vw'
     },
     height() {
-      if (this.scrollable) {
-        return 'auto'
-      }
       if (this.isLandscape) {
         return designHeight / designRem + 'rem'
       }
@@ -55,8 +56,6 @@ export default {
 
       let scale
       if (this.isLandscape) {
-        if (window.orientation === 0 || window.orientation === 180) return
-
         scale = (clientHeight * (designWidth / designHeight)) / designWidth
       } else {
         scale = clientWidth / designWidth
