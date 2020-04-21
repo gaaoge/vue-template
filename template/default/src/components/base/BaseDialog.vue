@@ -182,6 +182,7 @@ export default {
   0% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.8);
+    transform-style: preserve-3d;
   }
   100% {
     opacity: 1;
@@ -192,6 +193,7 @@ export default {
 @keyframes slide-in {
   0% {
     transform: translateY(100%);
+    transform-style: preserve-3d;
   }
   100% {
     transform: translateY(0%);
