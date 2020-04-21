@@ -4,11 +4,13 @@
       <div class="mask" :style="maskStyle" @click="clickMask"></div>
       <div :class="type">
         <slot></slot>
-        <div v-if="mergedConfig.isShowClose" @click="close">
-          <slot name="close">
-            <div class="close"></div>
-          </slot>
-        </div>
+        <slot name="close">
+          <div
+            v-if="mergedConfig.isShowClose"
+            class="close"
+            @click="close"
+          ></div>
+        </slot>
       </div>
     </div>
   </transition>
@@ -134,20 +136,33 @@ export default {
   left: 50%;
   margin-top: -50px;
   transform: translate(-50%, -50%);
+
+  & .close {
+    position: absolute;
+    left: 50%;
+    bottom: -100px;
+    transform: translate(-50%);
+    background: url('../../assets/dialog-close.png');
+  }
 }
 
 .panel {
   position: absolute;
   bottom: 0;
   width: 100%;
-}
 
-.close {
-  position: absolute;
-  left: 50%;
-  bottom: -100px;
-  background: url('../../assets/dialog-close.png');
-  transform: translateX(-50%);
+  & .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &:before {
+      content: '';
+      display: block;
+      margin: 40px;
+      background: url('../../assets/panel-close.png');
+    }
+  }
 }
 
 @keyframes fade-in {
