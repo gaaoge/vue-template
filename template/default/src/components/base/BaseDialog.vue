@@ -63,8 +63,12 @@ export default {
     ...mapState('app', ['dialogConfig']),
   },
   watch: {
-    isShow(val) {
-      this.$emit(val ? 'open' : 'close', this.totalConfig.params)
+    totalConfig(newVal, oldVal) {
+      if (this.isShow) {
+        this.$emit('open', newVal.params)
+      } else {
+        this.$emit('close', oldVal.params)
+      }
     },
   },
   destroyed() {
