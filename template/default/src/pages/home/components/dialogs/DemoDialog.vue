@@ -1,7 +1,7 @@
 <template>
   <base-dialog name="demo-dialog">
     <div class="demo-dialog">
-      <base-scroll ref="scroll">
+      <base-scroll ref="bs">
         <logo-widget v-for="i in 3" :key="i"></logo-widget>
         <div class="btns">
           <div class="btn" @click="toTop">回到顶部</div>
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     toTop() {
-      this.$refs.scroll.bscroll.instance.scrollTo(0, 0, 300)
+      this.$refs.bs.bscroll.scrollTo(0, 0, 300)
     },
     showShare() {
       shareWithConfig()

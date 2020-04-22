@@ -11,27 +11,29 @@ import BScroll from 'better-scroll'
 
 export default {
   name: 'base-scroll',
+  props: {
+    options: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
+  },
   data() {
     return {
-      bscroll: {
-        instance: null,
+      bscroll: null,
+      defaultOptions: {
+        swipeBounceTime: 200,
+        click: true,
+        mouseWheel: true,
+        observeDom: true,
+        scrollbar: true,
       },
     }
   },
-  provide() {
-    return {
-      bscroll: this.bscroll,
-    }
-  },
   mounted() {
-    this.bscroll.instance = new BScroll(this.$el, {
-      swipeBounceTime: 200,
-      click: true,
-      scrollbar: true,
-      mouseWheel: true,
-      observeDom: true,
-      nestedScroll: true,
-    })
+    let options = Object.assign({}, this.defaultOptions, this.options)
+    this.bscroll = new BScroll(this.$el, options)
   },
 }
 </script>
