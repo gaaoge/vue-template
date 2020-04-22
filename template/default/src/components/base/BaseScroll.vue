@@ -28,6 +28,7 @@ export default {
         mouseWheel: true,
         observeDom: true,
         scrollbar: true,
+        nestedScroll: true,
       },
     }
   },
@@ -40,6 +41,7 @@ export default {
 
 <style lang="postcss" scoped>
 .base-scroll {
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
