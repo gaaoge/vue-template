@@ -24,7 +24,6 @@ export default {
   data() {
     return {
       isLandscape: false,
-      timer: null,
     }
   },
   computed: {
@@ -43,10 +42,10 @@ export default {
   },
   created() {
     this.updateRem()
-    window.addEventListener('resize', this.onResize)
+    window.addEventListener('orientationchange', this.updateRem)
   },
   destroyed() {
-    window.removeEventListener('resize', this.onResize)
+    window.removeEventListener('orientationchange', this.updateRem)
   },
   methods: {
     updateRem() {
@@ -66,10 +65,6 @@ export default {
       }
 
       document.documentElement.style.fontSize = scale * designRem + 'px'
-    },
-    onResize() {
-      clearTimeout(this.timer)
-      this.timer = setTimeout(this.updateRem, 100)
     },
   },
 }
