@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       isLandscape: false,
+      timer: null,
     }
   },
   computed: {
@@ -31,21 +32,21 @@ export default {
       if (this.isLandscape) {
         return designWidth / designRem + 'rem'
       }
-      return '100vw'
+      return '100%'
     },
     height() {
       if (this.isLandscape) {
         return designHeight / designRem + 'rem'
       }
-      return '100vh'
+      return '100%'
     },
   },
   created() {
     this.updateRem()
-    window.addEventListener('orientationchange', this.updateRem)
+    window.addEventListener('resize', this.onResize)
   },
   destroyed() {
-    window.removeEventListener('orientationchange', this.updateRem)
+    window.removeEventListener('resize', this.onResize)
   },
   methods: {
     updateRem() {
@@ -55,6 +56,8 @@ export default {
 
       let scale
       if (this.isLandscape) {
+        if (window.matchMedia('(orientation: portrait)').matches) return
+
         scale = (clientHeight * (designWidth / designHeight)) / designWidth
       } else {
         scale = clientWidth / designWidth
@@ -65,6 +68,10 @@ export default {
       }
 
       document.documentElement.style.fontSize = scale * designRem + 'px'
+    },
+    onResize() {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(this.updateRem, 200)
     },
   },
 }
