@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { isAndroid } from '@/utils/detect'
+
 const designWidth = 750 // 设计稿宽度
 const designHeight = 1206 // 设计稿高度
 const designRem = 100 // 设计rem对应px的比例
@@ -43,10 +45,16 @@ export default {
   },
   created() {
     this.updateRem()
-    window.addEventListener('resize', this.onResize)
+    window.addEventListener(
+      isAndroid ? 'orientationchange' : 'resize',
+      this.onResize
+    )
   },
   destroyed() {
-    window.removeEventListener('resize', this.onResize)
+    window.removeEventListener(
+      isAndroid ? 'orientationchange' : 'resize',
+      this.onResize
+    )
   },
   methods: {
     updateRem() {
@@ -56,8 +64,6 @@ export default {
 
       let scale
       if (this.isLandscape) {
-        if (window.matchMedia('(orientation: portrait)').matches) return
-
         scale = (clientHeight * (designWidth / designHeight)) / designWidth
       } else {
         scale = clientWidth / designWidth
