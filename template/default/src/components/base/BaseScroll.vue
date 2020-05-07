@@ -28,7 +28,6 @@ export default {
         mouseWheel: true,
         observeDom: true,
         scrollbar: true,
-        nestedScroll: true,
       },
     }
   },

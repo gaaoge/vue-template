@@ -93,7 +93,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9999;
+  pointer-events: auto;
 }
 
 .base-dialog-enter-active {

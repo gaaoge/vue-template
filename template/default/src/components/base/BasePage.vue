@@ -1,10 +1,9 @@
 <template>
   <div class="base-page" :style="{ width, height }">
-    <base-scroll v-if="scrollable">
-      <slot></slot>
-    </base-scroll>
-    <slot v-else></slot>
-    <slot name="dialogs"></slot>
+    <slot></slot>
+    <div class="dialogs" :style="{ width }">
+      <slot name="dialogs"></slot>
+    </div>
   </div>
 </template>
 
@@ -34,13 +33,16 @@ export default {
       if (this.isLandscape) {
         return designWidth / designRem + 'rem'
       }
-      return '100%'
+      return '100vw'
     },
     height() {
+      if (this.scrollable) {
+        return 'auto'
+      }
       if (this.isLandscape) {
         return designHeight / designRem + 'rem'
       }
-      return '100%'
+      return '100vh'
     },
   },
   created() {
@@ -88,5 +90,13 @@ export default {
   position: relative;
   margin: 0 auto;
   overflow: hidden;
+}
+
+.dialogs {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 9999;
+  pointer-events: none;
 }
 </style>
