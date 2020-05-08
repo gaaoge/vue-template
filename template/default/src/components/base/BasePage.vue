@@ -90,6 +90,10 @@ export default {
   position: relative;
   margin: 0 auto;
   overflow: hidden;
+  border: 0 solid transparent;
+  border-top-width: env(safe-area-inset-top);
+  border-bottom-width: env(safe-area-inset-bottom);
+  min-height: 100vh;
 }
 
 .dialogs {
