@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import { invoke, isAvailable } from '@mf2e/js-bridge'
 import { toSearchParams } from '@/utils'
-import { isNewsapp, isTest } from '@/utils/detect'
+import { isNewsapp, isDev, isTest } from '@/utils/detect'
 import modules from './modules'
 
 const stores = {
@@ -43,7 +43,7 @@ const stores = {
       // 发送fetch请求
       let data
       try {
-        if (isAvailable('request')) {
+        if (isAvailable('request') && !isDev) {
           let res = await invoke('request', {
             method,
             url,

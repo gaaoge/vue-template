@@ -5,11 +5,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import stores from './stores'
+import { isDev } from '@/utils/detect'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
+  strict: isDev,
   ...stores,
 })
 
