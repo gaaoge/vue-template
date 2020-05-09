@@ -87,7 +87,7 @@ const stores = {
 let requestHeader // 客户端请求头
 function getRequestHeader() {
   return new Promise((resolve) => {
-    if (/newsapptest/.test(navigator.userAgent) || !isNewsapp) {
+    if (/newsapptest/.test(navigator.userAgent) || !isNewsapp || isDev) {
       resolve()
       return
     }
