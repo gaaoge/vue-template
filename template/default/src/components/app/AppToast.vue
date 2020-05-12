@@ -31,14 +31,13 @@ export default {
   justify-content: center;
   align-items: center;
   max-width: 600px;
-  margin-top: -100px;
   padding: 30px;
   color: #fff;
   font-size: 30px;
   white-space: pre-wrap;
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.75);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -75%);
   animation: toast 0.3s both;
 }
 
@@ -54,10 +53,10 @@ export default {
 
 @keyframes toast {
   0% {
-    transform: translate(-50%, -50%) scale(0.6);
+    transform: translate(-50%, -75%) scale(0.6);
   }
   100% {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -75%) scale(1);
   }
 }
 </style>
