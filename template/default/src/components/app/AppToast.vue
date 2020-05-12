@@ -27,13 +27,11 @@ export default {
   top: 50%;
   left: 50%;
   z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   max-width: 600px;
   padding: 30px;
   color: #fff;
   font-size: 30px;
+  text-align: center;
   white-space: pre-wrap;
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.75);
