@@ -3,10 +3,10 @@
  * Created by GG on 2018/1/9.
  */
 
-import { isTest } from '@/utils/detect'
+import { isOnline } from '@/utils/detect'
 
 function track(event, info) {
-  if (isTest) return
+  if (!isOnline) return
 
   if (!window['NTESAntAnalysis']) {
     window.addEventListener('NTMReady', () => {

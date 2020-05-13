@@ -4,7 +4,7 @@
  */
 
 import { invoke, isAvailable } from '@mf2e/js-bridge'
-import { isTest } from '@/utils/detect'
+import { isOnline } from '@/utils/detect'
 
 let column
 let columnd = process.env.VUE_APP_TITLE
@@ -13,7 +13,7 @@ let columnd = process.env.VUE_APP_TITLE
 invokeIfAvailable('setColumnInfo', { columnd }, false)
 
 async function trace(id, value) {
-  if (isTest) return
+  if (!isOnline) return
 
   if (!column) {
     let res = await invokeIfAvailable('getColumnInfo', null, true)
