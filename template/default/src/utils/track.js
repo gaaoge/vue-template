@@ -1,13 +1,16 @@
+/**
+ * 蚂蚁统计
+ * Created by GG on 2018/1/9.
+ */
+
 import { isTest } from '@/utils/detect'
 
-const Events = {}
-
-function trackEvent(event, info) {
+function track(event, info) {
   if (isTest) return
 
   if (!window['NTESAntAnalysis']) {
     window.addEventListener('NTMReady', () => {
-      trackEvent(event, info)
+      track(event, info)
     })
   } else {
     window['NTESAntAnalysis'].sendData({
@@ -19,4 +22,4 @@ function trackEvent(event, info) {
   }
 }
 
-export { Events, trackEvent }
+export default track

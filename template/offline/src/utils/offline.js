@@ -1,3 +1,8 @@
+/**
+ * 离线工具类
+ * Created by GG on 2019/12/16.
+ */
+
 import { invoke, isAvailable } from '@mf2e/js-bridge'
 
 function invokeIfAvailable(name, params, needResult) {

@@ -1,3 +1,8 @@
+/**
+ * 检测工具类
+ * Created by GG on 2018/1/9.
+ */
+
 const UA = window.navigator.userAgent
 
 const isIos = /ipad|iphone|ipod|ios/i.test(UA)

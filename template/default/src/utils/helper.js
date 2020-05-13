@@ -1,3 +1,8 @@
+/**
+ * 辅助工具类
+ * Created by GG on 2018/1/9.
+ */
+
 import { loadScript } from '@/utils'
 import { isDebug, isOnline } from '@/utils/detect'
 import { register } from 'register-service-worker'

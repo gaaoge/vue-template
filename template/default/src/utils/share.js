@@ -1,6 +1,11 @@
+/**
+ * 分享工具类
+ * Created by GG on 2018/1/9.
+ */
+
 import NewsappShare from '@newsapp-activity/newsapp-share'
 import { getAbsPath, getStaticPath, expandFunc } from '@/utils'
-import { trackEvent } from '@/utils/track'
+import track from '@/utils/track'
 import * as jsBridge from '@mf2e/js-bridge'
 
 window.jsBridge = jsBridge
@@ -11,13 +16,13 @@ const defaultConfig = {
   link: getAbsPath() + '?spss=share',
   onlyImg: false,
   shareBefore: () => {
-    trackEvent('click_share')
+    track('click_share')
   },
   shareDone: (res) => {
     if (res && res.scene === 'favorite') {
-      trackEvent('favorite')
+      track('favorite')
     } else {
-      trackEvent('sharedone')
+      track('sharedone')
     }
   },
 }
