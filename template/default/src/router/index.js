@@ -7,7 +7,7 @@ import VueRouter from 'vue-router'
 import { invoke } from '@mf2e/js-bridge'
 import { isNewsapp } from '@/utils/detect'
 import { updateShareConfig } from '@/utils/share'
-import { trackEvent } from '@/utils/track'
+import { track } from '@/utils/track'
 import routes from './routes'
 
 Vue.use(VueRouter)
@@ -26,10 +26,10 @@ router.afterEach((to) => {
   updateShareConfig(to.meta.shareConfig)
 
   // 统计
-  trackEvent('pageview' + to.path.replace(/\//g, '_'))
+  track('pageview' + to.path.replace(/\//g, '_'))
 })
 
 // 默认页面统计
-trackEvent('pageview')
+track('pageview')
 
 export default router

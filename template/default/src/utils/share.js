@@ -5,7 +5,7 @@
 
 import NewsappShare from '@newsapp-activity/newsapp-share'
 import { getAbsPath, getStaticPath, expandFunc } from '@/utils'
-import track from '@/utils/track'
+import { track } from '@/utils/track'
 import * as jsBridge from '@mf2e/js-bridge'
 
 window.jsBridge = jsBridge

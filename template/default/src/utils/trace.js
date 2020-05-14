@@ -35,4 +35,4 @@ function invokeIfAvailable(name, params, needResult) {
   }
 }
 
-export default trace
+export { trace }

@@ -22,4 +22,4 @@ function track(event, info) {
   }
 }
 
-export default track
+export { track }
