@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div class="app">
+    <app-router></app-router>
     <app-toast></app-toast>
   </div>
 </template>
@@ -20,5 +20,16 @@ body {
   -webkit-overflow-scrolling: touch;
   -webkit-text-size-adjust: 100%;
   -webkit-user-select: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
 }
 </style>
