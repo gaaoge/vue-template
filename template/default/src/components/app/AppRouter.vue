@@ -42,7 +42,8 @@ export default {
       touchX = e.changedTouches[0].clientX
     })
     document.body.addEventListener('touchend', (e) => {
-      if (Math.abs(e.changedTouches[0].clientX - touchX) > 10) {
+      let deltaX = Math.abs(e.changedTouches[0].clientX - touchX)
+      if ((touchX <= 50 || touchX >= window.innerWidth - 50) && deltaX > 10) {
         this.isGesture = true
       } else {
         this.isGesture = false
