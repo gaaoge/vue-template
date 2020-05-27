@@ -5,6 +5,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { invoke } from '@mf2e/js-bridge'
+import { sleep } from '@/utils'
 import { isNewsapp } from '@/utils/detect'
 import { updateShareConfig } from '@/utils/share'
 import { track } from '@/utils/track'
@@ -14,7 +15,8 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes,
-  scrollBehavior() {
+  async scrollBehavior() {
+    await sleep(400)
     return { x: 0, y: 0 }
   },
 })

@@ -1,7 +1,9 @@
 <template>
-  <transition :name="direction">
-    <router-view></router-view>
-  </transition>
+  <div class="app-router">
+    <transition :name="direction">
+      <router-view></router-view>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -52,6 +54,20 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+.app-router {
+  display: flex;
+  justify-content: center;
+
+  &:before,
+  &:after {
+    content: '';
+    flex: auto;
+    position: relative;
+    background: #fff;
+    z-index: 9999;
+  }
+}
+
 .forward-enter-active {
   position: fixed !important;
   top: 0 !important;

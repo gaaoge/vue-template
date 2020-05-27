@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <app-router></app-router>
     <app-toast></app-toast>
   </div>
@@ -26,20 +26,5 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.app {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-
-  &:before,
-  &:after {
-    content: '';
-    flex: auto;
-    position: relative;
-    background: #fff;
-    z-index: 9999;
-  }
 }
 </style>
