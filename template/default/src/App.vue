@@ -31,5 +31,15 @@ img {
 .app {
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+
+  &:before,
+  &:after {
+    content: '';
+    flex: auto;
+    position: relative;
+    background: #fff;
+    z-index: 9999;
+  }
 }
 </style>

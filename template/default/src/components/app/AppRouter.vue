@@ -1,9 +1,7 @@
 <template>
-  <div class="app-router">
-    <transition :name="direction">
-      <router-view></router-view>
-    </transition>
-  </div>
+  <transition :name="direction">
+    <router-view></router-view>
+  </transition>
 </template>
 
 <script>
@@ -54,35 +52,27 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.app-router {
-  position: relative;
-  overflow: hidden;
-}
-
-.forward-enter-active,
-.forward-leave-active,
-.backward-enter-active,
-.backward-leave-active {
-  transform-style: preserve-3d;
-}
-
 .forward-enter-active {
-  position: absolute !important;
+  position: fixed !important;
   top: 0 !important;
+  z-index: 1 !important;
   animation: forward-enter 0.4s ease;
 }
 
 .forward-leave-active {
+  z-index: 0 !important;
   animation: forward-leave 0.4s ease;
 }
 
 .backward-enter-active {
-  position: absolute !important;
+  position: fixed !important;
   top: 0 !important;
+  z-index: 0 !important;
   animation: backward-enter 0.4s ease;
 }
 
 .backward-leave-active {
+  z-index: 1 !important;
   animation: backward-leave 0.4s ease;
 }
 
@@ -104,13 +94,13 @@ export default {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-30%);
   }
 }
 
 @keyframes backward-enter {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(-30%);
   }
   100% {
     transform: translateX(0%);
