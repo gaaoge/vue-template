@@ -4,12 +4,8 @@
       <div class="mask" :style="maskStyle" @click="clickMask"></div>
       <div :class="type">
         <slot></slot>
-        <slot name="close">
-          <div
-            v-if="mergedConfig.isShowClose"
-            class="close"
-            @click="close"
-          ></div>
+        <slot v-if="mergedConfig.isShowClose" name="close">
+          <div class="close" @click="close"></div>
         </slot>
       </div>
     </div>
