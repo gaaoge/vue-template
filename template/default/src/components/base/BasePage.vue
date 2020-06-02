@@ -85,6 +85,7 @@ export default {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  background: #fff;
   border: 0 solid transparent;
   border-top-width: env(safe-area-inset-top);
   border-bottom-width: env(safe-area-inset-bottom);
