@@ -16,7 +16,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes,
   async scrollBehavior() {
-    await sleep(400)
+    await sleep(350)
     return { x: 0, y: 0 }
   },
 })
