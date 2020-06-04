@@ -26,7 +26,7 @@ export default {
         swipeBounceTime: 200,
         click: true,
         mouseWheel: true,
-        observeDom: true,
+        observeDOM: true,
         scrollbar: true,
       },
     }
