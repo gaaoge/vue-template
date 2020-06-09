@@ -40,18 +40,19 @@ export default {
         isMaskClose: true,
         isShowClose: true,
       },
+      params: null,
     }
   },
   computed: {
     isShow() {
-      return !!this.dialogConfig[this.name]
+      return !!this.totalConfig
     },
     totalConfig() {
-      return this.dialogConfig[this.name] || {}
+      return this.dialogConfig[this.name]
     },
     mergedConfig() {
       let mergedConfig = Object.assign({}, this.defaultConfig, this.config)
-      return Object.assign({}, mergedConfig, this.totalConfig.config)
+      return Object.assign({}, mergedConfig, this.totalConfig?.config)
     },
     maskStyle() {
       return { background: `rgba(0, 0, 0, ${this.mergedConfig.maskOpacity})` }
@@ -59,11 +60,13 @@ export default {
     ...mapState('app', ['dialogConfig']),
   },
   watch: {
-    totalConfig(newVal, oldVal) {
-      if (this.isShow) {
-        this.$emit('open', newVal.params)
+    isShow(val) {
+      if (val) {
+        this.params = this.totalConfig?.params
+        this.$emit('open', this.params)
       } else {
-        this.$emit('close', oldVal.params)
+        this.$emit('close', this.params)
+        this.params = null
       }
     },
   },
