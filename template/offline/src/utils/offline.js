@@ -5,6 +5,10 @@
 
 import { invoke, isAvailable } from '@mf2e/js-bridge'
 
+// render上报
+renderStart()
+document.addEventListener('DOMContentLoaded', renderEnd)
+
 function invokeIfAvailable(name, params, needResult) {
   if (isAvailable(name)) {
     return invoke(name, params, needResult)
