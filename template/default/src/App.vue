@@ -15,10 +15,10 @@ export default {
 @import '~minireset.css';
 
 body {
-  font: 24px/1.5 sans-serif;
+  font: 24px sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-overflow-scrolling: touch;
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100% !import;
   -webkit-user-select: none;
 }
 
