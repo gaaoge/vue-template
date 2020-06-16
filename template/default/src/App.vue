@@ -18,7 +18,7 @@ body {
   font: 24px sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-overflow-scrolling: touch;
-  -webkit-text-size-adjust: 100% !import;
+  -webkit-text-size-adjust: 100% !important;
   -webkit-user-select: none;
 }
 
