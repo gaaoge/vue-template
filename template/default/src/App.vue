@@ -15,7 +15,7 @@ export default {
 @import '~minireset.css';
 
 body {
-  font: 24px sans-serif;
+  font: 24px / normal sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-overflow-scrolling: touch;
   -webkit-text-size-adjust: 100% !important;
