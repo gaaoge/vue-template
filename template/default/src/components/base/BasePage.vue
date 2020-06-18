@@ -11,6 +11,11 @@
 const designWidth = 750 // 设计稿宽度
 const designHeight = 1206 // 设计稿高度
 const designRem = 100 // 设计rem对应px的比例
+const defaultRem = getDefaultRem() // 浏览器默认rem对应px的比例
+
+function getDefaultRem() {
+  return parseInt(window.getComputedStyle(document.documentElement).fontSize)
+}
 
 export default {
   name: 'base-page',
@@ -70,7 +75,8 @@ export default {
         }
       }
 
-      document.documentElement.style.fontSize = scale * designRem + 'px'
+      document.documentElement.style.fontSize =
+        ((scale * designRem) / defaultRem) * 100 + '%'
     },
     onResize() {
       clearTimeout(this.timer)
