@@ -6,8 +6,9 @@ const chalk = require('chalk')
 const inquirer = require('inquirer')
 const Uploader = require('@newap/uploader')
 
-let cacheDir = path.resolve('node_modules/.cache/uploader/')
-let cachePath = `${cacheDir}/cache-files.json`
+const projectPath = `newsapp/${pkg.name}`
+const cacheDir = path.resolve('node_modules/.cache/uploader/')
+const cachePath = `${cacheDir}/cache-files.json`
 let uploadConfig = {}
 
 function findFiles(rootPath, replacePath = '') {
@@ -57,7 +58,7 @@ function clearStaticCache() {
   let updateFiles = cacheFiles.filter((item) => item.split('.').length !== 3)
 
   updateFiles.forEach((item) => {
-    let url = `https://static.ws.126.net/163/activity/${pkg.name}/static/${item}`
+    let url = `https://static.ws.126.net/163/frontend/${projectPath}/static/${item}`
     http.get(
       `http://purge.ws.netease.com/api/purge?url=${encodeURIComponent(url)}`
     )
@@ -72,7 +73,7 @@ async function uploadStatic() {
 
   await new Uploader({
     dir: './dist/static',
-    target: `activity/${pkg.name}/static`,
+    target: `frontend/${projectPath}/static`,
     exclude: cacheFiles.map((item) => new RegExp(path.basename(item))),
   }).run()
 
@@ -88,7 +89,7 @@ async function uploadHtml() {
 
   await new Uploader({
     dir: './dist',
-    target: `page/newsapp/activity/${pkg.name}`,
+    target: `page/${projectPath}`,
     include: uploadConfig.targets
       .map((item) => new RegExp(`${item}\.html`))
       .concat([/service-worker\.js/]),

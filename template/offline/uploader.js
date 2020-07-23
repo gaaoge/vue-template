@@ -7,8 +7,9 @@ const inquirer = require('inquirer')
 const Uploader = require('@newap/uploader')
 const offlineTool = require('@mf2e/offline-tool')
 
-let cacheDir = path.resolve('node_modules/.cache/uploader/')
-let cachePath = `${cacheDir}/cache-files.json`
+const projectPath = `newsapp/${pkg.name}`
+const cacheDir = path.resolve('node_modules/.cache/uploader/')
+const cachePath = `${cacheDir}/cache-files.json`
 let uploadConfig = {}
 
 function findFiles(rootPath, replacePath = '') {
@@ -58,7 +59,7 @@ function clearStaticCache() {
   let updateFiles = cacheFiles.filter((item) => item.split('.').length !== 3)
 
   updateFiles.forEach((item) => {
-    let url = `https://static.ws.126.net/163/activity/${pkg.name}/static/${item}`
+    let url = `https://static.ws.126.net/163/frontend/${projectPath}/static/${item}`
     http.get(
       `http://purge.ws.netease.com/api/purge?url=${encodeURIComponent(url)}`
     )
@@ -73,7 +74,7 @@ async function uploadStatic() {
 
   await new Uploader({
     dir: './dist/static',
-    target: `activity/${pkg.name}/static`,
+    target: `frontend/${projectPath}/static`,
     exclude: cacheFiles.map((item) => new RegExp(path.basename(item))),
   }).run()
 
@@ -89,7 +90,7 @@ async function uploadHtml() {
 
   await new Uploader({
     dir: './dist',
-    target: `html/newsapp/activity/${pkg.name}`,
+    target: `html/${projectPath}`,
     include: uploadConfig.targets
       .map((item) => new RegExp(`${item}\.html`))
       .concat([/service-worker\.js/]),
@@ -103,11 +104,9 @@ async function uploadZip() {
     await offlineTool.build(
       [
         {
-          name: `activity-${pkg.name}`,
+          name: pkg.name,
           description: pkg.description,
-          url: [
-            `//wp.m.163.com/163/html/newsapp/activity/${pkg.name}/index.html`,
-          ],
+          url: [`//wp.m.163.com/163/html/${projectPath}/index.html`],
           srcDir: './dist/index.html',
           apiList: [],
         },
@@ -116,6 +115,7 @@ async function uploadZip() {
     )
   }
 }
+
 async function upload() {
   uploadConfig = await inquirer.prompt([
     {
