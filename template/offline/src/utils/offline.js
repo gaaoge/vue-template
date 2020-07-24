@@ -27,8 +27,12 @@ function requestEnd() {
   invokeIfAvailable('updateFailType', { failType: '2004' }, false)
 }
 
+let isRender
 function renderEnd() {
+  if (isRender) return
+
   invokeIfAvailable('render', { timestamp: { render: Date.now() } }, false)
+  isRender = true
 }
 
 export { invokeIfAvailable, renderStart, requestStart, requestEnd, renderEnd }
