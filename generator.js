@@ -14,6 +14,7 @@ module.exports = (api, options, rootOptions) => {
         '@mf2e/js-bridge': '^1.0.11',
         '@newsapp-activity/newsapp-share': '^1.6.7',
         'better-scroll': '^2.0.0-beta.6',
+        'core-js': '^3.6.5',
         'minireset.css': '^0.0.6',
         'register-service-worker': '^1.7.1',
         'vue': '^2.6.11',
